@@ -5,10 +5,12 @@ import Footer from "./Footer";
 import style from "./index.css";
 
 function App() {
+  const showCart = () => {};
   return (
     <>
       <Header />
       <Main />
+      <Footer />
     </>
   );
 }

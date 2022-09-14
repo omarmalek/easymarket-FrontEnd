@@ -140,6 +140,9 @@ Navbar
 ===============
 */
 nav {
+  position: fixed;
+  width: 100vh;
+  height: 5rem;
   background: var(--clr-white);
   box-shadow: var(--light-shadow);
 }
