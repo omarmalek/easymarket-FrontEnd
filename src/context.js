@@ -1,24 +1,31 @@
 import React, { useState, useEffect, useContext } from "react";
+import { catgories } from "./catgories-data";
 
 const AppContext = React.createContext();
 
-const catgories = [
-  { id: "1", name: "Canned Food" },
-  { id: "2", name: "غازية مشروبات" },
-  { id: "3", name: "Dairy" },
-];
-
+const getCatgoriesNames = catgories.map((cat) => {
+  const { id, catgoryTitle } = cat;
+  return {
+    id: id,
+    name: catgoryTitle,
+  };
+  console.log(cat.catgoryTitle);
+});
 const AppProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [catgory, setCatgory] = React.useState("");
-  //  console.log(catgory);
+  const [catgory, setCatgory] = useState();
+  console.log(catgory);
 
   useEffect(() => {
-    setCatgory("popular");
+    setCatgory(catgories[0]);
+    // console.log(catgories[0]);
   }, []);
 
-  const handleCatgory = (catgory) => {
-    setCatgory(catgory);
+  const handleCatgory = (catgoryId) => {
+    setCatgory(() => {
+      let currentCat = catgories.filter((cat) => cat.id === catgoryId);
+      return currentCat[0];
+    });
   };
   const openCart = () => {
     setIsCartOpen(true);
@@ -34,7 +41,7 @@ const AppProvider = ({ children }) => {
         openCart,
         closeCart,
         catgory,
-        catgories,
+        getCatgoriesNames,
         handleCatgory,
       }}
     >

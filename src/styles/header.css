@@ -140,9 +140,6 @@ Navbar
 ===============
 */
 nav {
-  position: fixed;
-  width: 100vh;
-  height: 5rem;
   background: var(--clr-white);
   box-shadow: var(--light-shadow);
 }
@@ -223,9 +220,13 @@ nav {
   }
   .social-icons {
     display: flex;
+    /* border: solid red; */
+    padding-top: 1rem;
+    padding-bottom: 0;
   }
   .social-icons a {
     margin: 0 0.5rem;
+
     color: var(--clr-primary-5);
     transition: var(--transition);
   }

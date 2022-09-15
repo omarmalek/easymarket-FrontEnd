@@ -1,28 +1,30 @@
 import React, { useEffect } from "react";
 import { useGlobalContext } from "./context";
-import cartLogo from "./images/cart.png";
+import cartLogo from "./images/cart2.png";
 //import style from "./index.css";
 
 function Menu() {
-  const { openCart, catgories, catgory, handleCatgory } = useGlobalContext();
-
+  const { openCart, getCatgoriesNames, catgory, handleCatgory } =
+    useGlobalContext();
   return (
     <div className="menu-component">
-      <select
-        className=" select-class"
-        onChange={(e) => handleCatgory(e.target.value)}
-      >
-        <option value="0">Select Catgory</option>
-        {catgory && catgory !== undefined
-          ? catgories.map((cat, index) => {
-              return (
-                <option key={index} value={cat.id}>
-                  {cat.name}
-                </option>
-              );
-            })
-          : "No Cargory"}
-      </select>
+      <div className="select-container">
+        <select
+          className=" select-class"
+          onChange={(e) => handleCatgory(e.target.value)}
+        >
+          <option value="0">اختر التصنيف</option>
+          {getCatgoriesNames && getCatgoriesNames !== undefined
+            ? getCatgoriesNames.map((cat, index) => {
+                return (
+                  <option key={index} value={cat.id}>
+                    {cat.name}
+                  </option>
+                );
+              })
+            : "No Cargory"}
+        </select>
+      </div>
 
       {/* //icon cart ...link to cart */}
       <button className="sidebar-toggle " onClick={openCart}>
