@@ -1,0 +1,538 @@
+@import url("https://fonts.googleapis.com/css2?family=El+Messiri:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/earlyaccess/notonaskharabic.css");
+@import url("https://fonts.googleapis.com/css2?family=Amiri&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rakkas&display=swap");
+@import url("http://www.fontstatic.com/f=sky-bold,sky");
+@import url("http://www.fontstatic.com/f=dubai,dubai-light,dubai-medium,dubai-bold");
+@import url("http://www.fontstatic.com/f=cocon-next-arabic");
+@import url("http://www.fontstatic.com/f=jazeera,jazeera-light");
+@import url("http://www.fontstatic.com/f=bahij");
+@import url("http://www.fontstatic.com/f=jooza");
+@import url("http://www.fontstatic.com/f=flat-jooza");
+@import url("https://fonts.googleapis.com/css?family=Cairo:400,700&subset=arabic");
+@import url("https://cdn.rawgit.com/ahmedmontaser12/crazynet/89a2750a/Bukra-Font.css");
+
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+  /* dark shades of primary color*/
+  --clr-primary-1: hsl(205, 86%, 17%);
+  --clr-primary-2: hsl(205, 77%, 27%);
+  --clr-primary-3: hsl(205, 72%, 37%);
+  --clr-primary-4: hsl(205, 63%, 48%);
+  /* primary/main color */
+  --clr-primary-5: hsl(205, 78%, 60%);
+  /* lighter shades of primary color */
+  --clr-primary-6: hsl(205, 89%, 70%);
+  --clr-primary-7: hsl(205, 90%, 76%);
+  --clr-primary-8: hsl(205, 86%, 81%);
+  --clr-primary-9: hsl(205, 90%, 88%);
+  --clr-primary-10: hsl(205, 100%, 96%);
+  /* darkest grey - used for headings */
+  --clr-grey-1: hsl(209, 61%, 16%);
+  --clr-grey-2: hsl(211, 39%, 23%);
+  --clr-grey-3: hsl(209, 34%, 30%);
+  --clr-grey-4: hsl(209, 28%, 39%);
+  /* grey used for paragraphs */
+  --clr-grey-5: hsl(210, 22%, 49%);
+  --clr-grey-6: hsl(209, 23%, 60%);
+  --clr-grey-7: hsl(211, 27%, 70%);
+  --clr-grey-8: hsl(210, 31%, 80%);
+  --clr-grey-9: hsl(212, 33%, 89%);
+  --clr-grey-10: hsl(210, 36%, 96%);
+  --clr-white: #fff;
+  --clr-red-dark: hsl(360, 67%, 44%);
+  --clr-red-light: hsl(360, 71%, 66%);
+  --clr-green-dark: hsl(125, 67%, 44%);
+  --clr-green-light: hsl(125, 71%, 66%);
+  --clr-black: #222;
+  --transition: all 0.3s linear;
+  --spacing: 0.1rem;
+  --radius: 0.25rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --max-width: 1170px;
+  --fixed-width: 620px;
+  --subtle: #aaa;
+  --green: #27ae60;
+  --black: #192a56;
+  --light-color: #666;
+  --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+/*
+=============== 
+Global Styles
+===============
+*/
+
+* {
+  font-family: "Cairo", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+}
+
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* ================================== global classes */
+
+/* section */
+.section {
+  width: 90vw;
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+.container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh; */
+}
+
+.btn {
+  text-transform: uppercase;
+  background: var(--clr-black);
+  color: var(--clr-white);
+  padding: 0.375rem 0.75rem;
+  letter-spacing: var(--spacing);
+  display: inline-block;
+  /* transition: var(--transition); */
+  font-size: 0.875rem;
+  border: 2px solid var(--clr-black);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius);
+  margin: 0.5rem;
+}
+.btn:hover {
+  color: var(--clr-black);
+  background: transparent;
+}
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+/*
+============================================================================================ 
+                                              CUSTOM
+============================================================================================
+*/
+/* -------------------------------------       cart        ------------------------------- */
+.cart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: var(--clr-white);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 1rem;
+  box-shadow: var(--clr-red-dark);
+  transition: var(--transition);
+  transform: translate(-100%);
+  z-index: 10;
+}
+.cart--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+.cart--close {
+  font-size: 1.75rem;
+  background: transparent;
+  border-color: transparent;
+  color: var(--clr-primary-5);
+  transition: var(--transition);
+  cursor: pointer;
+  color: var(--clr-red-dark);
+  margin-top: 0.2rem;
+}
+.cart--close:hover {
+  color: var(--clr-red-light);
+}
+.cart--logo {
+  justify-self: center;
+  height: 40px;
+}
+
+.show--cart {
+  transform: translate(0);
+}
+.cart-toggle {
+  position: fixed;
+  top: 6rem;
+  left: 1rem;
+  font-size: 2rem;
+  background: transparent;
+  border-color: transparent;
+  color: var(--clr-primary-5);
+  transition: var(--transition);
+  cursor: pointer;
+  animation: bounce 2s ease-in-out infinite;
+  z-index: 2;
+}
+
+/* custom by me omar-do-this */
+.cart-toggle img {
+  padding: 1rem;
+  width: 80px;
+}
+
+/* -----------------------------------         Header      -------------------------- */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 1rem 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: var(--box-shadow);
+}
+
+header .logo {
+  color: var(--black);
+  font-size: 2.5rem;
+  font-weight: bolder;
+}
+
+header .logo i {
+  color: var(--green);
+}
+
+header .navbar a {
+  font-size: 1.7rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  color: var(--light-color);
+}
+
+header .navbar a.active,
+header .navbar a:hover {
+  color: #fff;
+  background: var(--green);
+}
+
+header .icons i,
+header .icons a {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  height: 4.5rem;
+  line-height: 4.5rem;
+  width: 4.5rem;
+  text-align: center;
+  font-size: 1.7rem;
+  color: var(--black);
+  border-radius: 50%;
+  background: #eee;
+}
+
+header .icons i:hover,
+header .icons a:hover {
+  color: #fff;
+  background: var(--green);
+  transform: rotate(360deg);
+}
+
+header .icons #menu-bars {
+  display: none;
+}
+/* ------------------------------------------- Header   Ends ------------------------- */
+.social-icons {
+  display: flex;
+}
+
+.social-icons a {
+  margin: 0 0.5rem;
+  color: var(--clr-primary-5);
+  transition: var(--transition);
+}
+.social-icons a:hover {
+  color: var(--clr-primary-7);
+}
+/* ---------------------------------------     menu      ------------------- */
+.menu-component {
+  position: fixed; /*updated absolute*/
+  top: 5rem; /*updated as 100% */
+  border-top: 0.1rem solid rgb(0, 0, 0, 0.2); /*updated*/
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.select-class {
+  /* width: 10rem !important; */
+  margin: 1.2rem;
+  /* margin-right: 2rem; */
+  float: right;
+  padding: 10px 15px;
+
+  font-size: 1.2rem;
+  direction: rtl;
+}
+
+/* ----------------------------    exhibition      -------------- */
+
+.exhibition-component {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ============================================  single-product ===========================================  */
+
+.single-product {
+  position: relative;
+  margin: 0 10px 20px 10px;
+  width: 30%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.single-product .img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  overflow: hidden;
+  /* border: 1px solid red; */
+}
+.single-product .img-container img {
+  width: 100%;
+  object-fit: cover;
+  /* background-size: cover; */
+}
+.single-product .product-details {
+  display: flex;
+  justify-content: end;
+}
+.single-product .product-details .info {
+  padding: 10px;
+  direction: rtl;
+  width: 70%;
+  border-right: 5px solid var(--clr-grey-7);
+}
+.single-product .info--name {
+  font-family: "El Messiri", sans-serif;
+}
+.single-product .info--price {
+  color: maroon;
+}
+.single-product .info--weight {
+  font-weight: 400;
+  color: darkolivegreen;
+  font-family: "Noto Kufi Arabic", sans-serif;
+}
+.single-product .info--company {
+  color: var(--subtle);
+  font-family: "dubai-bold", sans-serif;
+}
+.single-product .info--country {
+  font-weight: 400;
+  border-bottom: 1px dashed var(--subtle);
+  padding-bottom: 15px;
+}
+.single-product .info--desc {
+  font-family: "sky-bold", serif;
+  color: #222;
+}
+
+.single-product .card-circle {
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 22px;
+  font-size: 12px;
+  height: 25px;
+  text-align: center;
+  width: 25px;
+}
+
+.control {
+  padding: 2px;
+  width: 30%;
+  /* border: 1px solid greenyellow; */
+}
+
+.control > button {
+  background-color: var(--clr-primary-4);
+  width: 100%;
+  height: 3rem;
+  margin: 0 0 0.3rem 0;
+  border: none;
+  border-radius: 0;
+}
+.control > button:hover {
+  background-color: var(--clr-primary-5);
+}
+.control .under-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.control .under-btn button {
+  width: 32%;
+  font-size: 2em;
+  padding: 3px;
+  /* text-align: center; */
+}
+.control .under-btn button:first-child {
+  border-radius: 15px 0 0 15px;
+  color: red;
+}
+.control .under-btn button:last-child {
+  border-radius: 0 15px 15px 0;
+  color: rgb(9, 128, 34);
+}
+.control .under-btn input {
+  width: 35%;
+  font-size: 2em;
+  padding: 3px;
+  text-align: center;
+}
+
+.green-border {
+  border: 1px solid rgb(25, 231, 6);
+}
+.red-border {
+  border: 1px solid rgb(241, 16, 16);
+}
+
+/* ==========================================       RESPOSIVE     =========================== */
+
+@media (max-width: 991px) {
+  html {
+    font-size: 50%;
+  }
+  header {
+    padding: 1rem 2rem;
+  }
+  .single-product {
+    width: 45%;
+  }
+  .links-container a {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header .icons #menu-bars {
+    display: inline-block;
+  }
+
+  header .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+
+  header .navbar.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  header .navbar a {
+    display: block;
+    padding: 1.5rem;
+    margin: 1rem;
+    font-size: 2rem;
+    background: #eee;
+  }
+  .single-product {
+    width: 100%;
+  }
+  .cart {
+    width: 100px;
+  }
+  .links-container {
+    display: none;
+  }
+}
+@media screen and (max-width: 479px) {
+}
+/*
+=============== 
+Modal
+===============
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  transition: var(--transition);
+  visibility: hidden;
+  z-index: -1;
+}
+/* OPEN/CLOSE MODAL */
+/*
+.show-modal {
+  visibility: visible;
+  z-index: 10;
+}
+.modal-container {
+  background: var(--clr-white);
+  border-radius: var(--radius);
+  width: 90vw;
+  height: 30vh;
+  max-width: var(--fixed-width);
+  text-align: center;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.close-modal-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  background: transparent;
+  border-color: transparent;
+  color: var(--clr-red-dark);
+  cursor: pointer;
+}*/
+
+/* ================================================ unused============================================== */

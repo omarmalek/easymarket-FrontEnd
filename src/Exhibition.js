@@ -1,19 +1,29 @@
 import React from "react";
 import { useGlobalContext } from "./context";
 import SingleProduct from "./SingleProduct";
+import SingleProductShort from "./SingleProductShort";
+
 // import stlyle from "./styles/";
 
 function Exhibition() {
-  const { catgory } = useGlobalContext();
+  const { productsOfCurrentCatgory, openCart } = useGlobalContext();
+
   return (
-    <div className="exhibition-component ">
-      {catgory && catgory !== undefined ? (
-        catgory.contents.map((item, index) => {
-          return <SingleProduct key={index} item={item} />;
-        })
-      ) : (
-        <p>no catgory</p>
-      )}
+    <div>
+      <div className="exhibition-component">
+        {productsOfCurrentCatgory && productsOfCurrentCatgory !== undefined ? (
+          productsOfCurrentCatgory.map((product, index) => {
+            return <SingleProductShort key={index} product={product} />;
+          })
+        ) : (
+          <p>no catgory</p>
+        )}
+      </div>
+      <div>
+        <div>
+          <button onClick={openCart}>تحضير الطلبية</button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,57 +1,69 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
-import { links, social } from "./data";
-import logo from "./images/logo.png";
-import style from "./styles/header.css";
+import { links } from "./data";
+import logo from "./images/shopping-cart-bag-logo-260nw-small.png";
+import { useGlobalContext } from "./context";
 
 function Header() {
-  const [showLinks, setShowLinks] = useState(false);
+  const { showSearchBar, toggleNavbar, showNvbar } = useGlobalContext();
+
   const linksContainerRef = useRef(null);
-  const linksRef = useRef(null);
-  const toggleLinks = () => {
-    setShowLinks(!showLinks);
-  };
-  useEffect(() => {
-    const linksHeight = linksRef.current.getBoundingClientRect().height;
-    if (showLinks) {
-      linksContainerRef.current.style.height = `${linksHeight}px`;
-    } else {
-      linksContainerRef.current.style.height = "0px";
-    }
-  }, [showLinks]);
+  const navbarRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (showNvbar) {
+  //     navbarRef.current.
+  //   } else {
+  //     navbarRef.current.style.
+  //   }
+  // }, [showNvbar]);
   return (
-    <nav>
-      <div className="nav-center">
-        <div className="nav-header">
-          <img src={logo} className="logo" alt="logo" />
-          <button className="nav-toggle" onClick={toggleLinks}>
-            <FaBars />
-          </button>
-        </div>
-        <div className="links-container" ref={linksContainerRef}>
-          <ul className="links" ref={linksRef}>
-            {links.map((link) => {
-              const { id, url, text } = link;
-              return (
-                <li key={id}>
-                  <a href={url}>{text}</a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <ul className="social-icons">
-          {social.map((socialIcon) => {
-            const { id, url, icon } = socialIcon;
-            return (
-              <li key={id}>
-                <a href={url}>{icon}</a>
-              </li>
-            );
-          })}
-        </ul>
+    //  header section starts
+    <header>
+      <div className="logo">
+        <a href="/" className="logo-name">
+          <img src={logo} alt="" />
+          غزة ديليفري
+        </a>
       </div>
-    </nav>
+
+      <div className={showNvbar ? "navbar active" : "navbar"} ref={navbarRef}>
+        <a href="/" className="active">
+          الصفحة الرئيسية
+        </a>
+        <a href="#about">العروض</a>
+        <a href="#menu">أسعار التوصيل</a>
+        <a href="/set"> الطلبات السابقة</a>
+      </div>
+
+      <div className="icons">
+        <i className="fa fa-bars" id="menu-bars" onClick={toggleNavbar}></i>
+        <i
+          className="fa fa-search"
+          id="search-icon"
+          onClick={showSearchBar}
+        ></i>
+        <a href="#" className="fas fa-heart"></a>
+        <i className="fa-solid fa-user"></i>
+      </div>
+    </header>
+    // header section ends
+    // <nav className="navbar" >
+
+    //   <div className="container">
+    //     <div className="navbar-logo">
+    //       <img src={logo} className="logo-img" alt="logo" />
+    //       <button className="nav-toggle" onClick={toggleLinks}>
+    //         <FaBars />
+    //       </button>
+    //     </div>
+    //     <div className="links-container" ref={linksContainerRef}>
+    //       <ul className="links" ref={linksRef}>
+    //
+    //       </ul>
+    //     </div>
+    //   </div>
+    // </nav>
   );
 }
 
