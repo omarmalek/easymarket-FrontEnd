@@ -1,11 +1,16 @@
 import React from "react";
 import { useGlobalContext } from "./context";
 
-const OrderSetterDetails = () => {
-  const { currentOrder } = useGlobalContext();
+const OrderDetails = ({ currentOrder, role }) => {
+  const {
+    updateOrderPacked,
+    updateOrderSentToDelivery,
+    updateOrderDeliverdToCustomer,
+    updateOrderRejected,
+    updateOrder,
+  } = useGlobalContext();
   const updateProductQuantity = () => {};
-  console.log("OrderSetterDetails >>");
-  console.log(currentOrder);
+
   const {
     id,
     customerId,
@@ -16,11 +21,12 @@ const OrderSetterDetails = () => {
     date,
     paymentType,
     delivaryServiceType,
-    isPacked,
-    isDelivared,
-    isPaid,
-    isCancelled,
-    isRejected,
+    packed,
+    sentDelivery,
+    delivered,
+    paid,
+    cancelled,
+    rejected,
     customerEvaluation,
     controlNotes,
     customerName,
@@ -28,9 +34,9 @@ const OrderSetterDetails = () => {
     customerAddress,
   } = currentOrder;
   return (
-    <div className="order-setter-details-component">
-      <div className="order-setter-header">
-        <h1>Orders Setter Details</h1>
+    <div className="order-view-details-component">
+      <div className="header">
+        <h1>تفاصيل الطلبية</h1>
         <i className="somelogo">
           <span>number of new orders</span>
         </i>
@@ -58,23 +64,23 @@ const OrderSetterDetails = () => {
           <div className=" row2 row">
             <div className="form-item">
               <label htmlFor=""> تم التحضير </label>
-              <input type="text" value={isPacked ? "yes" : "No"} readOnly />
+              <input type="text" value={packed ? "yes" : "No"} readOnly />
             </div>
             <div className="form-item">
               <label htmlFor=""> ارسلت ديليفري </label>
-              <input type="text" value="unknown" readOnly />
+              <input type="text" value={sentDelivery ? "yes" : "No"} readOnly />
             </div>
             <div className="form-item">
               <label htmlFor=""> تم التسليم</label>
-              <input type="text" value={isDelivared ? "yes" : "No"} readOnly />
+              <input type="text" value={delivered ? "yes" : "No"} readOnly />
             </div>
             <div className="form-item">
               <label> ملغاة </label>
-              <input type="text" value={isCancelled ? "yes" : "No"} readOnly />
+              <input type="text" value={cancelled ? "yes" : "No"} readOnly />
             </div>
             <div className="form-item">
               <label> مرفوضة </label>
-              <input type="text" value={isRejected ? "yes" : "No"} readOnly />
+              <input type="text" value={rejected ? "yes" : "No"} readOnly />
             </div>
           </div>
           <div className=" row3 row">
@@ -93,8 +99,35 @@ const OrderSetterDetails = () => {
               <input type="text" value={customerAddress} readOnly />
             </div>
           </div>
-
-          <button> Update</button>
+          <div className="control-control-btns ">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              طباعة <i className="fa fa-print"></i>
+            </button>
+            <button
+              onClick={() => {
+                updateOrder(currentOrder, "packed");
+              }}
+            >
+              تم التحضير <i className="fa-solid fa-person-carry-box"></i>
+            </button>
+            <button onClick={() => updateOrder(currentOrder, "sentDelivery")}>
+              تم التسليم الى الديليفري
+            </button>
+            {(role === "admin" || role === "delivery") && (
+              <button onClick={() => updateOrder(currentOrder, "delivered")}>
+                تم التوصيل الى الزبون
+              </button>
+            )}
+            {role === "admin" && (
+              <button onClick={() => updateOrder(currentOrder, "cancelled")}>
+                رفض العملية
+              </button>
+            )}
+          </div>
         </form>
       </div>
 
@@ -154,4 +187,4 @@ const OrderSetterDetails = () => {
     </div>
   );
 };
-export default OrderSetterDetails;
+export default OrderDetails;

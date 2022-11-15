@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-
 //for testing...
 // import { catgories } from "./catgories-data";
-
 import { tempCart } from "./tempCart";
 import { ordersData } from "./orders-data";
 import e from "cors";
 
 const AppContext = React.createContext();
-//const customer = { name: "primary abc" };
+
 const AppProvider = ({ children }) => {
   // ----------------------------   states     -------------------------------------
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -27,83 +25,109 @@ const AppProvider = ({ children }) => {
     phoneNumber: "",
     address: "",
   });
-  const [userOrders, setUserOrders] = useState([]);
-  // const [userOrder, setUserOrder] = useState({
-  //   customerId: "",
-  //   cartTotal: "",
-  //   paymentType: "",
-  //   DelivaryServiceType: "",
-  //   orderCart: [{ productId: "", productAmount: "" }],
-  // });
 
   // ----------------------------   states for app2    -------------------------------------
-  const [orders, setOreders] = useState([]); // well be deleted
+
   const [controlOrders, setControlOrders] = useState([
     {
-      id: "",
-      customerId: "",
-      orderSetterId: "",
-      deliveryManId: "",
-      delivaryCharge: "",
-      OrderCart: [],
-      cartTotal: "",
-      date: "",
-      paymentType: "",
-      delivaryServiceType: "",
-      isPacked: "",
-      isDelivared: "",
-      isPaid: "",
-      isCancelled: "",
-      isRejected: "",
-      customerEvaluation: "",
-      controlNotes: "",
-      customerName: "",
-      customerPhone: "",
-      customerAddress: "",
+      id: "0",
+      customerId: "0",
+      orderSetterId: "0",
+      deliveryManId: "0",
+      delivaryCharge: "0",
+      OrderCart: [{}],
+      cartTotal: "0",
+      date: "0",
+      paymentType: "0",
+      delivaryServiceType: "0",
+      packed: "0",
+      sentDelivery: "0",
+      delivered: "0",
+      paid: "0",
+      cancelled: "0",
+      rejected: "0",
+      customerEvaluation: "0",
+      controlNotes: "0",
+      customerName: "0",
+      customerPhone: "0",
+      customerAddress: "0",
+    },
+  ]);
+  const [setterOrders, setSetterOrders] = useState([
+    {
+      id: "0",
+      customerId: "0",
+      orderSetterId: "0",
+      deliveryManId: "0",
+      delivaryCharge: "0",
+      OrderCart: [{}],
+      cartTotal: "0",
+      date: "0",
+      paymentType: "0",
+      delivaryServiceType: "0",
+      packed: "0",
+      sentDelivery: "0",
+      delivered: "0",
+      paid: "0",
+      cancelled: "0",
+      rejected: "0",
+      customerEvaluation: "0",
+      controlNotes: "0",
+      customerName: "0",
+      customerPhone: "0",
+      customerAddress: "0",
     },
   ]);
 
-  const [currentOrder, setCurrentOrder] = useState({
-    id: "",
-    customerName: "",
-    cartTotal: "",
-    date: "",
-    isPacked: "",
-    isDelivared: "",
-    isCancelled: "",
-    isRejected: "",
-    delivaryServiceType: "",
-    orderCart: [],
-  });
-
+  const [controlOldOrders, setControlOldOrders] = useState([
+    {
+      id: "0",
+      customerId: "0",
+      orderSetterId: "0",
+      deliveryManId: "0",
+      delivaryCharge: "0",
+      OrderCart: [{}],
+      cartTotal: "0",
+      date: "0",
+      paymentType: "0",
+      delivaryServiceType: "0",
+      packed: "0",
+      sentDelivery: "0",
+      delivered: "0",
+      paid: "0",
+      cancelled: "0",
+      rejected: "0",
+      customerEvaluation: "0",
+      controlNotes: "0",
+      customerName: "0",
+      customerPhone: "0",
+      customerAddress: "0",
+    },
+  ]);
   // ----------------------------   Effect     ----------------------------------------
 
   useEffect(() => {
-    console.log("useEffect runs >> on intial [] to run fetchCatgories()");
     fetchCatgories();
   }, []);
 
   useEffect(() => {
-    console.log("useEffect runs >> on change of [cart] ");
     computCartTotal();
     computeCartCount();
   }, [cart]);
 
   useEffect(() => {
-    console.log(
-      "useEffect runs >> on intial [] to run fetchProductsOfCurrentCatgory()"
-    );
+    console.log();
     fetchProductsOfCurrentCatgory(1);
   }, []);
-  // useEffect(() => {
-  //   console.log("useEffect runs >> on intial [] to run fetchOrders()");
-  //   fetchOrders();
-  // }, []);
   useEffect(() => {
-    console.log("useEffect runs >> on intial [] to run fetchControlOrders()");
     fetchControlOrders();
-    console.log("controlOrders is: ");
-    console.log(controlOrders);
+  }, []);
+  useEffect(() => {
+    fetchSetterOrders();
+  }, []);
+
+  useEffect(() => {
+    fetchControlOldOrders();
   }, []);
 
   // ----------------------------   Effect     ------------------------- Ends
@@ -157,9 +181,50 @@ const AppProvider = ({ children }) => {
       // setLoading(false);
     }
   };
+  const fetchControlOldOrders = () => {
+    let pageIndex = 0;
+    let pageSize = 10;
 
-  // --------------------------- Fetch functions ---------------Ends
-  // ---------------------------  Functions-------------------
+    try {
+      fetch(
+        `http://localhost:8080/api/controloldorders/${pageIndex}/${pageSize}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setControlOldOrders(data);
+        });
+    } catch (error) {
+      console.log(error);
+      // setLoading(false);
+    }
+  };
+  const updateOrderFinal = (newUpdatedOrder) => {
+    console.log("updatine order run..............");
+    fetch("http://localhost:8080/api/order", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUpdatedOrder),
+    });
+  };
+  const fetchSetterOrders = () => {
+    let pageIndex = 0;
+    let pageSize = 10;
+
+    try {
+      fetch(`http://localhost:8080/api/setterorders/${pageIndex}/${pageSize}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setSetterOrders(data);
+        });
+    } catch (error) {
+      console.log(error);
+      // setLoading(false);
+    }
+  };
+  // ------------------------------------------------- Fetch functions ---------------Ends
+  // ------------------------------------------------  Functions-------------------
   const choosCatgory = (catgoryId) => {
     console.log("choosCatgory>> catgoryId  is:" + catgoryId);
     //console.log("choosCatgory>> All catgories  are:" + catgories);
@@ -220,11 +285,9 @@ const AppProvider = ({ children }) => {
       incProductQuantityInCart(product);
     }
     if (!inCart(product)) {
-      // console.log("context >> buyProduct >> buying new product: " + product);
       product.amount = 1;
       setCart((cart) => [...cart, product]);
     }
-    // console.log("bayProduct function >> cart is: " + cart);
   };
   const inCart = (product) => {
     return cart.some((currentProduct) => currentProduct.id === product.id);
@@ -232,7 +295,6 @@ const AppProvider = ({ children }) => {
   const getQuantity = (id) => {
     let quantity = 0;
     cart.map((product) => {
-      // console.log("context >> product.amount: " + product.amount);
       if (product.id === id) {
         quantity = product.amount;
       }
@@ -262,9 +324,7 @@ const AppProvider = ({ children }) => {
     setIsCustomerInfoShown(true);
   };
   const showNextBtnInCart = () => {};
-  const showOrderDetails = (id) => {
-    setCurrentOrder(controlOrders.find((order) => order.id === id));
-  };
+
   const sendOrder = () => {
     console.log("starting sendOrder() -------->   -------->  ------->");
     let cartSummary = cart.map((product) => {
@@ -298,7 +358,15 @@ const AppProvider = ({ children }) => {
     console.log(customer);
   };
 
-  // ---------------------------  Functions------------------- Ends
+  const updateAnyOrder = (orderTarget, orderId, property, value) => {}; // to be done
+
+  const updateOrder = (order, property) => {
+    let newUpdatedOrder = { ...order, [property]: true };
+    updateOrderFinal(newUpdatedOrder);
+  };
+  // ---------------------------  Functions--------------------------------------------------------- Ends
+  // ---------------------------  Functions--------------------------------------------------------- Ends
+  // ---------------------------  Functions--------------------------------------------------------- Ends
   return (
     <AppContext.Provider
       value={{
@@ -325,14 +393,14 @@ const AppProvider = ({ children }) => {
         showCustomerInfo,
         isCustomerInfoShown,
         showNextBtnInCart,
-        orders,
-        currentOrder,
-        showOrderDetails,
         productsOfCurrentCatgory,
         customer,
         sendOrder,
         updateCusomerInfo,
         controlOrders,
+        setterOrders,
+        controlOldOrders,
+        updateOrder,
       }}
     >
       {children}
@@ -345,9 +413,4 @@ export const useGlobalContext = () => {
 };
 
 export { AppContext, AppProvider };
-// const getProduct = (id) => {
-//   let targetList = catgories.map((subCat) => {
-//     return subCat.contents.find((product) => product.id === id);
-//   });
-//   return targetList[0];
-// };
+//note: to send sms message to the customer by form

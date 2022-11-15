@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from "react";
 import OrderSetterDetails from "./Order-setter-details";
 import { useGlobalContext } from "./context";
-import Header from "./Header";
+import HeaderControl from "./Header-Control";
 
 let log = console.log;
 const OrderSetter = () => {
-  const { orders, controlOrders, showOrderDetails } = useGlobalContext();
-  console.log("fetching orders from database:&&&&&&&&&&&&&&&");
-  console.log(controlOrders);
+  const {
+    orders,
+    controlOrders,
+    showSetterOrderDetails,
+    currentOrder,
+    setterOrders,
+    currentSetterOrder,
+  } = useGlobalContext();
+  console.log("fetching setterOrders from database:&&&&&&&&&&&&&&&");
+  console.log(setterOrders);
   return (
     <>
-      <Header />
+      <HeaderControl />
       <div className="order-setter-component">
         <div className="order-setter-header">
           <br></br> <br></br>
-          <br></br>
-          <br></br>
-          <h1>Orders setter</h1>
+          <h1>موظف تجهيز الطلبيات</h1>
+          <h3>Orders setter</h3>
           <i className="somelogo"></i>
         </div>
         <table>
@@ -28,15 +34,13 @@ const OrderSetter = () => {
               <th>مبلغ الطلبية</th>
               <th>وقت الطلب</th>
               <th>تم التحضير</th>
-              <th>تم التسليم</th>
-              <th>ملغاة</th>
-              <th>مرفوضة</th>
+
               <th>فئة التوصيل</th>
             </tr>
           </thead>
           <tbody>
-            {controlOrders !== null && controlOrders !== undefined
-              ? controlOrders.map((order) => {
+            {setterOrders !== null && setterOrders !== undefined
+              ? setterOrders.map((order) => {
                   const {
                     //here we will take just the important info
                     id,
@@ -48,11 +52,8 @@ const OrderSetter = () => {
                     date,
                     paymentType,
                     delivaryServiceType,
-                    isPacked,
-                    isDelivared,
-                    isPaid,
-                    isCancelled,
-                    isRejected,
+                    packed,
+
                     customerEvaluation,
                     controlNotes,
                     customerName,
@@ -61,7 +62,13 @@ const OrderSetter = () => {
                   } = order;
 
                   return (
-                    <tr key={id} onClick={() => showOrderDetails(id)}>
+                    <tr
+                      key={id}
+                      onClick={() => showSetterOrderDetails(id)}
+                      className={
+                        currentSetterOrder.id === id ? "current-order" : ""
+                      }
+                    >
                       <td className="counter">
                         <span id="counter"></span>
                       </td>
@@ -69,10 +76,10 @@ const OrderSetter = () => {
                       <td>{customerName}</td>
                       <td>{cartTotal}</td>
                       <td>{date}</td>
-                      <td>{isPacked ? "yes" : "No"}</td>
-                      <td>{isDelivared ? "yes" : "No"}</td>
-                      <td>{isCancelled ? "yes" : "No"}</td>
-                      <td>{isRejected ? "yes" : "No"}</td>
+                      <td className={packed ? "selected" : ""}>
+                        {packed ? "yes" : "No"}
+                      </td>
+
                       <td>{delivaryServiceType}</td>
                       <td></td>
                     </tr>

@@ -141,3 +141,4 @@ const Cart = () => {
   );
 };
 export default Cart;
+//go to this website -> https://fontawesome.com/icons/moped?s=solid&f=classic

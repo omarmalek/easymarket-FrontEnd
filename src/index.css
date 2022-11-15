@@ -66,7 +66,7 @@
   --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
   --mainFont: white;
   --style: var(--green);
-  --mainTransition: all 0.3s linear;
+  --mainTransition_1: all 0.3s linear;
   --mainWhite: #fff;
 
   --b: 1px solid red;
@@ -841,27 +841,37 @@ table th {
   /* color: ; */
   font-size: 0.8rem;
 }
-/* -----------------------------------  order-setter-component  -------------- */
-.order-setter-component {
-  border: 1px solid red;
+/* -----------------------------------  order-view-component  -------------- */
+
+.order-view-component {
+  /* border: 1px solid red; */
   margin: 0 auto;
+  transition: none;
+  padding: 10px;
 }
-.order-setter-component table {
+.order-view-component h1,
+h3 {
+  text-align: center;
+}
+.order-view-component table {
   direction: rtl;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   border-collapse: collapse;
   border: 1px solid var(--style);
   width: 100%;
   counter-reset: items_counter;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.order-setter-component table td,
+.order-view-component table .current-order {
+  background-color: #27ae60;
+}
+.order-view-component table td,
 table th {
   border-bottom: 1px solid gray;
   padding: 3px;
 }
 
-.order-setter-component table th {
+.order-view-component table th {
   padding-top: 0.5rem;
   text-align: right;
   background-color: var(--style);
@@ -869,48 +879,50 @@ table th {
   position: sticky;
   top: 0;
 }
-.order-setter-component #counter:before {
+.order-view-component #counter:before {
   counter-increment: items_counter;
   content: counter(items_counter) ". ";
 }
-.order-setter-component table tr:nth-child(odd) {
+.order-view-component table tr:nth-child(odd) {
   background-color: #f2f2f2;
 }
 
-.order-setter-component table tr:hover {
-  background-color: #ddd;
+.order-view-component table tr:hover {
+  background-color: #27ae60;
 }
-/* --------------------------  order-setter-details-component  ---------------- */
-.order-setter-details-component {
+.order-view-component table tr:nth-child(odd).current-order {
+  background-color: #27ae60;
+}
+.order-view-component .selected {
+  background-color: #e27e0c;
+}
+/* --------------------------  order-view-details-component  ---------------- */
+.order-view-details-component {
   padding: 20px;
   direction: rtl;
 }
 
-.order-setter-details-component .order-details .row {
+.order-view-details-component .order-details .row {
   /* background-color: #666; */
   margin: 0 10% 15px;
   display: flex;
   justify-content: space-between;
 }
-.order-setter-details-component .order-details .row .form-item {
+.order-view-details-component .order-details .row .form-item {
   display: flex;
   flex-direction: column;
   width: 90%;
   /* border: 1px solid rgb(229, 23, 236); */
 }
-.order-setter-details-component .order-details .form-item label {
-  /* display: block; */
-  /* color: red; */
-  /* border: 1px solid blue; */
-}
-.order-setter-details-component .order-details .form-item input {
+
+.order-view-details-component .order-details .form-item input {
   padding-right: 10px;
   width: 80%;
   border: 1px solid rgb(66, 66, 70);
   background-color: #ddd;
   font-size: 1.2rem;
 }
-.order-setter-details-component table {
+.order-view-details-component table {
   direction: rtl;
   border-collapse: collapse;
   border: 1px solid var(--style);
@@ -919,12 +931,12 @@ table th {
   counter-reset: items_counter;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.order-setter-details-component table td,
+.order-view-details-component table td,
 table th {
   border-bottom: 1px solid gray;
   padding: 3px;
 }
-.order-setter-details-component table th {
+.order-view-details-component table th {
   padding-top: 0.5rem;
   text-align: right;
   background-color: var(--style);
@@ -932,16 +944,16 @@ table th {
   position: sticky;
   top: 0;
 }
-.order-setter-details-component table th.amount-caption {
+.order-view-details-component table th.amount-caption {
   text-align: center;
   /* border: 1px solid red; */
 }
-.order-setter-details-component #counter:before {
+.order-view-details-component #counter:before {
   counter-increment: items_counter;
   content: counter(items_counter) ". ";
 }
 
-.order-setter-details-component table button {
+.order-view-details-component table button {
   width: 100%;
   color: red;
   font-weight: 700;
@@ -949,15 +961,15 @@ table th {
   border: 1px solid rgba(255, 0, 0, 0.404);
   border-radius: 3px;
 }
-.order-setter-details-component table tr:nth-child(odd) {
+.order-view-details-component table tr:nth-child(odd) {
   background-color: #f2f2f2;
 }
 
-.order-setter-details-component table tr:hover {
+.order-view-details-component table tr:hover {
   background-color: #ddd;
 }
 
-.order-setter-details-component table .amount {
+.order-view-details-component table .amount {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -965,26 +977,36 @@ table th {
   /* padding: 1px; */
 }
 
-.order-setter-details-component table .amount button {
+.order-view-details-component table .amount button {
   width: 3rem;
   padding: 3px;
   border: 1px solid var(--green);
 }
-.order-setter-details-component table .amount button:first-child {
+.order-view-details-component table .amount button:first-child {
   border-radius: 0 15px 15px 0;
   color: red;
 }
-.order-setter-details-component table .amount button:last-child {
+.order-view-details-component table .amount button:last-child {
   border-radius: 15px 0 0 15px;
   color: rgb(9, 128, 34);
 }
-.order-setter-details-component table .amount input {
+.order-view-details-component table .amount input {
   width: 4rem;
   padding: 4px;
   font-size: 0.9rem;
   text-align: center;
   border-top: 1px solid var(--green);
   border-bottom: 1px solid var(--green);
+}
+.order-view-details-component .control-control-btns {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.order-view-details-component .control-control-btns button {
+  margin-left: 20px;
+  padding: 7px 15px;
+  background-color: #27ae60;
 }
 
 /* -------------------------------    footer     ------------------------- */

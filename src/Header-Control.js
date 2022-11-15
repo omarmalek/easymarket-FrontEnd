@@ -4,7 +4,7 @@ import { links } from "./data";
 import logo from "./images/shopping-cart-bag-logo-260nw-small.png";
 import { useGlobalContext } from "./context";
 
-function Header() {
+function HeaderControl() {
   const { showSearchBar, toggleNavbar, showNvbar } = useGlobalContext();
 
   const linksContainerRef = useRef(null);
@@ -29,12 +29,11 @@ function Header() {
 
       <div className={showNvbar ? "navbar active" : "navbar"} ref={navbarRef}>
         <a href="/" className="active">
-          الصفحة الرئيسية
+          الرئيسية
         </a>
-        {/* <a href="#">العروض</a> */}
-        <a href="#">أسعار التوصيل</a>
-        <a href="#"> الطلبات السابقة</a>
-        <a href="/control">Control</a>
+        <a href="/control">ادارة التطبيق</a>
+        <a href="/set">موظف التجهيز</a>
+        <a href="/control/old">الطلبات السابقة</a>
       </div>
 
       <div className="icons">
@@ -68,4 +67,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderControl;
