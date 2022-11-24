@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGlobalContext } from "./context";
 import cartLogo from "./images/cart.png";
 import { FaTimes } from "react-icons/fa";
 import { links, social } from "./data";
 import CustomerInfo from "./CustomerInfo";
+import PhoneBox from "./phone-box";
 
 const Cart = () => {
   const {
@@ -20,6 +21,10 @@ const Cart = () => {
     showCustomerInfo,
     isCustomerInfoShown,
   } = useGlobalContext();
+  const [isPhoneBoxShown, setIsPhoneBoxShown] = useState(false);
+  const showPhoneBox = () => {
+    setIsPhoneBoxShown(true);
+  };
   const doNothing = () => {};
   return (
     <div className="cart-scroll">
@@ -116,26 +121,16 @@ const Cart = () => {
                 أفرغ السلة <i className="fas fa-trash"></i>
               </button>
               <br></br>
-              <button id="empty-cart" onClick={showCustomerInfo}>
-                <a href="#customer-info"> التالي</a>
+              <button id="empty-cart" onClick={showPhoneBox}>
+                <a href="#phone-box"> التالي</a>
               </button>
             </div>
           </div>
         </div>
+
+        <br></br>
+        {isPhoneBoxShown && <PhoneBox />}
         {isCustomerInfoShown && <CustomerInfo />}
-        <p>الطلبية قيد الاحضار</p>
-        <p> رقم الطلبية</p>
-        <p>اجمالي الطلبية</p>
-        <p> سيتم التسليم خلال:....</p>
-        <p>بيان الطلبية</p>
-        <p>معرف عامل الدييفري</p>
-        <p>رقم هاتف الديليفري</p>
-        <p>الغاء الطلبية</p>
-        <p>
-          (سيتم عدم تفعيل زر الغاء الطلبية في حال تم تسليمها الى عامل الديليفري){" "}
-        </p>
-        <p>تقييم الزبون</p>
-        تصفير الكارت
       </aside>
     </div>
   );

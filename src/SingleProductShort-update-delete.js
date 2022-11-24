@@ -4,7 +4,7 @@ import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
 import noProductImg from "./images/no product image.png";
 // import { AiOutlineCheck } from "react-icons/ai";
 
-const SingleProduct = ({ product }) => {
+const SingleProductShortUpdateDelete = ({ product }) => {
   const {
     updateProductQuantity,
     buyProduct,
@@ -47,7 +47,7 @@ const SingleProduct = ({ product }) => {
     });
   };
 
-  // console.log("SingleProductShort component >> running... ");
+  console.log("SingleProductShort component >> running... ");
   return (
     <div key={id} className="single-product-short row">
       <div
@@ -74,45 +74,36 @@ const SingleProduct = ({ product }) => {
           </div>
           <div className="control ">
             <button
-              className={amount > 0 ? "btn gone" : "btn"}
-              onClick={() => buyProduct(product)}
+              className="btn"
+              //onClick={() => updateProduct(product)}
             >
-              Buy
+              Update
             </button>
             <button
-              className={amount == 0 ? "fa fa-trash btn gone" : "btn cancel"}
-              onClick={() => deleteFromCart(id)}
+              className=" btn "
+              //onClick={() => deleteProduct(id)}
             >
-              Cancel
+              Delete
             </button>
-            <div className="under-btn ">
-              <button onClick={() => decreasProductAmount(product)}>-</button>
-              <input
-                type="text"
-                value={amount}
-                onChange={updateProductQuantity}
-              />
-              <button onClick={() => buyProduct(product)}>+</button>
-            </div>
           </div>
         </div>
-      </div>
-      <div
-        className={
-          showSecondaryInfo
-            ? "info-secondary show-info-secondary"
-            : "info-secondary"
-        }
-      >
-        <button
-          className="close-info-secondary fa fa-times"
-          onClick={toggleInfoSecondry}
-        ></button>
-        {company && <h3 className="info--company">الشركة : {company}</h3>}
-        {country && <p className="info--country">بلد المنشأ : {country}</p>}
-        {desc && <p className="info--desc">الوصف : {desc}</p>}
+        <div
+          className={
+            showSecondaryInfo
+              ? "info-secondary show-info-secondary"
+              : "info-secondary"
+          }
+        >
+          <button
+            className="close-info-secondary fa fa-times"
+            onClick={toggleInfoSecondry}
+          ></button>
+          {company && <h3 className="info--company">الشركة : {company}</h3>}
+          {country && <p className="info--country">بلد المنشأ : {country}</p>}
+          {desc && <p className="info--desc">الوصف : {desc}</p>}
+        </div>
       </div>
     </div>
   );
 };
-export default SingleProduct;
+export default SingleProductShortUpdateDelete;

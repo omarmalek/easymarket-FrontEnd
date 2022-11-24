@@ -21,9 +21,11 @@ const AppProvider = ({ children }) => {
   const [cartTotal, setCartTotal] = useState(0);
   const [cartCount, setCartCount] = useState(0);
   const [customer, setCustomer] = useState({
+    id: 0,
     name: "",
     phoneNumber: "",
     address: "",
+    exist: false,
   });
 
   // ----------------------------   states for app2    -------------------------------------
@@ -78,7 +80,6 @@ const AppProvider = ({ children }) => {
       customerAddress: "0",
     },
   ]);
-
   const [controlOldOrders, setControlOldOrders] = useState([
     {
       id: "0",
@@ -104,7 +105,9 @@ const AppProvider = ({ children }) => {
       customerAddress: "0",
     },
   ]);
-  // ----------------------------   Effect     ----------------------------------------
+  // const [foundProducts, setFoundProducts] = useState([]);
+
+  // ===============================================   Effect     =================================
 
   useEffect(() => {
     fetchCatgories();
@@ -116,12 +119,13 @@ const AppProvider = ({ children }) => {
   }, [cart]);
 
   useEffect(() => {
-    console.log();
     fetchProductsOfCurrentCatgory(1);
   }, []);
+
   useEffect(() => {
     fetchControlOrders();
   }, []);
+
   useEffect(() => {
     fetchSetterOrders();
   }, []);
@@ -130,8 +134,10 @@ const AppProvider = ({ children }) => {
     fetchControlOldOrders();
   }, []);
 
-  // ----------------------------   Effect     ------------------------- Ends
-  // --------------------------- fetch functions  -------------------
+  console.log("context says: >>>>>>> customer is =========>");
+  console.log(customer);
+  //                     -------------  End   Effect     ------------
+  // ============================ Fetch functions  =================================
   const fetchCatgories = () => {
     // setLoading(true);
     try {
@@ -143,7 +149,6 @@ const AppProvider = ({ children }) => {
       // setLoading(false);
     }
   };
-
   const fetchProductsOfCurrentCatgory = (catid) => {
     // setLoading(true);
     console.log(
@@ -223,8 +228,25 @@ const AppProvider = ({ children }) => {
       // setLoading(false);
     }
   };
-  // ------------------------------------------------- Fetch functions ---------------Ends
-  // ------------------------------------------------  Functions-------------------
+  const fetchSearchResult = (str) => {
+    let pageIndex = 0;
+    let pageSize = 50;
+    try {
+      fetch(
+        `http://localhost:8080/api/products/byname/${str}/${pageIndex}/${pageSize}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setProductsOfCurrentCatgory(data);
+        });
+    } catch (error) {
+      console.log(error);
+      // setLoading(false);
+    }
+  };
+
+  //                              ----------------- Fetch functions ---------------Ends
+  // ===================================================   Functions  ================================
   const choosCatgory = (catgoryId) => {
     console.log("choosCatgory>> catgoryId  is:" + catgoryId);
     //console.log("choosCatgory>> All catgories  are:" + catgories);
@@ -250,6 +272,7 @@ const AppProvider = ({ children }) => {
   const closeSerchBar = () => {
     setIsSearchBarshown(false);
   };
+  // ==================================================  Calculating Cart Functions    ===============================
   const incProductQuantityInCart = (product) => {
     let newCart = cart.map((item) => {
       //ma be I can use forEach insted of map
@@ -320,34 +343,45 @@ const AppProvider = ({ children }) => {
     // let count = cart ? cart.length : 0;
     setCartCount(cart.length);
   };
+  //                             -------------------Calculating Cart Ends   --------------------------
+
   const showCustomerInfo = () => {
     setIsCustomerInfoShown(true);
   };
   const showNextBtnInCart = () => {};
 
-  const sendOrder = () => {
-    console.log("starting sendOrder() -------->   -------->  ------->");
+  const sendOrder = (e) => {
+    e.preventDefault();
     let cartSummary = cart.map((product) => {
       return { productId: product.id, productAmount: product.amount };
     });
-
     const userOrder = {
+      customerId: customer.id,
       customerName: customer.name,
       customerPhone: customer.phoneNumber,
       customerAddress: customer.address,
       cartTotal: cartTotal,
-      paymentType: "abc",
-      delivaryServiceType: "abc",
+      paymentType: "Cash",
+      delivaryServiceType: "Normal",
       orderCart: cartSummary, //I dont send the cart... I send this summary
     };
-
-    fetch("http://localhost:8080/api/userorder", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userOrder),
-    });
+    try {
+      fetch("http://localhost:8080/api/userorder", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userOrder),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
+          location.assign(`/customerhistory/${customer.id}`);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    // location.assign(`/customerhistory/${data.customerId}`);
   };
   const updateCusomerInfo = (event) => {
     const { name, value } = event.target;
@@ -357,16 +391,32 @@ const AppProvider = ({ children }) => {
     console.log("updating customer info: ");
     console.log(customer);
   };
-
   const updateAnyOrder = (orderTarget, orderId, property, value) => {}; // to be done
 
   const updateOrder = (order, property) => {
     let newUpdatedOrder = { ...order, [property]: true };
     updateOrderFinal(newUpdatedOrder);
   };
-  // ---------------------------  Functions--------------------------------------------------------- Ends
-  // ---------------------------  Functions--------------------------------------------------------- Ends
-  // ---------------------------  Functions--------------------------------------------------------- Ends
+  const checkIfUserExist = (e) => {
+    //e.preventDefault();
+    try {
+      fetch(`http://localhost:8080/api/customerbyphone/${customer.phoneNumber}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setCustomer({ ...data, exist: true }); //include id and phone in case of new customer
+        });
+    } catch (error) {
+      console.log(error);
+      setCustomer({ ...customer, exist: false });
+    }
+    setIsCustomerInfoShown(true);
+  };
+  const handleSearch = (e) => {
+    let str = e.target.value;
+    fetchSearchResult(str);
+  };
+  //                                  -------------  Functions Ends -------------------
+
   return (
     <AppContext.Provider
       value={{
@@ -401,6 +451,9 @@ const AppProvider = ({ children }) => {
         setterOrders,
         controlOldOrders,
         updateOrder,
+        checkIfUserExist,
+
+        handleSearch,
       }}
     >
       {children}

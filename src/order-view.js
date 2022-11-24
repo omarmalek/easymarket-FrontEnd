@@ -61,7 +61,7 @@ const OrderView = ({ orders, name, role }) => {
             </tr>
           </thead>
           <tbody>
-            {orders !== null && orders !== undefined
+            {orders
               ? orders.map((order) => {
                   const {
                     //here we will take just the important info
@@ -126,7 +126,7 @@ const OrderView = ({ orders, name, role }) => {
                     </>
                   );
                 })
-              : "no list to view"}
+              : "لا توجد بيانات لعرضها"}
           </tbody>
         </table>
         <OrderDetails currentOrder={currentOrder} role={role} />

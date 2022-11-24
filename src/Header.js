@@ -5,7 +5,8 @@ import logo from "./images/shopping-cart-bag-logo-260nw-small.png";
 import { useGlobalContext } from "./context";
 
 function Header() {
-  const { showSearchBar, toggleNavbar, showNvbar } = useGlobalContext();
+  const { showSearchBar, toggleNavbar, showNvbar, customer } =
+    useGlobalContext();
 
   const linksContainerRef = useRef(null);
   const navbarRef = useRef(null);
@@ -33,7 +34,7 @@ function Header() {
         </a>
         {/* <a href="#">العروض</a> */}
         <a href="#">أسعار التوصيل</a>
-        <a href="#"> الطلبات السابقة</a>
+        <a href={`/customerhistory/${customer.id}`}> الطلبات السابقة</a>
         <a href="/control">Control</a>
       </div>
 

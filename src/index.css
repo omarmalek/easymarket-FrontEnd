@@ -453,6 +453,8 @@ table th {
   color: var(--style);
   border: 1px solid var(--green);
 }
+
+/* =======================================    customer-info   =============================== */
 .customer-info {
   border: 2px solid var(--green);
   border-radius: 5px;
@@ -496,6 +498,22 @@ table th {
 
   border: none;
   margin: 0 auto;
+}
+/* ==================================     phone-box-component            ============= */
+.phone-box-component {
+  border: 2px solid var(--green);
+  border-radius: 5px;
+  padding: 10px;
+  direction: rtl;
+  margin-bottom: 20px;
+}
+.phone-box-component input {
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 0.3rem;
+  display: block;
 }
 
 /* ----------------------------    exhibition      -------------- */
@@ -719,7 +737,7 @@ table th {
 .single-product-short .info--name {
   font-family: "El Messiri", sans-serif;
   font-size: 1.1rem;
-  line-height: 0.8rem;
+  line-height: 1.1rem;
 }
 .single-product-short .info--price {
   color: maroon;
@@ -1008,7 +1026,205 @@ table th {
   padding: 7px 15px;
   background-color: #27ae60;
 }
+/* -----------------------------------------      customer-history-component      ------------------- */
+.customer-history-component {
+  margin: 20px 15%;
+  transition: none;
+  padding: 10px;
+  /* border: 4px solid red; */
+}
+.customer-history-component h1 {
+  text-align: right;
+}
+.customer-history-component h2,
+h3 {
+  text-align: center;
+}
+.customer-history-component table {
+  direction: rtl;
+  /* border: 1px solid red; */
+  border-collapse: collapse;
+  border: 1px solid var(--style);
+  width: 100%;
+  counter-reset: items_counter;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 20px;
+}
+.customer-history-component .current-order {
+  background-color: #27ae60;
+}
+.customer-history-component td,
+table th {
+  border-bottom: 1px solid gray;
+  padding: 3px;
+}
 
+.customer-history-component th {
+  padding-top: 0.5rem;
+  text-align: right;
+  background-color: var(--style);
+  color: var(--mainFont);
+  position: sticky;
+  top: 0;
+}
+.order-view-component #counter:before {
+  counter-increment: items_counter;
+  content: counter(items_counter) ". ";
+}
+.customer-history-component tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.customer-history-component tr:hover {
+  background-color: #27ae60;
+}
+.customer-history-component tr:nth-child(odd).current-order {
+  background-color: #27ae60;
+}
+.customer-history-component .selected {
+  background-color: #e27e0c;
+}
+.customer-history-component .details h1 {
+  text-align: center;
+}
+.customer-history-component .details table {
+  direction: rtl;
+  border-collapse: collapse;
+  border: 1px solid var(--style);
+  width: 80%;
+  margin: 0 auto;
+  counter-reset: items_counter2;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.customer-history-component .details table td,
+table th {
+  border-bottom: 1px solid gray;
+  padding: 3px;
+}
+.customer-history-component .details table th {
+  padding-top: 0.5rem;
+  text-align: right;
+  background-color: var(--style);
+  color: var(--mainFont);
+  position: sticky;
+  top: 0;
+}
+/* .customer-history-component .details table th.amount-caption {
+  text-align: center;
+  /* border: 1px solid red; 
+} */
+.customer-history-component .details #counter:before {
+  counter-increment: items_counter2;
+  content: counter(items_counter2) ". ";
+}
+
+.customer-history-component .details table button {
+  width: 100%;
+  color: red;
+  font-weight: 700;
+  font-size: 16px;
+  border: 1px solid rgba(255, 0, 0, 0.404);
+  border-radius: 3px;
+}
+.customer-history-component .details table tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.customer-history-component .details table tr:hover {
+  background-color: #ddd;
+}
+
+.customer-history-component .details table .amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  /* padding: 1px; */
+}
+
+.customer-history-component .details table .amount button {
+  width: 3rem;
+  padding: 3px;
+  border: 1px solid var(--green);
+}
+.customer-history-component .details table .amount button:first-child {
+  border-radius: 0 15px 15px 0;
+  color: red;
+}
+.customer-history-component .details table .amount button:last-child {
+  border-radius: 15px 0 0 15px;
+  color: rgb(9, 128, 34);
+}
+.customer-history-component .details table .amount input {
+  width: 4rem;
+  padding: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+  border-top: 1px solid var(--green);
+  border-bottom: 1px solid var(--green);
+}
+/*                                     ----------  customer-history-component ENDs --------      */
+
+/* -----------------------------------------      add-product-component      ------------------- */
+.add-product-component {
+  margin: 20px auto;
+  width: 80%;
+
+  direction: rtl;
+}
+.add-product-component h1 {
+  text-align: center;
+}
+.add-product-component .row {
+  margin: 0 10% 15px;
+  display: flex;
+  justify-content: space-between;
+  /* border: 2px solid red; */
+}
+.add-product-component .row .form-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* border: 2px solid rgb(25, 97, 230); */
+  margin-left: 20px;
+}
+.add-product-component .row .id {
+  width: 150px;
+}
+.add-product-component .row .id input {
+  background-color: rgb(66, 66, 70);
+  color: #fff;
+}
+.add-product-component label {
+}
+.add-product-component input {
+  padding-right: 10px;
+  /* width: 100%; */
+  border: 1px solid rgb(66, 66, 70);
+  background-color: #ddd;
+  font-size: 1.2rem;
+}
+.add-product-component .select-class {
+  padding-right: 10px;
+  width: 80%;
+  border: 1px solid rgb(66, 66, 70);
+  background-color: #ddd;
+  font-size: 1.2rem;
+}
+.add-product-component .control-btns {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.add-product-component button {
+  margin-left: 20px;
+  /* width: 100px; */
+  padding: 10px 20px;
+  background-color: #27ae60;
+  text-align: center;
+}
+
+/*                                  ---------     add-product-component     ENDs ------ */
 /* -------------------------------    footer     ------------------------- */
 footer {
   /* position: relative; */

@@ -32,6 +32,7 @@ function HeaderControl() {
           الرئيسية
         </a>
         <a href="/control">ادارة التطبيق</a>
+        <a href="/addproduct">اضافة منتج</a>
         <a href="/set">موظف التجهيز</a>
         <a href="/control/old">الطلبات السابقة</a>
       </div>

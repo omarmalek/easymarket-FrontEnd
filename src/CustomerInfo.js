@@ -1,20 +1,16 @@
 import React from "react";
 import { useGlobalContext } from "./context";
+import { Link } from "react-router-dom";
 
 function CustomerInfo() {
+  //const customerId = useParams();
   const { customer, sendOrder, updateCusomerInfo } = useGlobalContext();
   return (
     <div className="customer-and-payment-info">
       <div className="customer-info" id="customer-info">
         <h1>بيانات الزبون</h1>
+
         <form>
-          <label>رقم الهاتف</label>
-          <input
-            type="phone"
-            value={customer.phoneNumber}
-            name="phoneNumber"
-            onChange={updateCusomerInfo}
-          />
           <label htmlFor="">اسم المستخدم</label>
           <input
             type="text"

@@ -11,9 +11,9 @@ function Menu() {
     isSearchBarshown,
     closeSerchBar,
     cartCount,
+    handleSearch,
   } = useGlobalContext();
   // console.log("from menu >> isSearchBarshown is : " + isSearchBarshown);
-  const handleSearch = () => {};
 
   return (
     <div className="menu-component">

@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Customer from "./Customer";
-//import OrderControl from "./OrderControl";
-//import OrderSetter from "./Order-setter";
+import AddProduct from "./add-product";
 
 import OrderView from "./order-view";
 import CustomerHistory from "./customer-history";
+import SearchResult from "./Search-result";
 
 import { useGlobalContext } from "./context";
 
@@ -46,7 +46,12 @@ function App() {
             />
           }
         />
-        <Route path="/customerhistory" element={<CustomerHistory />} />;
+        <Route
+          path="/customerhistory/:customerid"
+          element={<CustomerHistory />}
+        />
+        <Route path="/addproduct" element={<AddProduct />} />;
+        <Route path="/searchresult" element={<SearchResult />} />
         {/* <Route path="/dev" element={<Delivery />} /> */}
       </Routes>
       {/* <Footer /> */}
