@@ -35,6 +35,7 @@ function HeaderControl() {
         <a href="/addproduct">اضافة منتج</a>
         <a href="/set">موظف التجهيز</a>
         <a href="/control/old">الطلبات السابقة</a>
+        <a href="/control/searchresult">بحث</a>
       </div>
 
       <div className="icons">

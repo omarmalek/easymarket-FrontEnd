@@ -51,7 +51,7 @@ function App() {
           element={<CustomerHistory />}
         />
         <Route path="/addproduct" element={<AddProduct />} />;
-        <Route path="/searchresult" element={<SearchResult />} />
+        <Route path="/control/searchresult" element={<SearchResult />} />
         {/* <Route path="/dev" element={<Delivery />} /> */}
       </Routes>
       {/* <Footer /> */}

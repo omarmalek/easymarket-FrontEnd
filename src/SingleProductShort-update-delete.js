@@ -3,6 +3,7 @@ import { useGlobalContext } from "./context";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
 import noProductImg from "./images/no product image.png";
 // import { AiOutlineCheck } from "react-icons/ai";
+import UpdateForm from "./Update-form";
 
 const SingleProductShortUpdateDelete = ({ product }) => {
   const {
@@ -15,7 +16,16 @@ const SingleProductShortUpdateDelete = ({ product }) => {
   } = useGlobalContext();
 
   const [showSecondaryInfo, setShowSecondaryInfo] = React.useState(false);
-
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [prodctToUpdate, setProdctToUpdate] = useState({});
+  // -------------------------------------------------------------------------------------
+  const selectToUpdateProduct = (product) => {
+    setProdctToUpdate(product);
+    setShowUpdateForm(true);
+  };
+  const closeForm = () => {
+    setShowUpdateForm(false);
+  };
   const {
     id,
     name,
@@ -47,9 +57,9 @@ const SingleProductShortUpdateDelete = ({ product }) => {
     });
   };
 
-  console.log("SingleProductShort component >> running... ");
+  //console.log("SingleProductShort component >> running... ");
   return (
-    <div key={id} className="single-product-short row">
+    <div key={id} className="single-product-update-delete-component row">
       <div
         className={amount > 0 ? "photo-and-basic choosen" : "photo-and-basic"}
       >
@@ -60,6 +70,7 @@ const SingleProductShortUpdateDelete = ({ product }) => {
         </div>
         <div className={"product-details row "}>
           <div className={amount > 0 ? "info incart " : "info"}>
+            <h4>{id}</h4>
             <h2 className="info--name ">{name}</h2>
             <h3 className="info--price">
               {unitPrice} <i className="fa-solid fa-shekel-sign"></i>
@@ -75,12 +86,12 @@ const SingleProductShortUpdateDelete = ({ product }) => {
           <div className="control ">
             <button
               className="btn"
-              //onClick={() => updateProduct(product)}
+              onClick={() => selectToUpdateProduct(product)}
             >
               Update
             </button>
             <button
-              className=" btn "
+              className=" btn cancel"
               //onClick={() => deleteProduct(id)}
             >
               Delete
@@ -103,6 +114,12 @@ const SingleProductShortUpdateDelete = ({ product }) => {
           {desc && <p className="info--desc">الوصف : {desc}</p>}
         </div>
       </div>
+      {showUpdateForm && (
+        <UpdateForm
+          prodctToUpdate={prodctToUpdate}
+          setShowUpdateForm={setShowUpdateForm}
+        />
+      )}
     </div>
   );
 };

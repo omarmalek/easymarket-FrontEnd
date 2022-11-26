@@ -1225,6 +1225,251 @@ table th {
 }
 
 /*                                  ---------     add-product-component     ENDs ------ */
+/* =======================================  search-result-component =====================================*/
+.search-result-component {
+  padding: 20px;
+  margin-top: 80px;
+  direction: rtl;
+}
+.search-result-component .input-search {
+  border: 1px solid rgb(59, 59, 77);
+  margin-right: 15px;
+  padding: 5px 7px;
+  width: 400px;
+}
+
+/*                                -------   search-result-component   ENDs-------- */
+
+/* =======================================  ExhibitionUpdateDelete-component =====================================*/
+.ExhibitionUpdateDelete-component {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* display: flex;
+  justify-content: center;
+  flex-wrap: wrap; */
+  /* gap: 10px; */
+  padding-top: 10px;
+  margin-top: 20px;
+}
+/*                                -------   ExhibitionUpdateDelete-component   ENDs-------- */
+
+/* =======================================  single-product-update-delete-component =====================================*/
+
+.single-product-update-delete-component {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px 5px 10px;
+  padding: 0.3rem;
+  /* width: 22%; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  font-size: 0.7rem;
+  background: #fff;
+  direction: rtl;
+}
+.single-product-update-delete-component .photo-and-basic {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  border: 1px solid var(--light-green);
+}
+.single-product-update-delete-component .img-container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 170px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+  margin-left: 5px;
+  background-color: #fff;
+}
+.single-product-update-delete-component .img-container img {
+  width: 100%;
+  object-fit: cover;
+}
+.single-product-update-delete-component .product-details {
+  display: flex;
+}
+.single-product-update-delete-component .product-details .info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  direction: rtl;
+  width: 70%;
+}
+.single-product-update-delete-component .info--name {
+  font-family: "El Messiri", sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+}
+.single-product-update-delete-component .info--price {
+  color: maroon;
+  font-size: 1.1rem;
+}
+.single-product-update-delete-component .info--weight {
+  font-weight: 400;
+  color: darkolivegreen;
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: 0.9rem;
+}
+.single-product-update-delete-component .extra-details-btn {
+  padding: 3px 15px;
+  margin-bottom: 0;
+  border-radius: 5px;
+  color: rgb(46, 73, 30);
+  background: LightGray;
+}
+.single-product-update-delete-component .extra-details-btn:hover {
+  color: var(--green);
+  /* background: var(--clr-grey-5); */
+}
+.single-product-update-delete-component .control {
+  padding: 10px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid greenyellow; */
+}
+.single-product-update-delete-component .control > button {
+  background-color: var(--green);
+  width: 100%;
+  height: 3rem;
+  /* line-height: 1rem; */
+  margin: 0 0 0.1rem 0;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bolder;
+}
+.single-product-update-delete-component .control > button:hover {
+  background-color: lightgreen;
+  color: var(--green);
+}
+.single-product-update-delete-component .control > button.cancel {
+  margin-top: 0.5rem;
+  color: red;
+  background-color: #fff;
+  border: 1px solid red;
+  transition: var(--transition);
+}
+
+.single-product-update-delete-component .info-secondary {
+  position: absolute;
+  /* display: none; */
+  top: 0;
+  height: 100%;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--green);
+  direction: rtl;
+  background-color: #fff;
+  z-index: -1;
+}
+.single-product-update-delete-component .show-info-secondary {
+  z-index: 3;
+}
+.single-product-update-delete-component .close-info-secondary {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  color: red;
+  background: transparent;
+  font-size: 1.7rem;
+}
+.single-product-update-delete-component .info--company {
+  font-family: "dubai-bold", sans-serif;
+}
+.single-product-update-delete-component .info--country {
+  font-weight: 400;
+}
+.single-product-update-delete-component .info--desc {
+  font-family: "sky-bold", serif;
+  font-size: 0.8rem;
+}
+/*                                -------   single-product-update-delete-component-component   ENDs-------- */
+
+/* =======================================  update-form-component =====================================*/
+.update-form-component {
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  right: 100px;
+  background-color: rgb(235, 229, 229);
+  border: 2px solid #27ae60;
+  z-index: 5;
+  direction: rtl;
+}
+.update-form-component .form-close {
+  float: left;
+  margin: 5px;
+  background-color: #e27e0c;
+}
+
+.update-form-component h1 {
+  text-align: center;
+}
+.update-form-component .row {
+  margin: 0 10px 15px;
+  display: flex;
+  justify-content: right;
+  /* border: 2px solid red; */
+}
+.update-form-component .row .form-item {
+  display: flex;
+  /* flex-direction: column; */
+  width: 100%;
+  /* border: 2px solid rgb(25, 97, 230); */
+  margin-left: 10px;
+}
+.update-form-component .row .id {
+  width: 200px;
+}
+.update-form-component .row .id input {
+  background-color: rgb(66, 66, 70);
+  color: #fff;
+  padding: 3px 5px;
+}
+.update-form-component label {
+  font-size: 1rem;
+  width: 170px;
+}
+.update-form-component input {
+  padding-right: 10px;
+  width: 100%;
+  border: 1px solid rgb(66, 66, 70);
+  background-color: #ddd;
+  font-size: 1rem;
+}
+.update-form-component .select-class {
+  padding-right: 10px;
+  width: 80%;
+  border: 1px solid rgb(66, 66, 70);
+  background-color: #ddd;
+  font-size: 1rem;
+}
+.update-form-component .control-btns {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.update-form-component button {
+  margin-left: 20px;
+  /* width: 100px; */
+  padding: 10px 20px;
+  background-color: #27ae60;
+  text-align: center;
+}
+
+/*                                -------   update-form-component   ENDs-------- */
 /* -------------------------------    footer     ------------------------- */
 footer {
   /* position: relative; */
@@ -1235,6 +1480,10 @@ footer {
 
 @media (max-width: 1100px) {
   .exhibition-component {
+    grid-template-columns: auto auto;
+  }
+
+  .ExhibitionUpdateDelete-component {
     grid-template-columns: auto auto;
   }
 }
@@ -1317,6 +1566,9 @@ footer {
     width: 90%;
   }
   .exhibition-component {
+    grid-template-columns: auto;
+  }
+  .ExhibitionUpdateDelete-component {
     grid-template-columns: auto;
   }
 }

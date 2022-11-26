@@ -9,7 +9,7 @@ function ExhibitionUpdateDelete({ products }) {
   //const { productsOfSearchResult } = useGlobalContext();
   return (
     <div>
-      <div className="exhibition-component">
+      <div className="ExhibitionUpdateDelete-component">
         {products && products !== undefined ? (
           products.map((product, index) => {
             return (

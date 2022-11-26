@@ -6,7 +6,7 @@ import noProductImg from "./images/no product image.png";
 
 function AddProduct() {
   const { catgories } = useGlobalContext();
-  const [imgesFile, setImgesFile] = useState("");
+  const [imgesFiles, setImgesFiles] = useState("");
   const [product, setProduct] = useState({
     id: 0,
     catgoryId: "",
@@ -38,7 +38,7 @@ function AddProduct() {
     console.log(product);
   };
   const updateProductImage = (event) => {
-    setImgesFile(event.target.files[0]); //I used the first picture only
+    setImgesFiles(event.target.files[0]); //I used the first picture only
     //if I want to use mutipel photos is use:...
     // const imgArray = event.target.files;
     // for (var i = 0; i < imgArray.length; i++) {
@@ -50,7 +50,7 @@ function AddProduct() {
     //e.preventDefault();
 
     var formData = new FormData();
-    formData.append("imgesFile", imgesFile);
+    formData.append("imgesFiles", imgesFiles);
     formData.append(
       "product",
       new Blob([JSON.stringify(product)], { type: "application/json" })
