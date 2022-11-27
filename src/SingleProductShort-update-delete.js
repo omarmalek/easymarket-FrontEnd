@@ -26,6 +26,7 @@ const SingleProductShortUpdateDelete = ({ product }) => {
   const closeForm = () => {
     setShowUpdateForm(false);
   };
+
   const {
     id,
     name,
@@ -56,7 +57,25 @@ const SingleProductShortUpdateDelete = ({ product }) => {
       setShowSecondaryInfo(false);
     });
   };
-
+  const deleteProduct = (id) => {
+    var result = confirm("Want to delete?");
+    if (result) {
+      try {
+        fetch(`http://localhost:8080/api/product/${id}`, {
+          method: "DELETE",
+          //body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Deleted!");
+          });
+      } catch (error) {
+        console.log("catch on Delete...................................");
+        console.log(error);
+      }
+      window.location.reload();
+    }
+  };
   //console.log("SingleProductShort component >> running... ");
   return (
     <div key={id} className="single-product-update-delete-component row">
@@ -75,7 +94,7 @@ const SingleProductShortUpdateDelete = ({ product }) => {
             <h3 className="info--price">
               {unitPrice} <i className="fa-solid fa-shekel-sign"></i>
             </h3>
-            {weight && <h4 className="info--weight">الوزن : {weight} غرام </h4>}
+            {weight && <h4 className="info--weight">الوزن : {weight}</h4>}
             <button
               className="btn extra-details-btn"
               onClick={toggleInfoSecondry}
@@ -90,10 +109,7 @@ const SingleProductShortUpdateDelete = ({ product }) => {
             >
               Update
             </button>
-            <button
-              className=" btn cancel"
-              //onClick={() => deleteProduct(id)}
-            >
+            <button className=" btn cancel" onClick={() => deleteProduct(id)}>
               Delete
             </button>
           </div>

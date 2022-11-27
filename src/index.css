@@ -1412,6 +1412,7 @@ table th {
   float: left;
   margin: 5px;
   background-color: #e27e0c;
+  width: 80px;
 }
 
 .update-form-component h1 {
@@ -1442,7 +1443,7 @@ table th {
   font-size: 1rem;
   width: 170px;
 }
-.update-form-component input {
+.update-form-component .text-input {
   padding-right: 10px;
   width: 100%;
   border: 1px solid rgb(66, 66, 70);
@@ -1457,13 +1458,25 @@ table th {
   font-size: 1rem;
 }
 .update-form-component .control-btns {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+  width: 200px;
+  margin: 10px auto;
+
+  /* border: 2px solid rgb(4, 122, 219); */
+  text-align: center;
 }
-.update-form-component button {
+/* .update-form-component .control-btns .check-update-ui {
+  padding: 5px 7px;
+  border: 2px solid red;
+} */
+/* .update-form-component .control-btns .check-update-ui > input {
+  margin: 5px 10px;
+}
+.update-form-component .control-btns .check-update-ui > label {
+  margin-top: 0px;
+} */
+.update-form-component .btn--update {
   margin-left: 20px;
-  /* width: 100px; */
+  width: 100px;
   padding: 10px 20px;
   background-color: #27ae60;
   text-align: center;

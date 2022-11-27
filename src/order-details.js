@@ -144,43 +144,45 @@ const OrderDetails = ({ currentOrder, role }) => {
             </tr>
           </thead>
           <tbody>
-            {currentOrder.orderCart.map((item, index) => {
-              const {
-                id,
-                productId,
-                productName,
-                unitPrice,
-                productAmount,
-                packType,
-              } = item;
-              let sumOfRow = 0;
-              sumOfRow = unitPrice * productAmount;
-              sumOfRow = parseFloat(sumOfRow.toFixed(2));
-              return (
-                <tr key={id}>
-                  <td className="counter">
-                    <span id="counter"></span>
-                  </td>
-                  <td>{productName}</td>
-                  <td>{productAmount + " " + packType}</td>
-                  <td>
-                    {unitPrice}
-                    <span> شيقل</span>
-                  </td>
-                  <td>
-                    {sumOfRow} <i className="fa-solid fa-shekel-sign"></i>
-                  </td>
-                  <td>
-                    <button
-                      className="remov-btn"
-                      // onClick={() => deleteFromCart(product.productId)}
-                    >
-                      حذف
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {currentOrder.orderCart
+              ? currentOrder.orderCart.map((item, index) => {
+                  const {
+                    id,
+                    productId,
+                    productName,
+                    unitPrice,
+                    productAmount,
+                    packType,
+                  } = item;
+                  let sumOfRow = 0;
+                  sumOfRow = unitPrice * productAmount;
+                  sumOfRow = parseFloat(sumOfRow.toFixed(2));
+                  return (
+                    <tr key={id}>
+                      <td className="counter">
+                        <span id="counter"></span>
+                      </td>
+                      <td>{productName}</td>
+                      <td>{productAmount + " " + packType}</td>
+                      <td>
+                        {unitPrice}
+                        <span> شيقل</span>
+                      </td>
+                      <td>
+                        {sumOfRow} <i className="fa-solid fa-shekel-sign"></i>
+                      </td>
+                      <td>
+                        <button
+                          className="remov-btn"
+                          // onClick={() => deleteFromCart(product.productId)}
+                        >
+                          حذف
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              : ""}
           </tbody>
         </table>
       </div>

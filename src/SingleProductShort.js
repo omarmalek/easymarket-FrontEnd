@@ -64,7 +64,7 @@ const SingleProduct = ({ product }) => {
             <h3 className="info--price">
               {unitPrice} <i className="fa-solid fa-shekel-sign"></i>
             </h3>
-            {weight && <h4 className="info--weight">الوزن : {weight} غرام </h4>}
+            {weight && <h4 className="info--weight">الوزن : {weight}</h4>}
             <button
               className="btn extra-details-btn"
               onClick={toggleInfoSecondry}

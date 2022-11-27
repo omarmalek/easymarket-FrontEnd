@@ -106,7 +106,7 @@ const AppProvider = ({ children }) => {
     },
   ]);
   // const [foundProducts, setFoundProducts] = useState([]);
-
+  const [refresher, setRefresher] = useState(false);
   // ===============================================   Effect     =================================
 
   useEffect(() => {
@@ -415,6 +415,7 @@ const AppProvider = ({ children }) => {
     let str = e.target.value;
     fetchSearchResult(str);
   };
+
   //                                  -------------  Functions Ends -------------------
 
   return (
@@ -452,8 +453,8 @@ const AppProvider = ({ children }) => {
         controlOldOrders,
         updateOrder,
         checkIfUserExist,
-
         handleSearch,
+        setRefresher,
       }}
     >
       {children}

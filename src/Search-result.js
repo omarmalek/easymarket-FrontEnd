@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { json } from "react-router-dom";
 import ExhibitionUpdateDelete from "./Exhibition-update-delete";
 import HeaderControl from "./Header-Control";
 
@@ -6,16 +7,27 @@ function SearchResult() {
   const [resultOfSearch, setResultOfSearch] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  // useEffect(()=>{},[])
-  const searchThisText = (event) => {
-    let str = event.target.value;
+  useEffect(() => {
+    if (localStorage.getItem("searchText")) {
+      setSearchText(localStorage.getItem("searchText"));
+      searchforProduct();
+    }
+  });
+
+  const handlSearch = (e) => {
+    let str = e.target.value;
     setSearchText(str);
+    localStorage.setItem("searchText", str);
+    searchforProduct();
+  };
+
+  const searchforProduct = () => {
     let pageIndex = 0;
     let pageSize = 20;
 
     try {
       fetch(
-        `http://localhost:8080/api/products/byname/${str}/${pageIndex}/${pageSize}`
+        `http://localhost:8080/api/products/byname/${searchText}/${pageIndex}/${pageSize}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -36,7 +48,7 @@ function SearchResult() {
           type="text"
           className="input-search"
           value={searchText}
-          onChange={searchThisText}
+          onChange={handlSearch}
         />
         {resultOfSearch ? (
           <ExhibitionUpdateDelete products={resultOfSearch} />

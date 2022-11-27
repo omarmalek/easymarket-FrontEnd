@@ -4,15 +4,10 @@ import { useGlobalContext } from "./context";
 import { FaTimes } from "react-icons/fa";
 
 function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
-  const { catgories } = useGlobalContext();
+  const { catgories, setRefresher } = useGlobalContext();
   const [product, setProduct] = useState(prodctToUpdate);
-  const [imgesFiles, setImgesFiles] = useState("abc");
+  const [imgesFiles, setImgesFiles] = useState("");
 
-  // useEffect(() => {
-  //   if (product.imgesFiles) {
-  //     setImgesFiles("data:image/jpeg;base64," + product.imgesFiles[0]);
-  //   }
-  // }, []);
   const closeForm = () => {
     setShowUpdateForm(false);
   };
@@ -22,11 +17,6 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
     setProduct((prdct) => {
       return { ...prdct, [name]: value };
     });
-    // console.log("updating Product info: ");
-    // console.log(product);
-
-    // console.log("checking image : ");
-    // console.log(imgesFiles);
   };
   const updateProductImage = (event) => {
     setImgesFiles(event.target.files[0]); //I used the first picture only
@@ -37,7 +27,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
     // }
     // setImgesFile(imgArray);
   };
-  const addProduct = (e) => {
+  const updateProductBK = (e) => {
     e.preventDefault();
     var formData = new FormData();
     formData.append("imgesFiles", imgesFiles);
@@ -64,7 +54,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
   };
   return (
     <div className="update-form-component">
-      <button className="form-close" onClick={closeForm}>
+      <button className="btn form-close" onClick={closeForm}>
         <FaTimes />
       </button>
       <h1>تعديل منتج</h1>
@@ -83,6 +73,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
               name="name"
               value={product.name}
               onChange={updateProduct}
+              className="text-input"
             />
           </div>
           <div className="form-item">
@@ -92,6 +83,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
               name="unitPrice"
               value={product.unitPrice}
               onChange={updateProduct}
+              className="text-input"
             />
           </div>
         </div>
@@ -122,6 +114,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
               name="packtype"
               value={product.packtype}
               onChange={updateProduct}
+              className="text-input"
             />
           </div>
         </div>
@@ -133,6 +126,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
               name="weight"
               value={product.weight}
               onChange={updateProduct}
+              className="text-input"
             />
           </div>
           <div className="form-item">
@@ -142,6 +136,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
               name="company"
               value={product.company}
               onChange={updateProduct}
+              className="text-input"
             />
           </div>
           <div className="form-item">
@@ -151,6 +146,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
               name="country"
               value={product.country}
               onChange={updateProduct}
+              className="text-input"
             />
           </div>
         </div>
@@ -162,6 +158,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
               name="img"
               value={product.img}
               onChange={updateProduct}
+              className="text-input"
             />
           </div>
         </div>
@@ -174,6 +171,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
                 product.productImages[0] ? product.productImages[0].picType : ""
               }
               onChange={updateProductImage}
+              className="text-input"
             />
           </div>
         </div>
@@ -185,11 +183,19 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
               name="desc"
               value={product.desc}
               onChange={updateProduct}
+              className="text-input"
             />
           </div>
         </div>
         <div className="control-btns">
-          <button onClick={addProduct}> تعديل</button>
+          {/* <div className="check-update-ui">
+            <input type="checkbox" id="uIupdate" />
+            <lable for="uIupdate">تحديث مباشر؟</lable>
+          </div> */}
+
+          <button className="btn--update" onClick={updateProductBK}>
+            تعديل
+          </button>
         </div>
       </form>
     </div>
