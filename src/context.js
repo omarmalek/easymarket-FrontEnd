@@ -155,7 +155,7 @@ const AppProvider = ({ children }) => {
       "fetchProductsOfCurrentCatgory >> currentCatgoryId is: " + catid
     );
     let pageIndex = 0;
-    let pageSize = 10;
+    let pageSize = 30;
 
     try {
       fetch(

@@ -51,6 +51,7 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
       console.log(error);
     }
     setShowUpdateForm(false);
+    //window.location.reload();
   };
   return (
     <div className="update-form-component">
@@ -111,8 +112,8 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
             <label>شكل العبوة</label>
             <input
               type="text"
-              name="packtype"
-              value={product.packtype}
+              name="packType"
+              value={product.packType}
               onChange={updateProduct}
               className="text-input"
             />

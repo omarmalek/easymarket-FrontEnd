@@ -1303,6 +1303,10 @@ table th {
   direction: rtl;
   width: 70%;
 }
+
+.single-product-update-delete-component .product-details .info .catid {
+  display: flex;
+}
 .single-product-update-delete-component .info--name {
   font-family: "El Messiri", sans-serif;
   font-size: 1.1rem;

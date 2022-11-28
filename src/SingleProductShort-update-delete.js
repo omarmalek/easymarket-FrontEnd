@@ -37,6 +37,7 @@ const SingleProductShortUpdateDelete = ({ product }) => {
     desc,
     company,
     productImages,
+    catgoryId,
   } = product;
 
   // console.log("--------------productImages---------------");
@@ -89,7 +90,10 @@ const SingleProductShortUpdateDelete = ({ product }) => {
         </div>
         <div className={"product-details row "}>
           <div className={amount > 0 ? "info incart " : "info"}>
-            <h4>{id}</h4>
+            <div className="catid">
+              <h4>{catgoryId}</h4>-<h4>{id}</h4>
+            </div>
+
             <h2 className="info--name ">{name}</h2>
             <h3 className="info--price">
               {unitPrice} <i className="fa-solid fa-shekel-sign"></i>
