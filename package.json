@@ -1,7 +1,7 @@
 {
-  "homepage": "https://omarmalek.github.io/easymarket",
   "name": "easymarket",
   "version": "0.1.0",
+  "homepage": "http://omarmalek.github.io/easymarket",
   "private": true,
   "dependencies": {
     "axios": "^1.1.3",
