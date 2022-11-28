@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/easymarket/static/css/main.8081baeb.css",
+    "main.js": "/easymarket/static/js/main.490ceedf.js",
+    "static/media/cart.png": "/easymarket/static/media/cart.1fde87eff34c8c791c0b.png",
+    "static/media/red-simple-shopping-cart-icon-12.png": "/easymarket/static/media/red-simple-shopping-cart-icon-12.107f30c1f2f6da42354c.png",
+    "static/media/shopping-cart-bag-logo-260nw-small.png": "/easymarket/static/media/shopping-cart-bag-logo-260nw-small.51beaf8c11b3e74c973d.png",
+    "index.html": "/easymarket/index.html",
+    "main.8081baeb.css.map": "/easymarket/static/css/main.8081baeb.css.map",
+    "main.490ceedf.js.map": "/easymarket/static/js/main.490ceedf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8081baeb.css",
+    "static/js/main.490ceedf.js"
+  ]
+}
