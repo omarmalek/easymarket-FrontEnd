@@ -54,12 +54,12 @@ const SingleProductShortUpdateDelete = ({ product }) => {
   // console.log("SingleProductShort component >> amount is: " + amount);
   const toggleInfoSecondry = () => {
     setShowSecondaryInfo(!showSecondaryInfo);
-    window.addEventListener("scroll", function () {
+    window.addEventListener("scroll", function() {
       setShowSecondaryInfo(false);
     });
   };
   const deleteProduct = (id) => {
-    var result = confirm("Want to delete?");
+    var result = window.confirm("Want to delete?");
     if (result) {
       try {
         fetch(`http://localhost:8080/api/product/${id}`, {

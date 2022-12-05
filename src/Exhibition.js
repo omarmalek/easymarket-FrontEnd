@@ -1,6 +1,6 @@
 import React from "react";
 import { useGlobalContext } from "./context";
-import SingleProduct from "./SingleProduct";
+
 import SingleProductShort from "./SingleProductShort";
 
 // import stlyle from "./styles/";

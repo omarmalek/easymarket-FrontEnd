@@ -21,7 +21,7 @@ function HeaderControl() {
     //  header section starts
     <header>
       <div className="logo">
-        <a href="/" className="logo-name">
+        <a href="/amabdo/" className="logo-name">
           <img src={logo} alt="" />
           غزة ديليفري
         </a>
@@ -31,11 +31,11 @@ function HeaderControl() {
         <a href="/" className="active">
           الرئيسية
         </a>
-        <a href="/control">ادارة التطبيق</a>
-        <a href="/addproduct">اضافة منتج</a>
-        <a href="/set">موظف التجهيز</a>
-        <a href="/control/old">الطلبات السابقة</a>
-        <a href="/control/searchresult">بحث</a>
+        <a href="/amabdo/control">ادارة التطبيق</a>
+        <a href="/amabdo/addproduct">اضافة منتج</a>
+        <a href="/amabdo/set">موظف التجهيز</a>
+        <a href="/amabdo/control/old">الطلبات السابقة</a>
+        <a href="/amabdo/control/searchresult">بحث</a>
       </div>
 
       <div className="icons">

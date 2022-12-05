@@ -231,17 +231,19 @@ const AppProvider = ({ children }) => {
   const fetchSearchResult = (str) => {
     let pageIndex = 0;
     let pageSize = 50;
-    try {
-      fetch(
-        `http://localhost:8080/api/products/byname/${str}/${pageIndex}/${pageSize}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setProductsOfCurrentCatgory(data);
-        });
-    } catch (error) {
-      console.log(error);
-      // setLoading(false);
+    if (str.length > 0) {
+      try {
+        fetch(
+          `http://localhost:8080/api/products/byname/${str}/${pageIndex}/${pageSize}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setProductsOfCurrentCatgory(data);
+          });
+      } catch (error) {
+        console.log(error);
+        // setLoading(false);
+      }
     }
   };
 
@@ -376,7 +378,7 @@ const AppProvider = ({ children }) => {
         .then((response) => response.json())
         .then((data) => {
           // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
-          location.assign(`/customerhistory/${customer.id}`);
+          window.location.assign(`amabdo/customerhistory/${customer.id}`);
         });
     } catch (error) {
       console.log(error);

@@ -18,7 +18,9 @@ function SearchResult() {
     let str = e.target.value;
     setSearchText(str);
     localStorage.setItem("searchText", str);
-    searchforProduct(str);
+    if (str.length > 0) {
+      searchforProduct(str);
+    }
   };
 
   const searchforProduct = (string) => {

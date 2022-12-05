@@ -5,8 +5,12 @@ import logo from "./images/shopping-cart-bag-logo-260nw-small.png";
 import { useGlobalContext } from "./context";
 
 function Header() {
-  const { showSearchBar, toggleNavbar, showNvbar, customer } =
-    useGlobalContext();
+  const {
+    showSearchBar,
+    toggleNavbar,
+    showNvbar,
+    customer,
+  } = useGlobalContext();
 
   const linksContainerRef = useRef(null);
   const navbarRef = useRef(null);
@@ -22,7 +26,7 @@ function Header() {
     //  header section starts
     <header>
       <div className="logo">
-        <a href="/" className="logo-name">
+        <a href="/amabdo/" className="logo-name">
           <img src={logo} alt="" />
           غزة ديليفري
         </a>
@@ -34,8 +38,8 @@ function Header() {
         </a>
         {/* <a href="#">العروض</a> */}
         <a href="#">أسعار التوصيل</a>
-        <a href={`/customerhistory/${customer.id}`}> الطلبات السابقة</a>
-        <a href="/control">Control</a>
+        <a href={`/amabdo/customerhistory/${customer.id}`}> الطلبات السابقة</a>
+        <a href="/amabdo/control">Control</a>
       </div>
 
       <div className="icons">

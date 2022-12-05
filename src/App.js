@@ -13,7 +13,7 @@ function App() {
   const { controlOrders, setterOrders, controlOldOrders } = useGlobalContext();
   //const showCart = () => {};
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="amabdo">
       <Routes>
         <Route path="/" element={<Customer />} />
         <Route
