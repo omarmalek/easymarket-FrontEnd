@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
-import noProductImg from "./images/no product image.png";
+import noProductImg from "../images/no product image.png";
 // import { AiOutlineCheck } from "react-icons/ai";
 
 const SingleProduct = ({ product }) => {
@@ -42,7 +42,7 @@ const SingleProduct = ({ product }) => {
   // console.log("SingleProductShort component >> amount is: " + amount);
   const toggleInfoSecondry = () => {
     setShowSecondaryInfo(!showSecondaryInfo);
-    window.addEventListener("scroll", function () {
+    window.addEventListener("scroll", function() {
       setShowSecondaryInfo(false);
     });
   };

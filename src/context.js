@@ -1,9 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-//for testing...
-// import { catgories } from "./catgories-data";
-import { tempCart } from "./tempCart";
-import { ordersData } from "./orders-data";
-import e from "cors";
 
 const AppContext = React.createContext();
 
@@ -17,7 +12,7 @@ const AppProvider = ({ children }) => {
 
   const [productsOfCurrentCatgory, setProductsOfCurrentCatgory] = useState([]);
   const [showNvbar, setshowNvbar] = useState(false);
-  const [cart, setCart] = useState(tempCart);
+  const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [cartCount, setCartCount] = useState(0);
   const [customer, setCustomer] = useState({
@@ -345,7 +340,7 @@ const AppProvider = ({ children }) => {
     // let count = cart ? cart.length : 0;
     setCartCount(cart.length);
   };
-  //                             -------------------Calculating Cart Ends   --------------------------
+  //                             -------------------Calculating Cart     Ends   --------------------------
 
   const showCustomerInfo = () => {
     setIsCustomerInfoShown(true);
@@ -378,7 +373,7 @@ const AppProvider = ({ children }) => {
         .then((response) => response.json())
         .then((data) => {
           // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
-          window.location.assign(`amabdo/customerhistory/${customer.id}`);
+          window.location.assign(`/customerhistory/${customer.id}`);
         });
     } catch (error) {
       console.log(error);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context";
 import { useParams } from "react-router-dom";
 
 function CustomerHistory() {

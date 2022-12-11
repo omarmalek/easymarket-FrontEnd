@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useGlobalContext } from "./context";
-import cartLogo from "./images/cart.png";
+import { useGlobalContext } from "../context";
+import cartLogo from "../images/cart.png";
 import { FaTimes } from "react-icons/fa";
-import { links, social } from "./data";
+import { links, social } from "../data";
 import CustomerInfo from "./CustomerInfo";
 import PhoneBox from "./phone-box";
 

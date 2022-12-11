@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Customer from "./Customer";
-import AddProduct from "./add-product";
+import Customer from "./user-pages/Customer";
+import AddProduct from "./control-pages/add-product";
 
-import OrderView from "./order-view";
-import CustomerHistory from "./customer-history";
-import SearchResult from "./Search-result";
+import OrderView from "./control-pages/order-view";
+import CustomerHistory from "./user-pages/customer-history";
+import SearchResult from "./control-pages/Search-result";
 
 import { useGlobalContext } from "./context";
 
@@ -13,7 +13,7 @@ function App() {
   const { controlOrders, setterOrders, controlOldOrders } = useGlobalContext();
   //const showCart = () => {};
   return (
-    <BrowserRouter basename="amabdo">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Customer />} />
         <Route

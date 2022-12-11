@@ -1,8 +1,8 @@
 import e from "cors";
 import React, { useState } from "react";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context";
 import HeaderControl from "./Header-Control";
-import noProductImg from "./images/no product image.png";
+import noProductImg from "../images/no product image.png";
 
 function AddProduct() {
   const { catgories } = useGlobalContext();

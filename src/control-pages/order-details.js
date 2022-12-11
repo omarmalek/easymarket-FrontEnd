@@ -1,16 +1,16 @@
 import React from "react";
-import { MdOutlineDeliveryDining } from "react-icons/fa";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context";
 
-const OrderSetterDetails = () => {
+const OrderDetails = ({ currentOrder, role }) => {
   const {
-    currentSetterOrder,
-    updateSetterOrderPackedMethod,
-    updateSetterOrderSentToDeliveryMethod,
+    updateOrderPacked,
+    updateOrderSentToDelivery,
+    updateOrderDeliverdToCustomer,
+    updateOrderRejected,
+    updateOrder,
   } = useGlobalContext();
   const updateProductQuantity = () => {};
-  console.log("OrderSetterDetails >>");
-  console.log(currentSetterOrder);
+
   const {
     id,
     customerId,
@@ -32,11 +32,11 @@ const OrderSetterDetails = () => {
     customerName,
     customerPhone,
     customerAddress,
-  } = currentSetterOrder;
+  } = currentOrder;
   return (
-    <div className="order-setter-details-component">
-      <div className="order-setter-header">
-        <h1>Orders Setter Details</h1>
+    <div className="order-view-details-component">
+      <div className="header">
+        <h1>تفاصيل الطلبية</h1>
         <i className="somelogo">
           <span>number of new orders</span>
         </i>
@@ -99,7 +99,7 @@ const OrderSetterDetails = () => {
               <input type="text" value={customerAddress} readOnly />
             </div>
           </div>
-          <div className="setter-control-btns ">
+          <div className="control-control-btns ">
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -107,12 +107,26 @@ const OrderSetterDetails = () => {
             >
               طباعة <i className="fa fa-print"></i>
             </button>
-            <button onClick={() => updateSetterOrderPackedMethod(id)}>
+            <button
+              onClick={() => {
+                updateOrder(currentOrder, "packed");
+              }}
+            >
               تم التحضير <i className="fa-solid fa-person-carry-box"></i>
             </button>
-            <button onClick={() => updateSetterOrderSentToDeliveryMethod(id)}>
+            <button onClick={() => updateOrder(currentOrder, "sentDelivery")}>
               تم التسليم الى الديليفري
             </button>
+            {(role === "admin" || role === "delivery") && (
+              <button onClick={() => updateOrder(currentOrder, "delivered")}>
+                تم التوصيل الى الزبون
+              </button>
+            )}
+            {role === "admin" && (
+              <button onClick={() => updateOrder(currentOrder, "cancelled")}>
+                رفض العملية
+              </button>
+            )}
           </div>
         </form>
       </div>
@@ -130,47 +144,49 @@ const OrderSetterDetails = () => {
             </tr>
           </thead>
           <tbody>
-            {currentSetterOrder.orderCart.map((item, index) => {
-              const {
-                id,
-                productId,
-                productName,
-                unitPrice,
-                productAmount,
-                packType,
-              } = item;
-              let sumOfRow = 0;
-              sumOfRow = unitPrice * productAmount;
-              sumOfRow = parseFloat(sumOfRow.toFixed(2));
-              return (
-                <tr key={id}>
-                  <td className="counter">
-                    <span id="counter"></span>
-                  </td>
-                  <td>{productName}</td>
-                  <td>{productAmount + " " + packType}</td>
-                  <td>
-                    {unitPrice}
-                    <span> شيقل</span>
-                  </td>
-                  <td>
-                    {sumOfRow} <i className="fa-solid fa-shekel-sign"></i>
-                  </td>
-                  <td>
-                    <button
-                      className="remov-btn"
-                      // onClick={() => deleteFromCart(product.productId)}
-                    >
-                      حذف
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {currentOrder.orderCart
+              ? currentOrder.orderCart.map((item, index) => {
+                  const {
+                    id,
+                    productId,
+                    productName,
+                    unitPrice,
+                    productAmount,
+                    packType,
+                  } = item;
+                  let sumOfRow = 0;
+                  sumOfRow = unitPrice * productAmount;
+                  sumOfRow = parseFloat(sumOfRow.toFixed(2));
+                  return (
+                    <tr key={id}>
+                      <td className="counter">
+                        <span id="counter"></span>
+                      </td>
+                      <td>{productName}</td>
+                      <td>{productAmount + " " + packType}</td>
+                      <td>
+                        {unitPrice}
+                        <span> شيقل</span>
+                      </td>
+                      <td>
+                        {sumOfRow} <i className="fa-solid fa-shekel-sign"></i>
+                      </td>
+                      <td>
+                        <button
+                          className="remov-btn"
+                          // onClick={() => deleteFromCart(product.productId)}
+                        >
+                          حذف
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              : ""}
           </tbody>
         </table>
       </div>
     </div>
   );
 };
-export default OrderSetterDetails;
+export default OrderDetails;
