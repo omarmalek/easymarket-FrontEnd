@@ -1,7 +1,7 @@
 import React from "react";
 import { useGlobalContext } from "../context";
 
-import SingleProductShort from "./SingleProductShort";
+import SingleProduct from "./SingleProduct";
 
 // import stlyle from "./styles/";
 
@@ -13,7 +13,7 @@ function Exhibition() {
       <div className="exhibition-component">
         {productsOfCurrentCatgory && productsOfCurrentCatgory !== undefined ? (
           productsOfCurrentCatgory.map((product, index) => {
-            return <SingleProductShort key={index} product={product} />;
+            return <SingleProduct key={index} product={product} />;
           })
         ) : (
           <p>no catgory</p>

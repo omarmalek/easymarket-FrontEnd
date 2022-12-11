@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
+  //let navigate = useNavigate();
   // ----------------------------   states     -------------------------------------
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [catgories, setCatgories] = useState([]);
@@ -244,6 +247,7 @@ const AppProvider = ({ children }) => {
 
   //                              ----------------- Fetch functions ---------------Ends
   // ===================================================   Functions  ================================
+
   const choosCatgory = (catgoryId) => {
     console.log("choosCatgory>> catgoryId  is:" + catgoryId);
     //console.log("choosCatgory>> All catgories  are:" + catgories);
@@ -374,6 +378,7 @@ const AppProvider = ({ children }) => {
         .then((data) => {
           // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
           window.location.assign(`/customerhistory/${customer.id}`);
+          //navigate(`/customerhistory/${customer.id}`);
         });
     } catch (error) {
       console.log(error);

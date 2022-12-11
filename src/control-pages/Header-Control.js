@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 function HeaderControl() {
   const { showSearchBar, toggleNavbar, showNvbar } = useGlobalContext();
 
-  const linksContainerRef = useRef(null);
-  const navbarRef = useRef(null);
+  // const linksContainerRef = useRef(null);
+  // const navbarRef = useRef(null);
 
   return (
     <header>
@@ -20,7 +20,7 @@ function HeaderControl() {
         </Link>
       </div>
 
-      <div className={showNvbar ? "navbar active" : "navbar"} ref={navbarRef}>
+      <div className={showNvbar ? "navbar active" : "navbar"}>
         <Link to="/" className="active">
           الرئيسية
         </Link>

@@ -15,8 +15,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Customer />} />
+        <Route exact path="/" element={<Customer />} />
         <Route
+          exact
           path="/control"
           element={
             <OrderView
@@ -27,6 +28,7 @@ function App() {
           }
         />
         <Route
+          exact
           path="/control/old"
           element={
             <OrderView
@@ -37,6 +39,7 @@ function App() {
           }
         />
         <Route
+          exact
           path="/set"
           element={
             <OrderView
@@ -47,11 +50,12 @@ function App() {
           }
         />
         <Route
+          exact
           path="/customerhistory/:customerid"
           element={<CustomerHistory />}
         />
-        <Route path="/addproduct" element={<AddProduct />} />;
-        <Route path="/control/searchresult" element={<SearchResult />} />
+        <Route exact path="/addproduct" element={<AddProduct />} />;
+        <Route exact path="/control/searchresult" element={<SearchResult />} />
         {/* <Route path="/dev" element={<Delivery />} /> */}
       </Routes>
       {/* <Footer /> */}
