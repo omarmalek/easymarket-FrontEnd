@@ -28,56 +28,56 @@ const AppProvider = ({ children }) => {
 
   // ----------------------------   states for app2    -------------------------------------
 
-  const [controlOrders, setControlOrders] = useState([
-    {
-      id: "0",
-      customerId: "0",
-      orderSetterId: "0",
-      deliveryManId: "0",
-      delivaryCharge: "0",
-      OrderCart: [{}],
-      cartTotal: "0",
-      date: "0",
-      paymentType: "0",
-      delivaryServiceType: "0",
-      packed: "0",
-      sentDelivery: "0",
-      delivered: "0",
-      paid: "0",
-      cancelled: "0",
-      rejected: "0",
-      customerEvaluation: "0",
-      controlNotes: "0",
-      customerName: "0",
-      customerPhone: "0",
-      customerAddress: "0",
-    },
-  ]);
-  const [setterOrders, setSetterOrders] = useState([
-    {
-      id: "0",
-      customerId: "0",
-      orderSetterId: "0",
-      deliveryManId: "0",
-      delivaryCharge: "0",
-      OrderCart: [{}],
-      cartTotal: "0",
-      date: "0",
-      paymentType: "0",
-      delivaryServiceType: "0",
-      packed: "0",
-      sentDelivery: "0",
-      delivered: "0",
-      paid: "0",
-      cancelled: "0",
-      rejected: "0",
-      customerEvaluation: "0",
-      controlNotes: "0",
-      customerName: "0",
-      customerPhone: "0",
-      customerAddress: "0",
-    },
-  ]);
+  // const [controlOrders, setControlOrders] = useState([
+  //   {
+  //     id: "0",
+  //     customerId: "0",
+  //     orderSetterId: "0",
+  //     deliveryManId: "0",
+  //     delivaryCharge: "0",
+  //     OrderCart: [{}],
+  //     cartTotal: "0",
+  //     date: "0",
+  //     paymentType: "0",
+  //     delivaryServiceType: "0",
+  //     packed: "0",
+  //     sentDelivery: "0",
+  //     delivered: "0",
+  //     paid: "0",
+  //     cancelled: "0",
+  //     rejected: "0",
+  //     customerEvaluation: "0",
+  //     controlNotes: "0",
+  //     customerName: "0",
+  //     customerPhone: "0",
+  //     customerAddress: "0",
+  //   },
+  // ]);
+  // const [setterOrders, setSetterOrders] = useState([
+  //   {
+  //     id: "0",
+  //     customerId: "0",
+  //     orderSetterId: "0",
+  //     deliveryManId: "0",
+  //     delivaryCharge: "0",
+  //     OrderCart: [{}],
+  //     cartTotal: "0",
+  //     date: "0",
+  //     paymentType: "0",
+  //     delivaryServiceType: "0",
+  //     packed: "0",
+  //     sentDelivery: "0",
+  //     delivered: "0",
+  //     paid: "0",
+  //     cancelled: "0",
+  //     rejected: "0",
+  //     customerEvaluation: "0",
+  //     controlNotes: "0",
+  //     customerName: "0",
+  //     customerPhone: "0",
+  //     customerAddress: "0",
+  //   },
+  // ]);
   const [controlOldOrders, setControlOldOrders] = useState([
     {
       id: "0",
@@ -120,13 +120,13 @@ const AppProvider = ({ children }) => {
     fetchProductsOfCurrentCatgory(1);
   }, []);
 
-  useEffect(() => {
-    fetchControlOrders();
-  }, []);
+  // useEffect(() => {
+  //   fetchControlOrders();
+  // }, []);
 
-  useEffect(() => {
-    fetchSetterOrders();
-  }, []);
+  // useEffect(() => {
+  //   fetchSetterOrders();
+  // }, []);
 
   useEffect(() => {
     fetchControlOldOrders();
@@ -167,21 +167,21 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const fetchControlOrders = () => {
-    let pageIndex = 0;
-    let pageSize = 10;
+  // const fetchControlOrders = () => {
+  //   let pageIndex = 0;
+  //   let pageSize = 10;
 
-    try {
-      fetch(`http://localhost:8080/api/controlorders/${pageIndex}/${pageSize}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setControlOrders(data);
-        });
-    } catch (error) {
-      console.log(error);
-      // setLoading(false);
-    }
-  };
+  //   try {
+  //     fetch(`http://localhost:8080/api/controlorders/${pageIndex}/${pageSize}`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setControlOrders(data);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //     // setLoading(false);
+  //   }
+  // };
   const fetchControlOldOrders = () => {
     let pageIndex = 0;
     let pageSize = 10;
@@ -208,22 +208,22 @@ const AppProvider = ({ children }) => {
       body: JSON.stringify(newUpdatedOrder),
     });
   };
-  const fetchSetterOrders = async () => {
-    let pageIndex = 0;
-    let pageSize = 10;
+  // const fetchSetterOrders = async () => {
+  //   let pageIndex = 0;
+  //   let pageSize = 10;
 
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/setterorders/${pageIndex}/${pageSize}`
-      );
-      const data = await response.json();
-      // setLoading(false);
-      setSetterOrders(data);
-    } catch (error) {
-      console.log(error);
-      // setLoading(false);
-    }
-  };
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8080/api/setterorders/${pageIndex}/${pageSize}`
+  //     );
+  //     const data = await response.json();
+  //     // setLoading(false);
+  //     setSetterOrders(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //     // setLoading(false);
+  //   }
+  // };
   const fetchSearchResult = (str) => {
     let pageIndex = 0;
     let pageSize = 50;
@@ -447,8 +447,8 @@ const AppProvider = ({ children }) => {
         customer,
         sendOrder,
         updateCusomerInfo,
-        controlOrders,
-        setterOrders,
+        // controlOrders,
+        // setterOrders,
         controlOldOrders,
         updateOrder,
         checkIfUserExist,

@@ -41,7 +41,7 @@ const OrderView = ({ orders, name, role }) => {
       <div className="order-view-component">
         <div className="header">
           <br></br> <br></br>
-          <h1>{name}</h1>
+          {/* <h1>{name}</h1> */}
           <i className="somelogo"></i>
         </div>
         <table>

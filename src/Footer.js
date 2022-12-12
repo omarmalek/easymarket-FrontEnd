@@ -1,9 +1,9 @@
 import React from "react";
-import { social } from "../data";
+import { social } from "./data";
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer>
       <div className="footer-container">
         <ul className="social-icons">
           {social.map((socialIcon) => {
