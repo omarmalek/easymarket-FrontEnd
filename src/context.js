@@ -134,8 +134,8 @@ const AppProvider = ({ children }) => {
 
   console.log("context says: >>>>>>> customer is =========>");
   console.log(customer);
-  //                     -------------  End   Effect     ------------
-  // ============================ Fetch functions  =================================
+  //                     -------------  End   Effect     ------------ends
+  //-------------------------------------Fetch functions  --------------------------------
   const fetchCatgories = () => {
     // setLoading(true);
     try {
@@ -149,9 +149,7 @@ const AppProvider = ({ children }) => {
   };
   const fetchProductsOfCurrentCatgory = (catid) => {
     // setLoading(true);
-    console.log(
-      "fetchProductsOfCurrentCatgory >> currentCatgoryId is: " + catid
-    );
+
     let pageIndex = 0;
     let pageSize = 30;
 
@@ -202,7 +200,6 @@ const AppProvider = ({ children }) => {
     }
   };
   const updateOrderFinal = (newUpdatedOrder) => {
-    console.log("updatine order run..............");
     fetch("http://localhost:8080/api/order", {
       method: "PUT",
       headers: {
@@ -211,16 +208,17 @@ const AppProvider = ({ children }) => {
       body: JSON.stringify(newUpdatedOrder),
     });
   };
-  const fetchSetterOrders = () => {
+  const fetchSetterOrders = async () => {
     let pageIndex = 0;
     let pageSize = 10;
 
     try {
-      fetch(`http://localhost:8080/api/setterorders/${pageIndex}/${pageSize}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setSetterOrders(data);
-        });
+      const response = await fetch(
+        `http://localhost:8080/api/setterorders/${pageIndex}/${pageSize}`
+      );
+      const data = await response.json();
+      // setLoading(false);
+      setSetterOrders(data);
     } catch (error) {
       console.log(error);
       // setLoading(false);
@@ -245,8 +243,8 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  //                              ----------------- Fetch functions ---------------Ends
-  // ===================================================   Functions  ================================
+  //                                       ------- Fetch functions --------ends
+  // ------------------------------------------- Functions -----------------------------
 
   const choosCatgory = (catgoryId) => {
     console.log("choosCatgory>> catgoryId  is:" + catgoryId);
@@ -273,7 +271,7 @@ const AppProvider = ({ children }) => {
   const closeSerchBar = () => {
     setIsSearchBarshown(false);
   };
-  // ==================================================  Calculating Cart Functions    ===============================
+  // ------------------------------------------- Calculating Cart Functions ---------------------------
   const incProductQuantityInCart = (product) => {
     let newCart = cart.map((item) => {
       //ma be I can use forEach insted of map
@@ -344,7 +342,7 @@ const AppProvider = ({ children }) => {
     // let count = cart ? cart.length : 0;
     setCartCount(cart.length);
   };
-  //                             -------------------Calculating Cart     Ends   --------------------------
+  //                                      ---------- Calculating Cart   ------------ends
 
   const showCustomerInfo = () => {
     setIsCustomerInfoShown(true);
@@ -383,7 +381,6 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-    // location.assign(`/customerhistory/${data.customerId}`);
   };
   const updateCusomerInfo = (event) => {
     const { name, value } = event.target;
@@ -418,7 +415,7 @@ const AppProvider = ({ children }) => {
     fetchSearchResult(str);
   };
 
-  //                                  -------------  Functions Ends -------------------
+  //                                  -------------  Functions ---------Ends
 
   return (
     <AppContext.Provider

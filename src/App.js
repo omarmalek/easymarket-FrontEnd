@@ -6,6 +6,7 @@ import AddProduct from "./control-pages/add-product";
 import OrderView from "./control-pages/order-view";
 import CustomerHistory from "./user-pages/customer-history";
 import SearchResult from "./control-pages/Search-result";
+import Footer from "./user-pages/Footer";
 
 import { useGlobalContext } from "./context";
 
@@ -58,7 +59,7 @@ function App() {
         <Route exact path="/control/searchresult" element={<SearchResult />} />
         {/* <Route path="/dev" element={<Delivery />} /> */}
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 }

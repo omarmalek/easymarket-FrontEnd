@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGlobalContext } from "../context";
-
+import Loading from "../Loading";
 import SingleProduct from "./SingleProduct";
-
-// import stlyle from "./styles/";
 
 function Exhibition() {
   const { productsOfCurrentCatgory, openCart } = useGlobalContext();
-
+  const [loading, setLoading] = useState(false);
+  if (loading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
   return (
     <div>
       <div className="exhibition-component">
