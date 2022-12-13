@@ -5,31 +5,7 @@ import Loading from "../Loading";
 
 export default function OrderControlPage() {
   const [loading, setLoading] = useState(true);
-  const [controlOrders, setControlOrders] = useState([
-    {
-      id: "0",
-      customerId: "0",
-      orderSetterId: "0",
-      deliveryManId: "0",
-      delivaryCharge: "0",
-      OrderCart: [{}],
-      cartTotal: "0",
-      date: "0",
-      paymentType: "0",
-      delivaryServiceType: "0",
-      packed: "0",
-      sentDelivery: "0",
-      delivered: "0",
-      paid: "0",
-      cancelled: "0",
-      rejected: "0",
-      customerEvaluation: "0",
-      controlNotes: "0",
-      customerName: "0",
-      customerPhone: "0",
-      customerAddress: "0",
-    },
-  ]);
+  const [controlOrders, setControlOrders] = useState([]);
 
   useEffect(() => {
     fetchControlOrders();
