@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const AppContext = React.createContext();
@@ -7,6 +6,7 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   //let navigate = useNavigate();
   // ----------------------------   states     -------------------------------------
+  const [loading, setLoading] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [catgories, setCatgories] = useState([]);
   const [isSearchBarshown, setIsSearchBarshown] = useState(false);
@@ -26,84 +26,6 @@ const AppProvider = ({ children }) => {
     exist: false,
   });
 
-  // ----------------------------   states for app2    -------------------------------------
-
-  // const [controlOrders, setControlOrders] = useState([
-  //   {
-  //     id: "0",
-  //     customerId: "0",
-  //     orderSetterId: "0",
-  //     deliveryManId: "0",
-  //     delivaryCharge: "0",
-  //     OrderCart: [{}],
-  //     cartTotal: "0",
-  //     date: "0",
-  //     paymentType: "0",
-  //     delivaryServiceType: "0",
-  //     packed: "0",
-  //     sentDelivery: "0",
-  //     delivered: "0",
-  //     paid: "0",
-  //     cancelled: "0",
-  //     rejected: "0",
-  //     customerEvaluation: "0",
-  //     controlNotes: "0",
-  //     customerName: "0",
-  //     customerPhone: "0",
-  //     customerAddress: "0",
-  //   },
-  // ]);
-  // const [setterOrders, setSetterOrders] = useState([
-  //   {
-  //     id: "0",
-  //     customerId: "0",
-  //     orderSetterId: "0",
-  //     deliveryManId: "0",
-  //     delivaryCharge: "0",
-  //     OrderCart: [{}],
-  //     cartTotal: "0",
-  //     date: "0",
-  //     paymentType: "0",
-  //     delivaryServiceType: "0",
-  //     packed: "0",
-  //     sentDelivery: "0",
-  //     delivered: "0",
-  //     paid: "0",
-  //     cancelled: "0",
-  //     rejected: "0",
-  //     customerEvaluation: "0",
-  //     controlNotes: "0",
-  //     customerName: "0",
-  //     customerPhone: "0",
-  //     customerAddress: "0",
-  //   },
-  // ]);
-  const [controlOldOrders, setControlOldOrders] = useState([
-    {
-      id: "0",
-      customerId: "0",
-      orderSetterId: "0",
-      deliveryManId: "0",
-      delivaryCharge: "0",
-      OrderCart: [{}],
-      cartTotal: "0",
-      date: "0",
-      paymentType: "0",
-      delivaryServiceType: "0",
-      packed: "0",
-      sentDelivery: "0",
-      delivered: "0",
-      paid: "0",
-      cancelled: "0",
-      rejected: "0",
-      customerEvaluation: "0",
-      controlNotes: "0",
-      customerName: "0",
-      customerPhone: "0",
-      customerAddress: "0",
-    },
-  ]);
-  // const [foundProducts, setFoundProducts] = useState([]);
   const [refresher, setRefresher] = useState(false);
   // ===============================================   Effect     =================================
 
@@ -120,35 +42,19 @@ const AppProvider = ({ children }) => {
     fetchProductsOfCurrentCatgory(1);
   }, []);
 
-  // useEffect(() => {
-  //   fetchControlOrders();
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchSetterOrders();
-  // }, []);
-
-  useEffect(() => {
-    fetchControlOldOrders();
-  }, []);
-
-  console.log("context says: >>>>>>> customer is =========>");
-  console.log(customer);
   //                     -------------  End   Effect     ------------ends
   //-------------------------------------Fetch functions  --------------------------------
   const fetchCatgories = () => {
-    // setLoading(true);
     try {
       let list = fetch("http://localhost:8080/api/catgories")
         .then((response) => response.json())
         .then((data) => setCatgories(data));
     } catch (error) {
       console.log("Error in fetchCatgories: " + error);
-      // setLoading(false);
     }
   };
   const fetchProductsOfCurrentCatgory = (catid) => {
-    // setLoading(true);
+    setLoading(true);
 
     let pageIndex = 0;
     let pageSize = 30;
@@ -159,46 +65,15 @@ const AppProvider = ({ children }) => {
       )
         .then((response) => response.json())
         .then((data) => {
+          setLoading(false);
           setProductsOfCurrentCatgory(data);
         });
     } catch (error) {
       console.log(error);
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
-  // const fetchControlOrders = () => {
-  //   let pageIndex = 0;
-  //   let pageSize = 10;
-
-  //   try {
-  //     fetch(`http://localhost:8080/api/controlorders/${pageIndex}/${pageSize}`)
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setControlOrders(data);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //     // setLoading(false);
-  //   }
-  // };
-  const fetchControlOldOrders = () => {
-    let pageIndex = 0;
-    let pageSize = 10;
-
-    try {
-      fetch(
-        `http://localhost:8080/api/controloldorders/${pageIndex}/${pageSize}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setControlOldOrders(data);
-        });
-    } catch (error) {
-      console.log(error);
-      // setLoading(false);
-    }
-  };
   const updateOrderFinal = (newUpdatedOrder) => {
     fetch("http://localhost:8080/api/order", {
       method: "PUT",
@@ -208,22 +83,7 @@ const AppProvider = ({ children }) => {
       body: JSON.stringify(newUpdatedOrder),
     });
   };
-  // const fetchSetterOrders = async () => {
-  //   let pageIndex = 0;
-  //   let pageSize = 10;
 
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:8080/api/setterorders/${pageIndex}/${pageSize}`
-  //     );
-  //     const data = await response.json();
-  //     // setLoading(false);
-  //     setSetterOrders(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //     // setLoading(false);
-  //   }
-  // };
   const fetchSearchResult = (str) => {
     let pageIndex = 0;
     let pageSize = 50;
@@ -420,6 +280,7 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        loading,
         isCartOpen,
         openCart,
         closeCart,
@@ -447,9 +308,7 @@ const AppProvider = ({ children }) => {
         customer,
         sendOrder,
         updateCusomerInfo,
-        // controlOrders,
-        // setterOrders,
-        controlOldOrders,
+
         updateOrder,
         checkIfUserExist,
         handleSearch,

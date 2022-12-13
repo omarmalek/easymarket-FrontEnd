@@ -4,8 +4,8 @@ import Loading from "../Loading";
 import SingleProduct from "./SingleProduct";
 
 function Exhibition() {
-  const { productsOfCurrentCatgory, openCart } = useGlobalContext();
-  const [loading, setLoading] = useState(false);
+  const { loading, productsOfCurrentCatgory, openCart } = useGlobalContext();
+
   if (loading) {
     return (
       <div>

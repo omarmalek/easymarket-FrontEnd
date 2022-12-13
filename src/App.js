@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import { useGlobalContext } from "./context";
 import OrderSetterPage from "./control-pages/OrderSetterPage";
 import OrderControlPage from "./control-pages/OrderControlPage";
+import OrderOldPage from "./control-pages/OrderOldPage";
 
 function App() {
   const { controlOrders, setterOrders, controlOldOrders } = useGlobalContext();
@@ -20,7 +21,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Customer />} />
         <Route exact path="/control" element={<OrderControlPage />} />
-        <Route exact path="/control/old" element={<OrderControlPage />} />
+        <Route exact path="/control/old" element={<OrderOldPage />} />
         <Route exact path="/set" element={<OrderSetterPage />} />
         <Route
           exact

@@ -59,7 +59,7 @@ export default function OrderSetterPage() {
   }
   return (
     <div>
-      <h1>موظف التجهيز</h1>
+      <h1 className="page-title">موظف التجهيز</h1>
       <OrderView orders={setterOrders} />
     </div>
   );
