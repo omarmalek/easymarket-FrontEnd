@@ -38,7 +38,7 @@ export default function OrderControlPage() {
   return (
     <div>
       <h1 className="page-title">موظف الكونترول</h1>
-      <OrderView orders={controlOrders} />
+      <OrderView orders={controlOrders} role={"admin"} />
     </div>
   );
 }

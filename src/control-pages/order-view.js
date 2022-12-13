@@ -34,7 +34,11 @@ const OrderView = ({ orders, name, role }) => {
     customerPhone: 0,
     customerAddress: "0",
   });
-
+  const [showOrderDetails, setShowOrderDetials] = useState(false);
+  const selectOrder = (order) => {
+    setCurrentOrder(order);
+    setShowOrderDetials(true);
+  };
   return (
     <>
       <HeaderControl />
@@ -86,7 +90,7 @@ const OrderView = ({ orders, name, role }) => {
                     <>
                       <tr
                         key={id}
-                        onClick={() => setCurrentOrder(order)}
+                        onClick={() => selectOrder(order)}
                         className={
                           currentOrder.id === id ? "current-order" : ""
                         }
@@ -124,7 +128,13 @@ const OrderView = ({ orders, name, role }) => {
               : "لا توجد بيانات لعرضها"}
           </tbody>
         </table>
-        <OrderDetails currentOrder={currentOrder} role={role} />
+        {showOrderDetails && (
+          <OrderDetails
+            currentOrder={currentOrder}
+            role={role}
+            setShowOrderDetials={setShowOrderDetials}
+          />
+        )}
       </div>
     </>
   );

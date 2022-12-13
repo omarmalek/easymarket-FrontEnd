@@ -878,6 +878,7 @@ table th {
 /* -----------------------------------  order-view-component  -------------- */
 
 .order-view-component {
+  /* position: relatives; */
   /* border: 1px solid red; */
   margin: 0 auto;
   transition: none;
@@ -932,13 +933,52 @@ table th {
 }
 /* --------------------------  order-view-details-component  ---------------- */
 .order-view-details-component {
-  padding: 20px;
+  position: fixed;
+  /* padding: 20px; */
   direction: rtl;
+  border: 2px solid rgb(42, 119, 6);
+  top: 80px;
+  left: 100px;
+  right: 100px;
+  bottom: 100px;
+  /* min-height: 100%; */
+  height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #fff;
 }
-
+.order-view-details-component .header {
+  display: flex;
+  height: 60px;
+  position: fixed;
+  left: 120px;
+  right: 120px;
+  background-color: #fff;
+}
+.order-view-details-component .header h1 {
+  justify-self: center;
+  margin-right: 30%;
+  /* border: 1px solid rgb(229, 23, 236); */
+}
+.order-view-details-component .form-close {
+  justify-self: self-start;
+  width: 70px;
+  height: 50px;
+  padding: 5px 7px;
+  margin: 15px 15px 0;
+  border: 1px solid red;
+  background-color: #fff;
+  color: red;
+  transform: none;
+}
+.order-view-details-component .form-close:hover {
+  background-color: red;
+  color: #fff;
+  font-size: 1.5rem;
+}
 .order-view-details-component .order-details .row {
   /* background-color: #666; */
-  margin: 0 10% 15px;
+  margin: 60px 10% 15px;
   display: flex;
   justify-content: space-between;
 }
@@ -964,6 +1004,7 @@ table th {
   margin: 0 auto;
   counter-reset: items_counter;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 35px;
 }
 .order-view-details-component table td,
 table th {

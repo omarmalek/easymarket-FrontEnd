@@ -1,12 +1,13 @@
 import React from "react";
 import { useGlobalContext } from "../context";
+import { FaTimes } from "react-icons/fa";
 
-const OrderDetails = ({ currentOrder, role }) => {
+const OrderDetails = ({ currentOrder, role, setShowOrderDetials }) => {
   const {
-    updateOrderPacked,
-    updateOrderSentToDelivery,
-    updateOrderDeliverdToCustomer,
-    updateOrderRejected,
+    // updateOrderPacked,
+    // updateOrderSentToDelivery,
+    // updateOrderDeliverdToCustomer,
+    // updateOrderRejected,
     updateOrder,
   } = useGlobalContext();
   const updateProductQuantity = () => {};
@@ -36,10 +37,18 @@ const OrderDetails = ({ currentOrder, role }) => {
   return (
     <div className="order-view-details-component">
       <div className="header">
+        <button
+          className="btn form-close"
+          onClick={() => {
+            setShowOrderDetials(false);
+          }}
+        >
+          <FaTimes />
+        </button>
         <h1>تفاصيل الطلبية</h1>
-        <i className="somelogo">
+        {/* <i className="somelogo">
           <span>number of new orders</span>
-        </i>
+        </i> */}
       </div>
       <div className="order-details" id="order-details">
         <form>
