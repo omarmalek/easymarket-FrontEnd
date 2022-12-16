@@ -940,7 +940,7 @@ table th {
   top: 80px;
   left: 100px;
   right: 100px;
-  bottom: 100px;
+  /* bottom: 100px; */
   /* min-height: 100%; */
   height: 80%;
   overflow-y: auto;
@@ -972,13 +972,18 @@ table th {
   transform: none;
 }
 .order-view-details-component .form-close:hover {
-  background-color: red;
-  color: #fff;
-  font-size: 1.5rem;
+  /* background-color: red; */
+  /* color: #fff; */
+  /* font-size: 2rem; */
+  box-shadow: 2px 0px 3px #666;
+}
+.order-view-details-component .order-details {
+  /* background-color: #666; */
+  margin-top: 60px;
 }
 .order-view-details-component .order-details .row {
   /* background-color: #666; */
-  margin: 60px 10% 15px;
+  margin: 10px 10% 15px;
   display: flex;
   justify-content: space-between;
 }
@@ -1289,9 +1294,13 @@ table th {
   direction: rtl;
   min-height: 80vh;
 }
+.search-result-component .search-bar {
+  display: flex;
+}
 .search-result-component .input-search {
   border: 1px solid rgb(59, 59, 77);
   margin-right: 15px;
+  margin-left: 15px;
   padding: 5px 7px;
   width: 400px;
 }

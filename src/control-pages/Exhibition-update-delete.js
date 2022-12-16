@@ -5,7 +5,7 @@ import SingleProductShortUpdateDelete from "./SingleProductShort-update-delete";
 
 // import stlyle from "./styles/";
 
-function ExhibitionUpdateDelete({ products }) {
+function ExhibitionUpdateDelete({ products, reSearch }) {
   //const { productsOfSearchResult } = useGlobalContext();
   return (
     <div>
@@ -13,7 +13,11 @@ function ExhibitionUpdateDelete({ products }) {
         {products && products !== undefined ? (
           products.map((product, index) => {
             return (
-              <SingleProductShortUpdateDelete key={index} product={product} />
+              <SingleProductShortUpdateDelete
+                key={index}
+                product={product}
+                reSearch={reSearch}
+              />
             );
           })
         ) : (

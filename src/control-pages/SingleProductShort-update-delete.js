@@ -5,7 +5,7 @@ import noProductImg from "../images/no product image.png";
 // import { AiOutlineCheck } from "react-icons/ai";
 import UpdateForm from "./Update-form";
 
-const SingleProductShortUpdateDelete = ({ product }) => {
+const SingleProductShortUpdateDelete = ({ product, reSearch }) => {
   const {
     updateProductQuantity,
     buyProduct,
@@ -19,7 +19,7 @@ const SingleProductShortUpdateDelete = ({ product }) => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [prodctToUpdate, setProdctToUpdate] = useState({});
   // -------------------------------------------------------------------------------------
-  const selectToUpdateProduct = (product) => {
+  const selectToUpdateProduct = (product, reSearch) => {
     setProdctToUpdate(product);
     setShowUpdateForm(true);
   };
@@ -138,6 +138,7 @@ const SingleProductShortUpdateDelete = ({ product }) => {
         <UpdateForm
           prodctToUpdate={prodctToUpdate}
           setShowUpdateForm={setShowUpdateForm}
+          reSearch={reSearch}
         />
       )}
     </div>

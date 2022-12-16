@@ -107,9 +107,6 @@ const AppProvider = ({ children }) => {
   // ------------------------------------------- Functions -----------------------------
 
   const choosCatgory = (catgoryId) => {
-    console.log("choosCatgory>> catgoryId  is:" + catgoryId);
-    //console.log("choosCatgory>> All catgories  are:" + catgories);
-
     fetchProductsOfCurrentCatgory(catgoryId);
   };
   const openCart = () => {
@@ -142,26 +139,19 @@ const AppProvider = ({ children }) => {
     });
     setCart(newCart);
   };
-
   const decreasProductAmount = (product) => {
-    cart.map((item) => {
-      //ma be I can use forEach insted of map
-      if (item.id === product.id) {
-        if (item.amount > 0) item.amount = item.amount - 1;
-      }
-      return item;
-    });
-    let newCart = cart.filter((item) => {
-      return item.amount !== 0;
-    });
+    let newCart = cart
+      .map((item) => {
+        if (item.id === product.id) {
+          item.amount = item.amount - 1;
+        }
+        return item;
+      })
+      .filter((item) => item.amount !== 0);
     setCart(newCart);
   };
-
-  const updateProductQuantity = () => {};
-
+  // const updateProductQuantity = () => {};
   const buyProduct = (product) => {
-    console.log("bayProduct function >> product is: ");
-    console.log(product);
     if (inCart(product)) {
       console.log("product already in cart...!");
       incProductQuantityInCart(product);
@@ -195,12 +185,17 @@ const AppProvider = ({ children }) => {
     let total = 0;
     cart.map((product) => {
       total += product.unitPrice * product.amount;
+      total = parseFloat(total.toFixed(2));
     });
     setCartTotal(total);
   };
   const computeCartCount = () => {
-    // let count = cart ? cart.length : 0;
-    setCartCount(cart.length);
+    let count = 0;
+    cart.map((product) => {
+      count += product.amount;
+      return count;
+    });
+    setCartCount(count);
   };
   //                                      ---------- Calculating Cart   ------------ends
 
@@ -291,7 +286,7 @@ const AppProvider = ({ children }) => {
         closeSerchBar,
         showNvbar,
         toggleNavbar,
-        updateProductQuantity,
+        // updateProductQuantity,
         cart,
         buyProduct,
         incProductQuantityInCart,
@@ -319,7 +314,7 @@ const AppProvider = ({ children }) => {
     </AppContext.Provider>
   );
 };
-
+//custom hook
 export const useGlobalContext = () => {
   return useContext(AppContext);
 };

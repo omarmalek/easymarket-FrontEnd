@@ -3,7 +3,7 @@ import React from "react";
 import { useGlobalContext } from "../context";
 import { FaTimes } from "react-icons/fa";
 
-function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
+function UpdateForm({ prodctToUpdate, setShowUpdateForm, reSearch }) {
   const { catgories, setRefresher } = useGlobalContext();
   const [product, setProduct] = useState(prodctToUpdate);
   const [imgesFiles, setImgesFiles] = useState("");
@@ -45,11 +45,13 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm }) {
           console.log("Files successfully uploaded!");
           console.log("data is: ");
           console.log(data);
+          reSearch();
         });
     } catch (error) {
       console.log("catch...................................");
       console.log(error);
     }
+
     setShowUpdateForm(false);
     //window.location.reload();
   };
