@@ -5,6 +5,7 @@ import SingleProduct from "./SingleProduct";
 
 function Exhibition() {
   const { loading, productsOfCurrentCatgory, openCart } = useGlobalContext();
+  // const [loading, setLoading] = useState(false);
 
   if (loading) {
     return (

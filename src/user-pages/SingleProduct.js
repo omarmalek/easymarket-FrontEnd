@@ -6,7 +6,6 @@ import noProductImg from "../images/no product image.png";
 
 const SingleProduct = ({ product }) => {
   const {
-    updateProductQuantity,
     buyProduct,
     decreasProductAmount,
     cart,
@@ -46,7 +45,7 @@ const SingleProduct = ({ product }) => {
       setShowSecondaryInfo(false);
     });
   };
-
+  const updateProductQuantity = () => {};
   // console.log("SingleProductShort component >> running... ");
   return (
     <div key={id} className="single-product-short row">
@@ -87,11 +86,7 @@ const SingleProduct = ({ product }) => {
             </button>
             <div className="under-btn ">
               <button onClick={() => decreasProductAmount(product)}>-</button>
-              <input
-                type="text"
-                value={amount}
-                onChange={updateProductQuantity}
-              />
+              <input type="text" value={amount} readOnly />
               <button onClick={() => buyProduct(product)}>+</button>
             </div>
           </div>

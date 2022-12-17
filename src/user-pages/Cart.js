@@ -17,7 +17,7 @@ const Cart = () => {
     cartCount,
     incProductQuantityInCart,
     decreasProductAmount,
-    updateProductQuantity,
+    // updateProductQuantity,
     showCustomerInfo,
     isCustomerInfoShown,
   } = useGlobalContext();
@@ -75,7 +75,7 @@ const Cart = () => {
                         <input
                           type="text"
                           value={product.amount + " " + product.packType}
-                          onChange={updateProductQuantity}
+                          readOnly
                         />
 
                         <button onClick={() => decreasProductAmount(product)}>
@@ -109,12 +109,7 @@ const Cart = () => {
           </table>
           <div className="cart-summary">
             <span>المجموع</span>
-            <input
-              id="total"
-              type="text"
-              value={cartTotal}
-              onChange={updateProductQuantity}
-            />
+            <input id="total" type="text" value={cartTotal} readOnly />
             <span> شيكل</span>
             <div>
               <button id="empty-cart" onClick={emptyCart}>

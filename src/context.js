@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { temp_catgories } from "./data";
+import { temp_full_catgories } from "./data";
 
 const AppContext = React.createContext();
 
@@ -8,7 +10,7 @@ const AppProvider = ({ children }) => {
   // ----------------------------   states     -------------------------------------
   const [loading, setLoading] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [catgories, setCatgories] = useState([]);
+  const [catgories, setCatgories] = useState(temp_catgories);
   const [isSearchBarshown, setIsSearchBarshown] = useState(false);
   const [isCustomerInfoShown, setIsCustomerInfoShown] = useState(false);
   const [isNextBtnInCartShown, setIsNextBtnInCartShown] = useState(false);
@@ -39,6 +41,7 @@ const AppProvider = ({ children }) => {
   }, [cart]);
 
   useEffect(() => {
+    setProductsAternativly(1);
     fetchProductsOfCurrentCatgory(1);
   }, []);
 
@@ -51,26 +54,27 @@ const AppProvider = ({ children }) => {
         .then((data) => setCatgories(data));
     } catch (error) {
       console.log("Error in fetchCatgories: " + error);
+      setCatgories(temp_catgories);
+      // setLoading(false);
     }
   };
-  const fetchProductsOfCurrentCatgory = (catid) => {
-    setLoading(true);
+  const fetchProductsOfCurrentCatgory = async (catid) => {
+    // setLoading(true);
 
     let pageIndex = 0;
     let pageSize = 30;
 
     try {
-      fetch(
+      const response = await fetch(
         `http://localhost:8080/api/products/bycatgory/${catid}/${pageIndex}/${pageSize}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setLoading(false);
-          setProductsOfCurrentCatgory(data);
-        });
+      );
+      const data = await response.json();
+      setLoading(false);
+      setProductsOfCurrentCatgory(data);
     } catch (error) {
       console.log(error);
       setLoading(false);
+      setProductsAternativly(catid);
     }
   };
 
@@ -107,6 +111,8 @@ const AppProvider = ({ children }) => {
   // ------------------------------------------- Functions -----------------------------
 
   const choosCatgory = (catgoryId) => {
+    setProductsAternativly(catgoryId);
+    setLoading(false);
     fetchProductsOfCurrentCatgory(catgoryId);
   };
   const openCart = () => {
@@ -127,6 +133,15 @@ const AppProvider = ({ children }) => {
   };
   const closeSerchBar = () => {
     setIsSearchBarshown(false);
+  };
+  const setProductsAternativly = (id) => {
+    let products = null;
+    temp_full_catgories.map((cat) => {
+      if ((cat.id = id)) {
+        products = cat.contents;
+      }
+    });
+    setProductsOfCurrentCatgory(products);
   };
   // ------------------------------------------- Calculating Cart Functions ---------------------------
   const incProductQuantityInCart = (product) => {
