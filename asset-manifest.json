@@ -1,16 +1,16 @@
 {
-  "files": {
-    "main.css": "/easymarket/static/css/main.8081baeb.css",
-    "main.js": "/easymarket/static/js/main.490ceedf.js",
-    "static/media/cart.png": "/easymarket/static/media/cart.1fde87eff34c8c791c0b.png",
-    "static/media/red-simple-shopping-cart-icon-12.png": "/easymarket/static/media/red-simple-shopping-cart-icon-12.107f30c1f2f6da42354c.png",
-    "static/media/shopping-cart-bag-logo-260nw-small.png": "/easymarket/static/media/shopping-cart-bag-logo-260nw-small.51beaf8c11b3e74c973d.png",
-    "index.html": "/easymarket/index.html",
-    "main.8081baeb.css.map": "/easymarket/static/css/main.8081baeb.css.map",
-    "main.490ceedf.js.map": "/easymarket/static/js/main.490ceedf.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.8081baeb.css",
-    "static/js/main.490ceedf.js"
-  ]
+  "main.css": "/easymarket/static/css/main.cae84f7d.chunk.css",
+  "main.js": "/easymarket/static/js/main.029d1315.chunk.js",
+  "main.js.map": "/easymarket/static/js/main.029d1315.chunk.js.map",
+  "static/js/1.ef9beaea.chunk.js": "/easymarket/static/js/1.ef9beaea.chunk.js",
+  "static/js/1.ef9beaea.chunk.js.map": "/easymarket/static/js/1.ef9beaea.chunk.js.map",
+  "runtime~main.js": "/easymarket/static/js/runtime~main.f176d234.js",
+  "runtime~main.js.map": "/easymarket/static/js/runtime~main.f176d234.js.map",
+  "static/media/shopping-cart-bag-logo-260nw-small.png": "/easymarket/static/media/shopping-cart-bag-logo-260nw-small.206f757c.png",
+  "static/media/red-simple-shopping-cart-icon-12.png": "/easymarket/static/media/red-simple-shopping-cart-icon-12.872edcc9.png",
+  "static/media/cart.png": "/easymarket/static/media/cart.6ab88067.png",
+  "static/css/main.cae84f7d.chunk.css.map": "/easymarket/static/css/main.cae84f7d.chunk.css.map",
+  "index.html": "/easymarket/index.html",
+  "precache-manifest.f1078dd38050d53acd3e02ee9c6424c3.js": "/easymarket/precache-manifest.f1078dd38050d53acd3e02ee9c6424c3.js",
+  "service-worker.js": "/easymarket/service-worker.js"
 }
