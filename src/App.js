@@ -12,6 +12,7 @@ import { useGlobalContext } from "./context";
 import OrderSetterPage from "./control-pages/OrderSetterPage";
 import OrderControlPage from "./control-pages/OrderControlPage";
 import OrderOldPage from "./control-pages/OrderOldPage";
+import ErrorPage from "./ErrorPage";
 
 function App() {
   const { controlOrders, setterOrders, controlOldOrders } = useGlobalContext();
@@ -30,6 +31,7 @@ function App() {
         />
         <Route exact path="/addproduct" element={<AddProduct />} />;
         <Route exact path="/control/searchresult" element={<SearchResult />} />
+        <Route path="*" element={<ErrorPage />} />
         {/* <Route path="/dev" element={<Delivery />} /> */}
       </Routes>
       <Footer />

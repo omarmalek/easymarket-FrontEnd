@@ -9,12 +9,15 @@ function SearchResult() {
     localStorage.getItem("searchText")
   );
   const [alert, setAlert] = useState({ show: false, style: "", msg: "" });
-
+  useEffect(() => {
+    searchValue.current.focus();
+  }, []);
   useEffect(() => {
     if (searchText) {
       searchforProduct(searchText);
     }
   }, []);
+  const searchValue = React.useRef("");
 
   const handlSearch = (e) => {
     let str = e.target.value;
@@ -39,8 +42,12 @@ function SearchResult() {
       )
         .then((response) => response.json())
         .then((data) => {
-          removeAlert();
-          setResultOfSearch(data);
+          if (data) {
+            removeAlert();
+            setResultOfSearch(data);
+          } else {
+            setResultOfSearch([]);
+          }
         });
     } catch (error) {
       console.log(error);
@@ -59,24 +66,26 @@ function SearchResult() {
       <HeaderControl />
       <div className="search-result-component">
         <div className="search-bar">
-          <lable>بحث عن المنتج:</lable>
+          <label>بحث عن المنتج:</label>
           <input
             type="text"
             className="input-search"
-            value={searchText}
+            ref={searchValue}
             onChange={handlSearch}
           />
           <p className="alert">
             {alert.show && <Alert {...alert} removeAlert={removeAlert} />}
           </p>
         </div>
-        {resultOfSearch ? (
+        {resultOfSearch.length > 0 ? (
           <ExhibitionUpdateDelete
             products={resultOfSearch}
             reSearch={reSearch}
           />
         ) : (
-          <h4>لا توجد نتائج</h4>
+          <div className="">
+            <h4>لا توجد نتائج</h4>
+          </div>
         )}
       </div>
     </>
