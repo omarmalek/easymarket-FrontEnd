@@ -2,21 +2,16 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Customer from "./user-pages/Customer";
 import AddProduct from "./control-pages/add-product";
-
-import OrderView from "./control-pages/order-view";
 import CustomerHistory from "./user-pages/customer-history";
 import SearchResult from "./control-pages/Search-result";
 import Footer from "./Footer";
 
-import { useGlobalContext } from "./context";
 import OrderSetterPage from "./control-pages/OrderSetterPage";
 import OrderControlPage from "./control-pages/OrderControlPage";
 import OrderOldPage from "./control-pages/OrderOldPage";
 import ErrorPage from "./ErrorPage";
 
 function App() {
-  const { controlOrders, setterOrders, controlOldOrders } = useGlobalContext();
-  //const showCart = () => {};
   return (
     <BrowserRouter>
       <Routes>

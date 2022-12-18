@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import HeaderControl from "./Header-Control";
 import OrderDetails from "./order-details";
 
-const OrderView = ({ orders, name, role }) => {
+const OrderView = ({ orders, role }) => {
   const [currentOrder, setCurrentOrder] = useState({
-    id: "0",
-    customerName: "no name",
-    cartTotal: "0",
-    date: "0",
-    packed: false,
-    sentDelivery: false,
-    delivered: false,
-    cancelled: false,
-    rejected: false,
-    delivaryServiceType: "0",
-    orderCart: [
-      {
-        id: 0,
-        productId: 0,
-        productName: "",
-        unitPrice: "0",
-        productAmount: "0",
-        packType: "",
-      },
-    ],
-    customerId: 0,
-    orderSetterId: 0,
-    deliveryManId: 0,
-    delivaryCharge: 0,
-    paymentType: 0,
-    customerEvaluation: "0",
-    controlNotes: "0",
-    customerPhone: 0,
-    customerAddress: "0",
+    //   id: "0",
+    //   customerName: "no name",
+    //   cartTotal: "0",
+    //   date: "0",
+    //   packed: false,
+    //   sentDelivery: false,
+    //   delivered: false,
+    //   cancelled: false,
+    //   rejected: false,
+    //   delivaryServiceType: "0",
+    //   orderCart: [
+    //     {
+    //       id: 0,
+    //       productId: 0,
+    //       productName: "",
+    //       unitPrice: "0",
+    //       productAmount: "0",
+    //       packType: "",
+    //     },
+    //   ],
+    //   customerId: 0,
+    //   orderSetterId: 0,
+    //   deliveryManId: 0,
+    //   delivaryCharge: 0,
+    //   paymentType: 0,
+    //   customerEvaluation: "0",
+    //   controlNotes: "0",
+    //   customerPhone: 0,
+    //   customerAddress: "0",
   });
   const [showOrderDetails, setShowOrderDetials] = useState(false);
   const selectOrder = (order) => {
@@ -65,25 +65,25 @@ const OrderView = ({ orders, name, role }) => {
                   const {
                     //here we will take just the important info
                     id,
-                    customerId,
-                    orderSetterId,
-                    deliveryManId,
-                    delivaryCharge,
+                    // customerId,
+                    // orderSetterId,
+                    // deliveryManId,
+                    // delivaryCharge,
                     cartTotal,
                     date,
-                    paymentType,
+                    // paymentType,
                     delivaryServiceType,
                     packed,
                     sentDelivery,
                     delivered,
-                    paid,
+                    // paid,
                     cancelled,
                     rejected,
-                    customerEvaluation,
-                    controlNotes,
+                    // customerEvaluation,
+                    // controlNotes,
                     customerName,
-                    customerPhone,
-                    customerAddress,
+                    //   customerPhone,
+                    //   customerAddress,
                   } = order;
 
                   return (

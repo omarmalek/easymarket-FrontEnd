@@ -2,12 +2,7 @@ import React from "react";
 import { useGlobalContext } from "../context";
 
 function PhoneBox() {
-  const {
-    customer,
-    sendOrder,
-    updateCusomerInfo,
-    checkIfUserExist,
-  } = useGlobalContext();
+  const { customer, updateCusomerInfo, checkIfUserExist } = useGlobalContext();
   return (
     <div className="phone-box-component" id="phone-box">
       <h1>بيانات الزبون</h1>

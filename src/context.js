@@ -13,7 +13,7 @@ const AppProvider = ({ children }) => {
   const [catgories, setCatgories] = useState(temp_catgories);
   const [isSearchBarshown, setIsSearchBarshown] = useState(false);
   const [isCustomerInfoShown, setIsCustomerInfoShown] = useState(false);
-  const [isNextBtnInCartShown, setIsNextBtnInCartShown] = useState(false);
+  // const [isNextBtnInCartShown, setIsNextBtnInCartShown] = useState(false);
 
   const [productsOfCurrentCatgory, setProductsOfCurrentCatgory] = useState([]);
   const [showNvbar, setshowNvbar] = useState(false);
@@ -28,7 +28,7 @@ const AppProvider = ({ children }) => {
     exist: false,
   });
 
-  const [refresher, setRefresher] = useState(false);
+  // const [refresher, setRefresher] = useState(false);
   // ===============================================   Effect     =================================
 
   useEffect(() => {
@@ -47,15 +47,15 @@ const AppProvider = ({ children }) => {
 
   //                     -------------  End   Effect     ------------ends
   //-------------------------------------Fetch functions  --------------------------------
-  const fetchCatgories = () => {
+  const fetchCatgories = async () => {
     try {
-      let list = fetch("http://localhost:8080/api/catgories")
-        .then((response) => response.json())
-        .then((data) => setCatgories(data));
+      const response = await fetch("http://localhost:8080/api/catgories");
+      const data = await response.json();
+      setCatgories(data);
     } catch (error) {
       console.log("Error in fetchCatgories: " + error);
       setCatgories(temp_catgories);
-      // setLoading(false);
+      setLoading(false);
     }
   };
   const fetchProductsOfCurrentCatgory = async (catid) => {
@@ -135,13 +135,8 @@ const AppProvider = ({ children }) => {
     setIsSearchBarshown(false);
   };
   const setProductsAternativly = (id) => {
-    let products = null;
-    temp_full_catgories.map((cat) => {
-      if ((cat.id = id)) {
-        products = cat.contents;
-      }
-    });
-    setProductsOfCurrentCatgory(products);
+    const targetCatgory = temp_full_catgories.map((cat) => cat.id === id);
+    setProductsOfCurrentCatgory(targetCatgory.contents);
   };
   // ------------------------------------------- Calculating Cart Functions ---------------------------
   const incProductQuantityInCart = (product) => {
@@ -185,6 +180,7 @@ const AppProvider = ({ children }) => {
       if (product.id === id) {
         quantity = product.amount;
       }
+      return 0;
     });
     return quantity;
   };
@@ -197,12 +193,16 @@ const AppProvider = ({ children }) => {
     setIsCustomerInfoShown(false);
   };
   const computCartTotal = () => {
-    let total = 0;
-    cart.map((product) => {
-      total += product.unitPrice * product.amount;
-      total = parseFloat(total.toFixed(2));
-    });
+    let total = cart.reduce(
+      (total, product) => (total += product.unitPrice * product.amount),
+      0
+    );
     setCartTotal(total);
+    // let total = 0;
+    // cart.map((product) => {
+    //   total += product.unitPrice * product.amount;
+    //   total = parseFloat(total.toFixed(2));
+    // });
   };
   const computeCartCount = () => {
     let count = 0;
@@ -260,7 +260,7 @@ const AppProvider = ({ children }) => {
     console.log("updating customer info: ");
     console.log(customer);
   };
-  const updateAnyOrder = (orderTarget, orderId, property, value) => {}; // to be done
+  // const updateAnyOrder = (orderTarget, orderId, property, value) => {}; // to be done
 
   const updateOrder = (order, property) => {
     let newUpdatedOrder = { ...order, [property]: true };
@@ -322,7 +322,6 @@ const AppProvider = ({ children }) => {
         updateOrder,
         checkIfUserExist,
         handleSearch,
-        setRefresher,
       }}
     >
       {children}

@@ -124,7 +124,9 @@ section:nth-child(even) {
   cursor: pointer;
   /* padding: 0.8rem 3rem; */
 }
-
+.center {
+  text-align: center;
+}
 .btn:hover {
   /* letter-spacing: 0.1rem; */
   color: var(--green);
@@ -650,7 +652,7 @@ table th {
 }
 .single-product .product-details {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .single-product .product-details .info {
   padding: 10px;

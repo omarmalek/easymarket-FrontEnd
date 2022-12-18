@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { useGlobalContext } from "../context";
-import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
 import noProductImg from "../images/no product image.png";
 // import { AiOutlineCheck } from "react-icons/ai";
 
@@ -8,7 +7,6 @@ const SingleProduct = ({ product }) => {
   const {
     buyProduct,
     decreasProductAmount,
-    cart,
     getQuantity,
     deleteFromCart,
   } = useGlobalContext();
@@ -45,7 +43,7 @@ const SingleProduct = ({ product }) => {
       setShowSecondaryInfo(false);
     });
   };
-  const updateProductQuantity = () => {};
+  // const updateProductQuantity = () => {};
   // console.log("SingleProductShort component >> running... ");
   return (
     <div key={id} className="single-product-short row">
@@ -79,7 +77,7 @@ const SingleProduct = ({ product }) => {
               Buy
             </button>
             <button
-              className={amount == 0 ? "fa fa-trash btn gone" : "btn cancel"}
+              className={amount === 0 ? "fa fa-trash btn gone" : "btn cancel"}
               onClick={() => deleteFromCart(id)}
             >
               Cancel

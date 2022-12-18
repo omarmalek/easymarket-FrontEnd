@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useGlobalContext } from "../context";
-import cartLogo from "../images/cart.png";
 import { FaTimes } from "react-icons/fa";
-import { links, social } from "../data";
 import CustomerInfo from "./CustomerInfo";
 import PhoneBox from "./phone-box";
 
@@ -18,14 +16,14 @@ const Cart = () => {
     incProductQuantityInCart,
     decreasProductAmount,
     // updateProductQuantity,
-    showCustomerInfo,
+    // showCustomerInfo,
     isCustomerInfoShown,
   } = useGlobalContext();
   const [isPhoneBoxShown, setIsPhoneBoxShown] = useState(false);
   const showPhoneBox = () => {
     setIsPhoneBoxShown(true);
   };
-  const doNothing = () => {};
+
   return (
     <div className="cart-scroll">
       <aside className={isCartOpen ? "cart show-cart" : "cart "}>

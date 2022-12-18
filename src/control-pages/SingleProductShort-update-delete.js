@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 import { useGlobalContext } from "../context";
-import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
 import noProductImg from "../images/no product image.png";
 // import { AiOutlineCheck } from "react-icons/ai";
 import UpdateForm from "./Update-form";
 
 const SingleProductShortUpdateDelete = ({ product, reSearch }) => {
-  const {
-    updateProductQuantity,
-    buyProduct,
-    decreasProductAmount,
-    cart,
-    getQuantity,
-    deleteFromCart,
-  } = useGlobalContext();
+  const { getQuantity } = useGlobalContext();
 
   const [showSecondaryInfo, setShowSecondaryInfo] = React.useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
@@ -22,9 +14,6 @@ const SingleProductShortUpdateDelete = ({ product, reSearch }) => {
   const selectToUpdateProduct = (product, reSearch) => {
     setProdctToUpdate(product);
     setShowUpdateForm(true);
-  };
-  const closeForm = () => {
-    setShowUpdateForm(false);
   };
 
   const {

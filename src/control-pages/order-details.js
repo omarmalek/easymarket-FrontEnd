@@ -3,33 +3,27 @@ import { useGlobalContext } from "../context";
 import { FaTimes } from "react-icons/fa";
 
 const OrderDetails = ({ currentOrder, role, setShowOrderDetials }) => {
-  const {
-    // updateOrderPacked,
-    // updateOrderSentToDelivery,
-    // updateOrderDeliverdToCustomer,
-    // updateOrderRejected,
-    updateOrder,
-  } = useGlobalContext();
-  const updateProductQuantity = () => {};
+  const { updateOrder } = useGlobalContext();
+  // const updateProductQuantity = () => {};
 
   const {
     id,
-    customerId,
-    orderSetterId,
-    deliveryManId,
-    delivaryCharge,
+    // customerId,
+    // orderSetterId,
+    // deliveryManId,
+    // delivaryCharge,
     cartTotal,
     date,
-    paymentType,
+    // paymentType,
     delivaryServiceType,
     packed,
     sentDelivery,
     delivered,
-    paid,
+    // paid,
     cancelled,
     rejected,
-    customerEvaluation,
-    controlNotes,
+    // customerEvaluation,
+    // controlNotes,
     customerName,
     customerPhone,
     customerAddress,
@@ -157,7 +151,7 @@ const OrderDetails = ({ currentOrder, role, setShowOrderDetials }) => {
               ? currentOrder.orderCart.map((item, index) => {
                   const {
                     id,
-                    productId,
+                    // productId,
                     productName,
                     unitPrice,
                     productAmount,

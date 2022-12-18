@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useGlobalContext } from "../context";
-import cartLogo from "../images/red-simple-shopping-cart-icon-12.png";
+// import cartLogo from "../images/red-simple-shopping-cart-icon-12.png";
 //import style from "./index.css";
 
 function Menu() {

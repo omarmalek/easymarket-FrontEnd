@@ -57,10 +57,11 @@ export default function OrderSetterPage() {
       </div>
     );
   }
+  const role = "setterEmployee";
   return (
     <div>
       <h1 className="page-title">موظف التجهيز</h1>
-      <OrderView orders={setterOrders} role={"setterEmployee"} />
+      <OrderView orders={setterOrders} role={role} />
     </div>
   );
 }

@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { FaBars } from "react-icons/fa";
-import { links } from "../data";
+import React from "react";
+
 import logo from "../images/shopping-cart-bag-logo-260nw-small.png";
 import { useGlobalContext } from "../context";
 import { Link } from "react-router-dom";

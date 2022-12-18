@@ -35,10 +35,12 @@ export default function OrderControlPage() {
       </div>
     );
   }
+  const role = "admin";
   return (
     <div>
       <h1 className="page-title">موظف الكونترول</h1>
-      <OrderView orders={controlOrders} role={"admin"} />
+
+      <OrderView orders={controlOrders} role={role} />
     </div>
   );
 }

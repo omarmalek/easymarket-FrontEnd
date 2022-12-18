@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import { useGlobalContext } from "../context";
 import { FaTimes } from "react-icons/fa";
 
 function UpdateForm({ prodctToUpdate, setShowUpdateForm, reSearch }) {
-  const { catgories, setRefresher } = useGlobalContext();
+  const { catgories } = useGlobalContext();
   const [product, setProduct] = useState(prodctToUpdate);
   const [imgesFiles, setImgesFiles] = useState("");
 

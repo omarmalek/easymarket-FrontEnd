@@ -1,6 +1,4 @@
 import React from "react";
-import { useGlobalContext } from "../context";
-
 import SingleProductShortUpdateDelete from "./SingleProductShort-update-delete";
 
 // import stlyle from "./styles/";
