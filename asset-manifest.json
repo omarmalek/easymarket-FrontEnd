@@ -1,16 +1,14 @@
 {
-  "main.css": "/easymarket/static/css/main.cae84f7d.chunk.css",
-  "main.js": "/easymarket/static/js/main.029d1315.chunk.js",
-  "main.js.map": "/easymarket/static/js/main.029d1315.chunk.js.map",
-  "static/js/1.ef9beaea.chunk.js": "/easymarket/static/js/1.ef9beaea.chunk.js",
-  "static/js/1.ef9beaea.chunk.js.map": "/easymarket/static/js/1.ef9beaea.chunk.js.map",
+  "main.css": "/easymarket/static/css/main.808a0954.chunk.css",
+  "main.js": "/easymarket/static/js/main.912a5850.chunk.js",
+  "main.js.map": "/easymarket/static/js/main.912a5850.chunk.js.map",
+  "static/js/1.23d46062.chunk.js": "/easymarket/static/js/1.23d46062.chunk.js",
+  "static/js/1.23d46062.chunk.js.map": "/easymarket/static/js/1.23d46062.chunk.js.map",
   "runtime~main.js": "/easymarket/static/js/runtime~main.f176d234.js",
   "runtime~main.js.map": "/easymarket/static/js/runtime~main.f176d234.js.map",
   "static/media/shopping-cart-bag-logo-260nw-small.png": "/easymarket/static/media/shopping-cart-bag-logo-260nw-small.206f757c.png",
-  "static/media/red-simple-shopping-cart-icon-12.png": "/easymarket/static/media/red-simple-shopping-cart-icon-12.872edcc9.png",
-  "static/media/cart.png": "/easymarket/static/media/cart.6ab88067.png",
-  "static/css/main.cae84f7d.chunk.css.map": "/easymarket/static/css/main.cae84f7d.chunk.css.map",
+  "static/css/main.808a0954.chunk.css.map": "/easymarket/static/css/main.808a0954.chunk.css.map",
   "index.html": "/easymarket/index.html",
-  "precache-manifest.f1078dd38050d53acd3e02ee9c6424c3.js": "/easymarket/precache-manifest.f1078dd38050d53acd3e02ee9c6424c3.js",
+  "precache-manifest.6b3d85fea7f6d2be07062235553ecd00.js": "/easymarket/precache-manifest.6b3d85fea7f6d2be07062235553ecd00.js",
   "service-worker.js": "/easymarket/service-worker.js"
 }
