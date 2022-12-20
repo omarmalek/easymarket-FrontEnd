@@ -22,7 +22,7 @@ function Exhibition() {
           productsOfCurrentCatgory.map((product, index) => {
             return (
               <div>
-                <SingleProduct key={index} product={product} />;
+                <SingleProduct key={index} product={product} />
               </div>
             );
           })

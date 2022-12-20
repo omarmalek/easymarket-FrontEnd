@@ -211,19 +211,21 @@ section:nth-child(even) {
   text-align: center;
 }
 .pagination {
-  display: inline-block;
+  /* display: inline-block; */
+  display: flex;
   margin: 15px auto;
   /* border: 1px solid rgb(255, 94, 0); */
+  justify-content: center;
 }
 
 .pagination button {
   color: black;
   float: left;
-  padding: 8px 16px;
+  padding: 6px 14px;
   text-decoration: none;
   transition: background-color 0.3s;
   border: 1px solid #ddd;
-  margin: 0 4px;
+  margin: 0 3px;
 }
 
 .pagination button.active {
