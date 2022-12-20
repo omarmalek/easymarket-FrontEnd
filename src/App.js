@@ -28,6 +28,7 @@ function App() {
         <Route exact path="/control/searchresult" element={<SearchResult />} />
         <Route path="*" element={<ErrorPage />} />
         {/* <Route path="/dev" element={<Delivery />} /> */}
+        {/* <Route exact path="/test" element={<Test />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>

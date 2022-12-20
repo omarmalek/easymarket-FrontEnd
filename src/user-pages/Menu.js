@@ -28,7 +28,9 @@ function Menu() {
           className="select-class"
           onChange={(e) => choosCatgory(e.target.value)}
         >
-          <option value="0">اختر التصنيف</option>
+          <option value="31" onChange={(e) => choosCatgory(e.target.value)}>
+            اختر التصنيف
+          </option>
           {catgories && catgories !== undefined
             ? catgories.map((cat, index) => {
                 return (

@@ -27,6 +27,8 @@ const AppProvider = ({ children }) => {
     address: "",
     exist: false,
   });
+  const [page, setPage] = useState(1);
+  const [currentCatId, setCurrentCatId] = useState(1);
 
   // const [refresher, setRefresher] = useState(false);
   // ===============================================   Effect     =================================
@@ -41,9 +43,9 @@ const AppProvider = ({ children }) => {
   }, [cart]);
 
   useEffect(() => {
-    setProductsAternativly(1);
-    fetchProductsOfCurrentCatgory(1);
-  }, []);
+    // setProductsAternativly(1);
+    fetchProductsOfCurrentCatgory(currentCatId, page);
+  }, [page]);
 
   //                     -------------  End   Effect     ------------ends
   //-------------------------------------Fetch functions  --------------------------------
@@ -61,8 +63,9 @@ const AppProvider = ({ children }) => {
   const fetchProductsOfCurrentCatgory = async (catid) => {
     // setLoading(true);
 
-    let pageIndex = 0;
-    let pageSize = 30;
+    let pageIndex = page - 1;
+    // let pageIndex = 0;
+    let pageSize = 9;
 
     try {
       const response = await fetch(
@@ -111,9 +114,15 @@ const AppProvider = ({ children }) => {
   // ------------------------------------------- Functions -----------------------------
 
   const choosCatgory = (catgoryId) => {
+    setCurrentCatId(catgoryId);
+    setPage(1);
     setProductsAternativly(catgoryId);
     setLoading(false);
     fetchProductsOfCurrentCatgory(catgoryId);
+  };
+  const selectPage = (pageLabel) => {
+    setPage(pageLabel);
+    fetchProductsOfCurrentCatgory(currentCatId, pageLabel);
   };
   const openCart = () => {
     setIsCartOpen(true);
@@ -138,6 +147,7 @@ const AppProvider = ({ children }) => {
     const targetCatgory = temp_full_catgories.map((cat) => cat.id === id);
     setProductsOfCurrentCatgory(targetCatgory.contents);
   };
+
   // ------------------------------------------- Calculating Cart Functions ---------------------------
   const incProductQuantityInCart = (product) => {
     let newCart = cart.map((item) => {
@@ -322,6 +332,8 @@ const AppProvider = ({ children }) => {
         updateOrder,
         checkIfUserExist,
         handleSearch,
+        selectPage,
+        page,
       }}
     >
       {children}

@@ -1,6 +1,7 @@
 import React from "react";
 import { useGlobalContext } from "../context";
 import Loading from "../Loading";
+import Pagination from "../Pagination";
 import SingleProduct from "./SingleProduct";
 
 function Exhibition() {
@@ -19,16 +20,19 @@ function Exhibition() {
       <div className="exhibition-component">
         {productsOfCurrentCatgory && productsOfCurrentCatgory !== undefined ? (
           productsOfCurrentCatgory.map((product, index) => {
-            return <SingleProduct key={index} product={product} />;
+            return (
+              <div>
+                <SingleProduct key={index} product={product} />;
+              </div>
+            );
           })
         ) : (
           <p>no catgory</p>
         )}
       </div>
+      <Pagination />
       <div>
-        <div>
-          <button onClick={openCart}>تحضير الطلبية</button>
-        </div>
+        <button onClick={openCart}>تحضير الطلبية</button>
       </div>
     </div>
   );
