@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useGlobalContext } from "./context";
 
-function Pagination() {
-  // const [page, setPage] = useState(1);
-  const { page, selectPage } = useGlobalContext();
+function PaginationControl({ page, selectPage }) {
   const [pageListIcons, setPageListIcon] = useState([]);
   useEffect(() => {
     if (page <= 3) {
@@ -46,4 +43,4 @@ function Pagination() {
   );
 }
 
-export default Pagination;
+export default PaginationControl;

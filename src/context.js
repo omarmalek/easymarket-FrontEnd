@@ -122,7 +122,7 @@ const AppProvider = ({ children }) => {
   };
   const selectPage = (pageLabel) => {
     setPage(pageLabel);
-    fetchProductsOfCurrentCatgory(currentCatId, pageLabel);
+    // fetchProductsOfCurrentCatgory(currentCatId, pageLabel);
   };
   const openCart = () => {
     setIsCartOpen(true);
