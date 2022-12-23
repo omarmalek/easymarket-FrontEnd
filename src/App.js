@@ -10,6 +10,7 @@ import OrderSetterPage from "./control-pages/OrderSetterPage";
 import OrderControlPage from "./control-pages/OrderControlPage";
 import OrderOldPage from "./control-pages/OrderOldPage";
 import ErrorPage from "./ErrorPage";
+import Register from "./Register";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Route exact path="/control/searchresult" element={<SearchResult />} />
         <Route path="*" element={<ErrorPage />} />
         {/* <Route path="/dev" element={<Delivery />} /> */}
-        {/* <Route exact path="/test" element={<Test />} /> */}
+        {/* <Route exact path="/reg" element={<Register />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>

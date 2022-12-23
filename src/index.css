@@ -204,6 +204,105 @@ section:nth-child(even) {
   }
 }
 /*                                    --- Loader   ---ends */
+/* -----------------------------------   register-component   ----------------------------------------- */
+.register-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem 0.5rem;
+}
+
+.register-component section {
+  width: 100%;
+  max-width: 420px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.register-component form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-bottom: 1rem;
+}
+
+.register-component a,
+a:visited {
+  color: #fff;
+}
+
+.register-component input[type="text"],
+input[type="password"],
+button,
+textarea {
+  font-family: "Nunito", sans-serif;
+  font-size: 22px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.register-component label,
+button {
+  margin-top: 1rem;
+}
+
+.register-component button {
+  padding: 0.5rem;
+}
+
+.register-component.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+
+.register-component .instructions > svg {
+  margin-right: 0.25rem;
+}
+
+.register-component .offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.register-component .hide {
+  display: none;
+}
+
+.register-component .valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+.register-component .invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.register-component .errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.register-component .line {
+  display: inline-block;
+}
+/*                                  --   register-component   ---ends */
+
 /* -----------------------------------   pagination   ----------------------------------------- */
 .container {
   /* width: 100%; */
