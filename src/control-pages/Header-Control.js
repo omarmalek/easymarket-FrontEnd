@@ -20,14 +20,12 @@ function HeaderControl() {
       </div>
 
       <div className={showNvbar ? "navbar active" : "navbar"}>
-        <Link to="/" className="active">
-          الرئيسية
-        </Link>
-        <Link to="/control">ادارة التطبيق</Link>
-        <Link to="/addproduct">اضافة منتج</Link>
+        <Link to="/admin">ادارة التطبيق</Link>
+        <Link to="/admin/addproduct">اضافة منتج</Link>
         <Link to="/set">موظف التجهيز</Link>
-        <Link to="/control/old">الطلبات السابقة</Link>
-        <Link to="/control/searchresult">بحث</Link>
+        <Link to="/dv">موظف الديليفري</Link>
+        <Link to="/admin/control-old">الطلبات السابقة</Link>
+        <Link to="/admin/searchresult">بحث</Link>
       </div>
 
       <div className="icons">

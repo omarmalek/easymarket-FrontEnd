@@ -1,15 +1,32 @@
 import React from "react";
 import { useGlobalContext } from "../context";
+import { Link, useNavigate } from "react-router-dom";
 
 function CustomerInfo() {
+  // let navigate = useNavigate();
   //const customerId = useParams();
-  const { customer, sendOrder, updateCusomerInfo } = useGlobalContext();
+  const {
+    customer,
+    sendOrder,
+    updateCusomerInfo,
+    clearCustomerInfo,
+  } = useGlobalContext();
+
   return (
     <div className="customer-and-payment-info">
       <div className="customer-info" id="customer-info">
-        <h1>بيانات الزبون</h1>
+        <h1>بيانات الاتصال</h1>
 
         <form>
+          <label htmlFor="">رقم الجوال</label>
+          <input
+            type="text"
+            value={customer.phoneNumber}
+            name="phoneNumber"
+            onChange={updateCusomerInfo}
+            required
+          />
+
           <label htmlFor="">اسم المستخدم</label>
           <input
             type="text"
@@ -25,7 +42,7 @@ function CustomerInfo() {
             className="address"
             onChange={updateCusomerInfo}
           />
-          <button>مسح البيانات</button>
+          <button onClick={clearCustomerInfo}>مسح البيانات</button>
         </form>
       </div>
       <div className="pay-info">
@@ -38,9 +55,17 @@ function CustomerInfo() {
             <option>محفظة جوال </option>
             <option>حساب بنك فلسطين </option>
           </select>
-          <button onClick={sendOrder}>طلب نهائي</button>
+          <button onClick={sendOrder}>اتمام الطلب </button>
+          <p>
+            لرؤية تقدم الطلبية ولمشاهدة الطلبات السابقة وحماية بياناتك يمكنك
+            تسجيل الدخول الى المنصة
+            <span>
+              <Link to=""> من هنا</Link>
+            </span>
+            .
+          </p>
           <br></br>
-          <button>مسح البيانات</button>
+          <button onClick={clearCustomerInfo}>مسح البيانات</button>
         </form>
       </div>
     </div>

@@ -3,6 +3,7 @@ import OrderView from "./order-view";
 import { useEffect, useState } from "react";
 import Loading from "../Loading";
 import ServerError from "../ServerError";
+import HeaderControl from "./Header-Control";
 
 export default function OrderOld() {
   const [loading, setLoading] = useState(true);
@@ -36,6 +37,7 @@ export default function OrderOld() {
   }
   return (
     <div>
+      <HeaderControl />
       <h1 className="page-title">الطلبات السابقة </h1>
       <OrderView orders={oldOrders} />
     </div>

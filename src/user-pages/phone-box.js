@@ -14,6 +14,7 @@ function PhoneBox() {
           value={customer.phoneNumber}
           name="phoneNumber"
           onChange={updateCusomerInfo}
+          required
         />
 
         <button onClick={checkIfUserExist}>

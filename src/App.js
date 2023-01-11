@@ -11,25 +11,28 @@ import OrderControlPage from "./control-pages/OrderControlPage";
 import OrderOldPage from "./control-pages/OrderOldPage";
 import ErrorPage from "./ErrorPage";
 import Register from "./Register";
+import Delivery from "./control-pages/Delivery";
+import CustomerLogin from "./user-pages/CustomerLogin";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Customer />} />
-        <Route exact path="/control" element={<OrderControlPage />} />
-        <Route exact path="/control/old" element={<OrderOldPage />} />
-        <Route exact path="/set" element={<OrderSetterPage />} />
+        <Route exact path="/login" element={<CustomerLogin />} />
         <Route
           exact
           path="/customerhistory/:customerid"
           element={<CustomerHistory />}
         />
-        <Route exact path="/addproduct" element={<AddProduct />} />;
-        <Route exact path="/control/searchresult" element={<SearchResult />} />
+        <Route exact path="/admin" element={<OrderControlPage />} />
+        <Route exact path="/admin/control-old" element={<OrderOldPage />} />
+        <Route exact path="/admin/reg" element={<Register />} />
+        <Route exact path="/admin/addproduct" element={<AddProduct />} />;
+        <Route exact path="/admin/searchresult" element={<SearchResult />} />
+        <Route exact path="/set" element={<OrderSetterPage />} />
+        <Route path="/dv" element={<Delivery />} />
         <Route path="*" element={<ErrorPage />} />
-        {/* <Route path="/dev" element={<Delivery />} /> */}
-        <Route exact path="/reg" element={<Register />} />
       </Routes>
       <Footer />
     </BrowserRouter>

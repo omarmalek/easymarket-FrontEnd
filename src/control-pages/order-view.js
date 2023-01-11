@@ -41,7 +41,6 @@ const OrderView = ({ orders, role }) => {
   };
   return (
     <>
-      <HeaderControl />
       <div className="order-view-component">
         <table>
           <thead>

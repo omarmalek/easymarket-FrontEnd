@@ -26,10 +26,9 @@ function Header() {
         <Link to="/" className="active">
           الصفحة الرئيسية
         </Link>
-        {/* <a href="#">العروض</a> */}
+        <a href="#">العروض</a>
         <Link to="#">أسعار التوصيل</Link>
         <Link to={`/customerhistory/${customer.id}`}> الطلبات السابقة</Link>
-        <Link to="/control">Control</Link>
       </div>
 
       <div className="icons">
@@ -40,7 +39,7 @@ function Header() {
           onClick={showSearchBar}
         ></i>
         <Link to="#" className="fas fa-heart"></Link>
-        <i className="fa-solid fa-user"></i>
+        <Link to="/login" className="fa-solid fa-user"></Link>
       </div>
     </header>
   );

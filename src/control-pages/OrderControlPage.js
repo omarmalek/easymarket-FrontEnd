@@ -3,6 +3,7 @@ import OrderView from "./order-view";
 import { useEffect, useState } from "react";
 import Loading from "../Loading";
 import PaginationControl from "./PaginationControl";
+import HeaderControl from "./Header-Control";
 
 export default function OrderControlPage() {
   const [loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ export default function OrderControlPage() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/controlorders/${pageIndex}/${pageSize}`
+        `http://localhost:8080/api/admin/controlorders/${pageIndex}/${pageSize}`
       );
       const data = await response.json();
       setLoading(false);
@@ -43,6 +44,7 @@ export default function OrderControlPage() {
   const role = "admin";
   return (
     <div>
+      <HeaderControl />
       <h1 className="page-title">موظف الكونترول</h1>
 
       <OrderView orders={controlOrders} role={role} />

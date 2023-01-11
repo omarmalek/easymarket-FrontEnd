@@ -1,12 +1,28 @@
+import e from "cors";
 import React, { useState, useEffect, useContext } from "react";
+import { json } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import { temp_catgories } from "./data";
 import { temp_full_catgories } from "./data";
 
 const AppContext = React.createContext();
 
+const getCustomerLocalInfo = () => {
+  if (localStorage.getItem("customerInfo")) {
+    return JSON.parse(localStorage.getItem("customerInfo"));
+  } else {
+    return {
+      id: 0,
+      name: "",
+      phoneNumber: "",
+      address: "",
+      exist: false,
+    };
+  }
+};
+
 const AppProvider = ({ children }) => {
-  //let navigate = useNavigate();
+  // let navigate = useNavigate();
   // ----------------------------   states     -------------------------------------
   const [loading, setLoading] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -20,13 +36,7 @@ const AppProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [cartCount, setCartCount] = useState(0);
-  const [customer, setCustomer] = useState({
-    id: 0,
-    name: "",
-    phoneNumber: "",
-    address: "",
-    exist: false,
-  });
+  const [customer, setCustomer] = useState(getCustomerLocalInfo());
   const [page, setPage] = useState(1);
   const [currentCatId, setCurrentCatId] = useState(1);
 
@@ -46,6 +56,9 @@ const AppProvider = ({ children }) => {
     // setProductsAternativly(1);
     fetchProductsOfCurrentCatgory(currentCatId, page);
   }, [page]);
+  useEffect(() => {
+    localStorage.setItem("customerInfo", JSON.stringify(customer));
+  }, [customer]);
 
   //                     -------------  End   Effect     ------------ends
   //-------------------------------------Fetch functions  --------------------------------
@@ -112,6 +125,15 @@ const AppProvider = ({ children }) => {
 
   //                                       ------- Fetch functions --------ends
   // ------------------------------------------- Functions -----------------------------
+  const updateCusomerInfo = (event) => {
+    const { name, value } = event.target;
+    setCustomer((cstmr) => {
+      return { ...cstmr, [name]: value };
+    });
+
+    console.log("updating customer info: ");
+    console.log(customer);
+  };
 
   const choosCatgory = (catgoryId) => {
     setCurrentCatId(catgoryId);
@@ -147,6 +169,83 @@ const AppProvider = ({ children }) => {
     const targetCatgory = temp_full_catgories.map((cat) => cat.id === id);
     setProductsOfCurrentCatgory(targetCatgory.contents);
   };
+
+  const showCustomerInfo = () => {
+    setIsCustomerInfoShown(true);
+  };
+  const showNextBtnInCart = () => {};
+
+  const sendOrder = (e) => {
+    e.preventDefault();
+    let cartSummary = cart.map((product) => {
+      return { productId: product.id, productAmount: product.amount };
+    });
+    const userOrder = {
+      customerId: customer.id,
+      customerName: customer.name,
+      customerPhone: customer.phoneNumber,
+      customerAddress: customer.address,
+      cartTotal: cartTotal,
+      paymentType: "Cash",
+      delivaryServiceType: "Normal",
+      orderCart: cartSummary, //I dont send the cart... I send this summary
+    };
+    try {
+      fetch("http://localhost:8080/api/userorder", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userOrder),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          window.location.assign(`/`);
+          // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
+          //window.location.assign(`/customerhistory/${customer.id}`);
+          // navigate(`/`);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const updateAnyOrder = (orderTarget, orderId, property, value) => {}; // to be done
+
+  const updateOrder = (order, property) => {
+    let newUpdatedOrder = { ...order, [property]: true };
+    updateOrderFinal(newUpdatedOrder);
+  };
+  // const checkIfUserExist = (e) => {
+  //   //e.preventDefault();
+  //   try {
+  //     fetch(`http://localhost:8080/api/customerbyphone/${customer.phoneNumber}`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setCustomer({ ...data, exist: true }); //include id and phone in case of new customer
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //     setCustomer({ ...customer, exist: false });
+  //   }
+  //   setIsCustomerInfoShown(true);
+  // };
+  const handleSearch = (e) => {
+    let str = e.target.value;
+    fetchSearchResult(str);
+  };
+  const clearCustomerInfo = (e) => {
+    e.preventDefault();
+    setCustomer({
+      id: 0,
+      name: "",
+      phoneNumber: "",
+      address: "",
+      exist: false,
+    });
+  };
+
+  //                                  -------------  Functions ---------Ends
 
   // ------------------------------------------- Calculating Cart Functions ---------------------------
   const incProductQuantityInCart = (product) => {
@@ -222,80 +321,7 @@ const AppProvider = ({ children }) => {
     });
     setCartCount(count);
   };
-  //                                      ---------- Calculating Cart   ------------ends
-
-  const showCustomerInfo = () => {
-    setIsCustomerInfoShown(true);
-  };
-  const showNextBtnInCart = () => {};
-
-  const sendOrder = (e) => {
-    e.preventDefault();
-    let cartSummary = cart.map((product) => {
-      return { productId: product.id, productAmount: product.amount };
-    });
-    const userOrder = {
-      customerId: customer.id,
-      customerName: customer.name,
-      customerPhone: customer.phoneNumber,
-      customerAddress: customer.address,
-      cartTotal: cartTotal,
-      paymentType: "Cash",
-      delivaryServiceType: "Normal",
-      orderCart: cartSummary, //I dont send the cart... I send this summary
-    };
-    try {
-      fetch("http://localhost:8080/api/userorder", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userOrder),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
-          window.location.assign(`/customerhistory/${customer.id}`);
-          //navigate(`/customerhistory/${customer.id}`);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const updateCusomerInfo = (event) => {
-    const { name, value } = event.target;
-    setCustomer((cstmr) => {
-      return { ...cstmr, [name]: value };
-    });
-    console.log("updating customer info: ");
-    console.log(customer);
-  };
-  // const updateAnyOrder = (orderTarget, orderId, property, value) => {}; // to be done
-
-  const updateOrder = (order, property) => {
-    let newUpdatedOrder = { ...order, [property]: true };
-    updateOrderFinal(newUpdatedOrder);
-  };
-  const checkIfUserExist = (e) => {
-    //e.preventDefault();
-    try {
-      fetch(`http://localhost:8080/api/customerbyphone/${customer.phoneNumber}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setCustomer({ ...data, exist: true }); //include id and phone in case of new customer
-        });
-    } catch (error) {
-      console.log(error);
-      setCustomer({ ...customer, exist: false });
-    }
-    setIsCustomerInfoShown(true);
-  };
-  const handleSearch = (e) => {
-    let str = e.target.value;
-    fetchSearchResult(str);
-  };
-
-  //                                  -------------  Functions ---------Ends
+  //                                      --- Calculating Cart   ---ends
 
   return (
     <AppContext.Provider
@@ -326,11 +352,12 @@ const AppProvider = ({ children }) => {
         showNextBtnInCart,
         productsOfCurrentCatgory,
         customer,
+        clearCustomerInfo,
         sendOrder,
         updateCusomerInfo,
 
         updateOrder,
-        checkIfUserExist,
+        // checkIfUserExist,
         handleSearch,
         selectPage,
         page,

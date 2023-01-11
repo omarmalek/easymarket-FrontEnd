@@ -19,7 +19,7 @@ const Cart = () => {
     // showCustomerInfo,
     isCustomerInfoShown,
   } = useGlobalContext();
-  const [isPhoneBoxShown, setIsPhoneBoxShown] = useState(false);
+  const [isPhoneBoxShown, setIsPhoneBoxShown] = useState(true);
   const showPhoneBox = () => {
     setIsPhoneBoxShown(true);
   };
@@ -113,17 +113,17 @@ const Cart = () => {
               <button id="empty-cart" onClick={emptyCart}>
                 أفرغ السلة <i className="fas fa-trash"></i>
               </button>
-              <br></br>
-              <button id="empty-cart" onClick={showPhoneBox}>
+              {/* <br></br> */}
+              {/* <button id="empty-cart" onClick={showPhoneBox}>
                 <a href="#phone-box"> التالي</a>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
 
-        <br></br>
-        {isPhoneBoxShown && <PhoneBox />}
-        {isCustomerInfoShown && <CustomerInfo />}
+        <CustomerInfo />
+        {/* {isPhoneBoxShown && <PhoneBox />} */}
+        {/* {isCustomerInfoShown && <CustomerInfo />} */}
       </aside>
     </div>
   );
