@@ -113,17 +113,11 @@ const Cart = () => {
               <button id="empty-cart" onClick={emptyCart}>
                 أفرغ السلة <i className="fas fa-trash"></i>
               </button>
-              {/* <br></br> */}
-              {/* <button id="empty-cart" onClick={showPhoneBox}>
-                <a href="#phone-box"> التالي</a>
-              </button> */}
             </div>
           </div>
         </div>
 
         <CustomerInfo />
-        {/* {isPhoneBoxShown && <PhoneBox />} */}
-        {/* {isCustomerInfoShown && <CustomerInfo />} */}
       </aside>
     </div>
   );

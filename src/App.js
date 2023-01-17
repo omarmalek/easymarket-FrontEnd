@@ -12,14 +12,15 @@ import OrderOldPage from "./control-pages/OrderOldPage";
 import ErrorPage from "./ErrorPage";
 import Register from "./Register";
 import Delivery from "./control-pages/Delivery";
-import CustomerLogin from "./user-pages/CustomerLogin";
+
+import SignUp from "./user-pages/SignUp";
+import Login from "./user-pages/Login";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Customer />} />
-        <Route exact path="/login" element={<CustomerLogin />} />
         <Route
           exact
           path="/customerhistory/:customerid"
@@ -27,7 +28,9 @@ function App() {
         />
         <Route exact path="/admin" element={<OrderControlPage />} />
         <Route exact path="/admin/control-old" element={<OrderOldPage />} />
-        <Route exact path="/admin/reg" element={<Register />} />
+        <Route exact path="/reg" element={<Register />} />
+        <Route exact path="/signup" element={<SignUp />} />
+        <Route exact path="/login" element={<Login />} />
         <Route exact path="/admin/addproduct" element={<AddProduct />} />;
         <Route exact path="/admin/searchresult" element={<SearchResult />} />
         <Route exact path="/set" element={<OrderSetterPage />} />

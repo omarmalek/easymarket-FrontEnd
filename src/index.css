@@ -1655,7 +1655,108 @@ table th {
 }
 
 /*                      -------   update-form-component   ENDs-------- */
+/* -------------------------------    Signup     ------------------------- */
+.Signup-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem 0.5rem;
+  background-color: #fff;
+  direction: rtl;
+}
 
+.Signup-component section {
+  width: 100%;
+  max-width: 420px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid #27ae60;
+}
+
+.Signup-component form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-bottom: 1rem;
+}
+
+.Signup-component a,
+.Signup-component a:visited {
+  color: #fff;
+}
+
+.Signup-component input[type="text"],
+.Signup-component input[type="password"],
+.Signup-component button,
+.Signup-component textarea {
+  font-family: "Nunito", sans-serif;
+  font-size: 22px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.Signup-component label,
+.Signup-component button {
+  margin-top: 1rem;
+}
+
+.Signup-component button {
+  padding: 0.5rem;
+}
+
+.Signup-component .instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+
+.Signup-component .instructions > svg {
+  margin-right: 0.25rem;
+}
+
+.Signup-component .offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.Signup-component .hide {
+  display: none;
+}
+
+.Signup-component .valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+.Signup-component .invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.Signup-component .errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.Signup-component .line {
+  display: inline-block;
+}
+
+/*                      -------   Signup   ENDs-------- */
 /* -------------------------------    Register     ------------------------- */
 .register-component {
   display: flex;

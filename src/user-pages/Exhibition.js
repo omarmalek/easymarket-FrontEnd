@@ -20,11 +20,7 @@ function Exhibition() {
       <div className="exhibition-component">
         {productsOfCurrentCatgory && productsOfCurrentCatgory !== undefined ? (
           productsOfCurrentCatgory.map((product, index) => {
-            return (
-              <div>
-                <SingleProduct key={index} product={product} />
-              </div>
-            );
+            return <SingleProduct key={product.id} product={product} />;
           })
         ) : (
           <p>no catgory</p>
