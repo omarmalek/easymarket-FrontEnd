@@ -45,7 +45,7 @@ function CustomerHistory() {
 
   //  ============================================   fetch    ========================================
   const fetchCustomer = async () => {
-    let url = `http://localhost:8080/api/customer/${customerid}`;
+    let url = `http://localhost:8080/customer/${customerid}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -61,7 +61,7 @@ function CustomerHistory() {
     setLoading(true);
     let pageIndex = 0;
     let pageSize = 10;
-    const url = `http://localhost:8080/api/customerorders/${customerid}/${pageIndex}/${pageSize}`;
+    const url = `http://localhost:8080/customerorders/${customerid}/${pageIndex}/${pageSize}`;
 
     try {
       const response = await fetch(url);
@@ -77,7 +77,7 @@ function CustomerHistory() {
   const fetchCustomerOldOrders = async () => {
     let pageIndex = 0;
     let pageSize = 10;
-    const url = `http://localhost:8080/api/customeroldorders/${customerid}/${pageIndex}/${pageSize}`;
+    const url = `http://localhost:8080/customeroldorders/${customerid}/${pageIndex}/${pageSize}`;
 
     try {
       const response = await fetch(url);

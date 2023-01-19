@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const USER_REGEX = /^[A-z\u0621-\u064A][A-z0-9-_\u0621-\u064A]{2,}$/;
 const PWD_REGEX = /[a-zA-Z\u0621-\u064A0-9!@#$%*]{4,}$/;
-const REGISTER_URL = "/localhost:8080/api/registerNewUser";
+// const REGISTER_URL = "/localhost:8080/registerNewUser";
 
 const SignUp = () => {
   const userRef = useRef();
@@ -35,6 +35,8 @@ const SignUp = () => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
     userRef.current.focus();
@@ -68,7 +70,7 @@ const SignUp = () => {
     }
     try {
       const response = await axios.post(
-        REGISTER_URL,
+        "http://localhost:8080/registerNewUser",
         JSON.stringify({ userName: user, userPassword: pwd }),
         {
           headers: { "Content-Type": "application/json" },
@@ -100,9 +102,9 @@ const SignUp = () => {
     <div className="Signup-component">
       {success ? (
         <section>
-          <h1>Success!</h1>
+          <h1>تم تسجيل مستخدم جديد بنجاح!</h1>
           <p>
-            <a href="#">Sign In</a>
+            <a href="/login"> سجل الدخول</a>
           </p>
         </section>
       ) : (
@@ -116,6 +118,14 @@ const SignUp = () => {
           </p>
           <h1>إنشاء حساب</h1>
           <form onSubmit={handleSubmit}>
+            <label htmlFor="phone-number">رقم الجوال :</label>
+            <input
+              type="text"
+              id="phone-number"
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              value={phoneNumber}
+              required
+            />
             <label htmlFor="username">
               اسم المستخدم:
               <FontAwesomeIcon
@@ -140,14 +150,7 @@ const SignUp = () => {
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
             />
-            <label htmlFor="phone-number">رقم الجوال :</label>
-            <input
-              type="text"
-              id="phone-number"
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              value={phoneNumber}
-              required
-            />
+
             <p
               id="uidnote"
               className={
@@ -161,6 +164,14 @@ const SignUp = () => {
               <br />
               يسمح بالارقام والحروف و underscoresو hyphens .
             </p>
+            <label htmlFor="phone-number">العنوان :</label>
+            <textarea
+              type="text"
+              id="address"
+              onChange={(e) => setAddress(e.target.value)}
+              value={address}
+              required
+            />
 
             <label htmlFor="password">
               كلمة السر:

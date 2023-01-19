@@ -1,6 +1,4 @@
-import e from "cors";
 import React, { useState, useEffect, useContext } from "react";
-import { json } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import { temp_catgories } from "./data";
 import { temp_full_catgories } from "./data";
@@ -40,7 +38,6 @@ const AppProvider = ({ children }) => {
   const [page, setPage] = useState(1);
   const [currentCatId, setCurrentCatId] = useState(1);
 
-  // const [refresher, setRefresher] = useState(false);
   // ===============================================   Effect     =================================
 
   useEffect(() => {
@@ -60,11 +57,11 @@ const AppProvider = ({ children }) => {
     localStorage.setItem("customerInfo", JSON.stringify(customer));
   }, [customer]);
 
-  //                     -------------  End   Effect     ------------ends
+  //                                 ---     Effect     ---ends
   //-------------------------------------Fetch functions  --------------------------------
   const fetchCatgories = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/catgories");
+      const response = await fetch("http://localhost:8080/catgories");
       const data = await response.json();
       setCatgories(data);
     } catch (error) {
@@ -77,12 +74,12 @@ const AppProvider = ({ children }) => {
     // setLoading(true);
 
     let pageIndex = page - 1;
-    // let pageIndex = 0;
+
     let pageSize = 9;
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/products/bycatgory/${catid}/${pageIndex}/${pageSize}`
+        `http://localhost:8080/products/bycatgory/${catid}/${pageIndex}/${pageSize}`
       );
       const data = await response.json();
       setLoading(false);
@@ -95,7 +92,7 @@ const AppProvider = ({ children }) => {
   };
 
   const updateOrderFinal = (newUpdatedOrder) => {
-    fetch("http://localhost:8080/api/order", {
+    fetch("http://localhost:8080/admin/order", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +107,7 @@ const AppProvider = ({ children }) => {
     if (str.length > 0) {
       try {
         fetch(
-          `http://localhost:8080/api/products/byname/${str}/${pageIndex}/${pageSize}`
+          `http://localhost:8080/products/byname/${str}/${pageIndex}/${pageSize}`
         )
           .then((response) => response.json())
           .then((data) => {
@@ -188,10 +185,10 @@ const AppProvider = ({ children }) => {
       cartTotal: cartTotal,
       paymentType: "Cash",
       delivaryServiceType: "Normal",
-      orderCart: cartSummary, //I dont send the cart... I send this summary
+      orderCart: cartSummary, //I don't send the cart... I send this summary
     };
     try {
-      fetch("http://localhost:8080/api/userorder", {
+      fetch("http://localhost:8080/userorder", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -219,7 +216,7 @@ const AppProvider = ({ children }) => {
   // const checkIfUserExist = (e) => {
   //   //e.preventDefault();
   //   try {
-  //     fetch(`http://localhost:8080/api/customerbyphone/${customer.phoneNumber}`)
+  //     fetch(`http://localhost:8080/customerbyphone/${customer.phoneNumber}`)
   //       .then((response) => response.json())
   //       .then((data) => {
   //         setCustomer({ ...data, exist: true }); //include id and phone in case of new customer

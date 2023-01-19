@@ -4,17 +4,15 @@ import Customer from "./user-pages/Customer";
 import AddProduct from "./control-pages/add-product";
 import CustomerHistory from "./user-pages/customer-history";
 import SearchResult from "./control-pages/Search-result";
-import Footer from "./Footer";
-
 import OrderSetterPage from "./control-pages/OrderSetterPage";
 import OrderControlPage from "./control-pages/OrderControlPage";
 import OrderOldPage from "./control-pages/OrderOldPage";
 import ErrorPage from "./ErrorPage";
 import Register from "./Register";
 import Delivery from "./control-pages/Delivery";
-
 import SignUp from "./user-pages/SignUp";
 import Login from "./user-pages/Login";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -34,7 +32,7 @@ function App() {
         <Route exact path="/admin/addproduct" element={<AddProduct />} />;
         <Route exact path="/admin/searchresult" element={<SearchResult />} />
         <Route exact path="/set" element={<OrderSetterPage />} />
-        <Route path="/dv" element={<Delivery />} />
+        <Route exact path="/dv" element={<Delivery />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
