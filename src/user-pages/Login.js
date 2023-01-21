@@ -1,16 +1,18 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
 const Login = () => {
   let navigate = useNavigate();
+  const { customer, setCustomer } = useGlobalContext();
+  const PHONE_REGEX = /[0-9]{7,}$/;
 
   const userRef = useRef();
   const errRef = useRef();
 
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(customer.phoneNumber);
   const [passsword, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState(false);
 
@@ -38,22 +40,41 @@ const Login = () => {
         }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,
+          //withCredentials: true,
         }
       );
-      const token = response.accessToken;
-      localStorage.setItem("token", token);
+      const token = response.data.jwtToken;
+      localStorage.setItem("token", "Bearer " + token);
+      const customerId = response.data.id;
+      const userName = response.data.userName;
+      const phone = response.data.phoneNumber;
+      const address = response.data.address;
+      //const city = response.data.customer.city; // for feuture use
+      //const whatsappAcount = response.data.customer.whatsappAcount; // for feuture use
+      setCustomer({
+        id: customerId,
+        name: userName,
+        phoneNumber: phone,
+        address: address,
+        isAuthenticated: true,
+      });
+      console.log("token is:>>");
+      console.log(token);
+      console.log("customer-id is:>>");
+      //console.log(customerId);
+
       //should erease the Local Storage temp customer here...
-      console.log(response.data);
-      console.log(response.accessToken);
-      console.log(JSON.stringify(response));
+      //console.log("data is:>>");
+      //console.log(response.data);
+
+      //console.log(JSON.stringify(response));
       //setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this
       setUsername("");
       setPassword("");
 
-      navigate(`/customerhistory/10`);
+      navigate(`/customerhistory`);
       //navigate(`/customerhistory/${customer.id}`);
     } catch (err) {
       if (!err.response) {
@@ -78,7 +99,7 @@ const Login = () => {
         <h1>Login</h1>
 
         <form onSubmit={handleLogIn}>
-          <label>اسم المستخدم</label>
+          <label> رقم الجوال</label>
           <input
             type="text"
             onChange={(e) => setUsername(e.target.value)}

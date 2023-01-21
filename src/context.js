@@ -349,6 +349,7 @@ const AppProvider = ({ children }) => {
         showNextBtnInCart,
         productsOfCurrentCatgory,
         customer,
+        setCustomer,
         clearCustomerInfo,
         sendOrder,
         updateCusomerInfo,

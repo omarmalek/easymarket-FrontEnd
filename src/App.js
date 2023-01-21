@@ -19,11 +19,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Customer />} />
-        <Route
-          exact
-          path="/customerhistory/:customerid"
-          element={<CustomerHistory />}
-        />
+        <Route exact path="/customerhistory" element={<CustomerHistory />} />
         <Route exact path="/admin" element={<OrderControlPage />} />
         <Route exact path="/admin/control-old" element={<OrderOldPage />} />
         <Route exact path="/reg" element={<Register />} />

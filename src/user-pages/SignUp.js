@@ -8,22 +8,26 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import axios from "./api/axios";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
-const USER_REGEX = /^[A-z\u0621-\u064A][A-z0-9-_\u0621-\u064A]{2,}$/;
+const USER_REGEX = /[A-z0-9-_\u0621-\u064A ]{2,}$/;
 const PWD_REGEX = /[a-zA-Z\u0621-\u064A0-9!@#$%*]{4,}$/;
+const PHONE_REGEX = /[0-9]{7,}$/;
 // const REGISTER_URL = "/localhost:8080/registerNewUser";
 
 const SignUp = () => {
+  const { customer, updateCusomerInfo } = useGlobalContext();
+  let navigate = useNavigate();
   const userRef = useRef();
   const errRef = useRef();
+  const passRef = useRef();
 
-  const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [validPhoneNumber, setValidPhoneNumber] = useState(false);
+  const [phoneFocus, setPhoneFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
@@ -36,19 +40,20 @@ const SignUp = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const [address, setAddress] = useState("");
-
   useEffect(() => {
-    userRef.current.focus();
+    passRef.current.focus();
   }, []);
 
   useEffect(() => {
-    setValidName(USER_REGEX.test(user));
-  }, [user]);
+    setValidName(USER_REGEX.test(customer.name));
+  }, [customer.name]);
 
   useEffect(() => {
-    setValidPhoneNumber(() => (phoneNumber.length > 0 ? true : false));
-  }, [phoneNumber]);
+    if (customer.phoneNumber)
+      setValidPhoneNumber(() =>
+        customer.phoneNumber.length > 0 ? true : false
+      );
+  }, [customer.phoneNumber]);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
@@ -57,12 +62,12 @@ const SignUp = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd, matchPwd]);
+  }, [customer.name, pwd, matchPwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
-    const v1 = USER_REGEX.test(user);
+    const v1 = USER_REGEX.test(customer.name);
     const v2 = PWD_REGEX.test(pwd);
     if (!v1 || !v2) {
       setErrMsg("Invalid Entry");
@@ -71,7 +76,12 @@ const SignUp = () => {
     try {
       const response = await axios.post(
         "http://localhost:8080/registerNewUser",
-        JSON.stringify({ userName: user, userPassword: pwd }),
+        JSON.stringify({
+          userName: customer.name,
+          password: pwd,
+          phoneNumber: customer.phoneNumber,
+          address: customer.address,
+        }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -83,9 +93,10 @@ const SignUp = () => {
       setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this
-      setUser("");
+      //setUser("");
       setPwd("");
       setMatchPwd("");
+      navigate(`/login`);
     } catch (err) {
       if (!err.response) {
         setErrMsg("No Server Response");
@@ -122,28 +133,20 @@ const SignUp = () => {
             <input
               type="text"
               id="phone-number"
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              value={phoneNumber}
+              ref={passRef}
+              name="phoneNumber"
+              onChange={updateCusomerInfo}
+              value={customer.phoneNumber}
               required
             />
-            <label htmlFor="username">
-              اسم المستخدم:
-              <FontAwesomeIcon
-                icon={faCheck}
-                className={validName ? "valid" : "hide"}
-              />
-              <FontAwesomeIcon
-                icon={faTimes}
-                className={validName || !user ? "hide" : "invalid"}
-              />
-            </label>
+            <label htmlFor="username">اسم المستخدم:</label>
             <input
               type="text"
               id="username"
               ref={userRef}
-              autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
+              onChange={updateCusomerInfo}
+              value={customer.name}
+              name="name"
               required
               aria-invalid={validName ? "false" : "true"}
               aria-describedby="uidnote"
@@ -154,7 +157,9 @@ const SignUp = () => {
             <p
               id="uidnote"
               className={
-                userFocus && user && !validName ? "instructions" : "offscreen"
+                userFocus && customer.name && !validName
+                  ? "instructions"
+                  : "offscreen"
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
@@ -164,12 +169,13 @@ const SignUp = () => {
               <br />
               يسمح بالارقام والحروف و underscoresو hyphens .
             </p>
-            <label htmlFor="phone-number">العنوان :</label>
+            <label htmlFor="adress">العنوان :</label>
             <textarea
               type="text"
               id="address"
-              onChange={(e) => setAddress(e.target.value)}
-              value={address}
+              name="address"
+              value={customer.address}
+              onChange={updateCusomerInfo}
               required
             />
 

@@ -60,9 +60,14 @@ function CustomerInfo() {
             لرؤية تقدم الطلبية ولمشاهدة الطلبات السابقة وحماية بياناتك يمكنك
             تسجيل الدخول الى المنصة
             <span>
-              <Link to="signup"> من هنا</Link>
+              <Link to="/login"> من هنا</Link>
             </span>
-            .
+          </p>
+          <p>
+            ليس لديك حساب؟ قم بإنشاء حساب
+            <span>
+              <Link to="/signup"> من هنا</Link>
+            </span>
           </p>
           <br></br>
           <button onClick={clearCustomerInfo}>مسح البيانات</button>

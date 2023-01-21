@@ -2,40 +2,36 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { useParams, Link } from "react-router-dom";
 import Loading from "../Loading";
+import axios from "axios";
+import { useGlobalContext } from "../context";
 
 function CustomerHistory() {
-  const { customerid } = useParams();
+  //const { customerid } = useParams();
+  const { customer } = useGlobalContext();
   const [loading, setLoading] = useState(true);
   const [userNotFound, setUserNotFound] = useState(false);
-  const [customer, setCustomer] = useState({
-    id: 0,
-    name: "زبوننا الكريم",
-    phoneNumber: "",
-    address: "",
-    exist: false,
-  });
 
   const [customerOrders, setCustomerOrders] = useState([]);
   const [customerOldOrders, setCustomerOldOrders] = useState([]);
   const [lastOrder, setLastOrder] = useState({});
   // =============================================   useEffect   ===========================================
-  useEffect(() => {
-    if (customerid !== 0 && customerid !== "0") {
-      fetchCustomer(customerid);
-    } else {
-      setUserNotFound(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (customer.id !== 0 && customer.id !== "0") {
+  //     fetchCustomer(customer.id);
+  //   } else {
+  //     setUserNotFound(true);
+  //   }
+  // }, []);
 
   useEffect(() => {
-    if (!userNotFound) {
-      fetchCustomerOrders();
-    }
+    // if (!userNotFound) {
+    fetchCustomerOrders();
+    // }
   }, []);
   useEffect(() => {
-    if (!userNotFound) {
-      fetchCustomerOldOrders();
-    }
+    // if (!userNotFound) {
+    fetchCustomerOldOrders();
+    //  }
   }, []);
 
   useEffect(() => {
@@ -45,26 +41,40 @@ function CustomerHistory() {
 
   //  ============================================   fetch    ========================================
   const fetchCustomer = async () => {
-    let url = `http://localhost:8080/customer/${customerid}`;
+    //do we need that
+    let url = `http://localhost:8080/customer/${customer.id}`;
     try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setCustomer(data);
-      if (data.name === "notFound") {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        withCredentials: true,
+      });
+      setLoading(false);
+      if (response.data.name === "notFound") {
+        //change this and redirect to login page
         setUserNotFound(true);
       }
     } catch (error) {
       console.log("Error in fetchCustomer: " + error);
+      setLoading(false);
     }
   };
   const fetchCustomerOrders = async () => {
     setLoading(true);
     let pageIndex = 0;
     let pageSize = 10;
-    const url = `http://localhost:8080/customerorders/${customerid}/${pageIndex}/${pageSize}`;
+    const url = `http://localhost:8080/customerorders/${customer.id}/${pageIndex}/${pageSize}`;
 
     try {
-      const response = await fetch(url);
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        withCredentials: true,
+      });
       const data = await response.json();
       setLoading(false);
       setCustomerOrders(data);
@@ -72,19 +82,27 @@ function CustomerHistory() {
       // console.log(data);
     } catch (error) {
       console.log("Error in fetchCustomerOrders: " + error);
+      setLoading(false);
     }
   };
   const fetchCustomerOldOrders = async () => {
     let pageIndex = 0;
     let pageSize = 10;
-    const url = `http://localhost:8080/customeroldorders/${customerid}/${pageIndex}/${pageSize}`;
+    const url = `http://localhost:8080/customeroldorders/${customer.id}/${pageIndex}/${pageSize}`;
 
     try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setCustomerOldOrders(data);
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        withCredentials: true,
+      });
+      setCustomerOldOrders(response.data);
+      setLoading(false);
     } catch (error) {
       console.log("Error in fetchCustomerOldOrders: " + error);
+      setLoading(false);
     }
   };
   //                                  ------- fetch Ends    -------
