@@ -10,6 +10,7 @@ function CustomerHistory() {
   const { customer } = useGlobalContext();
   const [loading, setLoading] = useState(true);
   const [userNotFound, setUserNotFound] = useState(false);
+  const [isAthenticated, setIsAthenticated] = useState(false);
 
   const [customerOrders, setCustomerOrders] = useState([]);
   const [customerOldOrders, setCustomerOldOrders] = useState([]);
@@ -59,6 +60,7 @@ function CustomerHistory() {
     } catch (error) {
       console.log("Error in fetchCustomer: " + error);
       setLoading(false);
+      //if not authenticated redirect to login page
     }
   };
   const fetchCustomerOrders = async () => {
