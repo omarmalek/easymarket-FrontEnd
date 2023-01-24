@@ -174,6 +174,7 @@ const AppProvider = ({ children }) => {
 
   const sendOrder = (e) => {
     e.preventDefault();
+
     let cartSummary = cart.map((product) => {
       return { productId: product.id, productAmount: product.amount };
     });
@@ -187,23 +188,29 @@ const AppProvider = ({ children }) => {
       delivaryServiceType: "Normal",
       orderCart: cartSummary, //I don't send the cart... I send this summary
     };
-    try {
-      fetch("http://localhost:8080/userorder", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userOrder),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          window.location.assign(`/`);
-          // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
-          //window.location.assign(`/customerhistory/${customer.id}`);
-          // navigate(`/`);
-        });
-    } catch (error) {
-      console.log(error);
+    if (
+      customer.name !== "" &&
+      customer.phoneNumber !== "" &&
+      customer.address !== ""
+    ) {
+      try {
+        fetch("http://localhost:8080/userorder", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userOrder),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            window.location.assign(`/`);
+            // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
+            //window.location.assign(`/customerhistory/${customer.id}`);
+            // navigate(`/`);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

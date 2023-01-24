@@ -1,38 +1,30 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
-import { useParams, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../Loading";
 import axios from "axios";
 import { useGlobalContext } from "../context";
 
 function CustomerHistory() {
-  //const { customerid } = useParams();
+  let nevigate = useNavigate();
+
   const { customer } = useGlobalContext();
   const [loading, setLoading] = useState(true);
-  const [userNotFound, setUserNotFound] = useState(false);
-  const [isAthenticated, setIsAthenticated] = useState(false);
+  const [errMsg, setErrMsg] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const [customerOrders, setCustomerOrders] = useState([]);
   const [customerOldOrders, setCustomerOldOrders] = useState([]);
   const [lastOrder, setLastOrder] = useState({});
   // =============================================   useEffect   ===========================================
-  // useEffect(() => {
-  //   if (customer.id !== 0 && customer.id !== "0") {
-  //     fetchCustomer(customer.id);
-  //   } else {
-  //     setUserNotFound(true);
-  //   }
-  // }, []);
 
   useEffect(() => {
-    // if (!userNotFound) {
-    fetchCustomerOrders();
-    // }
-  }, []);
-  useEffect(() => {
-    // if (!userNotFound) {
-    fetchCustomerOldOrders();
-    //  }
+    if (customer.id !== 0 && customer.id !== undefined) {
+      fetchCustomerOrders();
+      fetchCustomerOldOrders();
+    } else {
+      nevigate("/login");
+    }
   }, []);
 
   useEffect(() => {
@@ -41,28 +33,7 @@ function CustomerHistory() {
   }, [customerOrders]);
 
   //  ============================================   fetch    ========================================
-  const fetchCustomer = async () => {
-    //do we need that
-    let url = `http://localhost:8080/customer/${customer.id}`;
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
-        },
-        withCredentials: true,
-      });
-      setLoading(false);
-      if (response.data.name === "notFound") {
-        //change this and redirect to login page
-        setUserNotFound(true);
-      }
-    } catch (error) {
-      console.log("Error in fetchCustomer: " + error);
-      setLoading(false);
-      //if not authenticated redirect to login page
-    }
-  };
+
   const fetchCustomerOrders = async () => {
     setLoading(true);
     let pageIndex = 0;
@@ -77,13 +48,18 @@ function CustomerHistory() {
         },
         withCredentials: true,
       });
-      const data = await response.json();
       setLoading(false);
-      setCustomerOrders(data);
-      // console.log("customerorders");
-      // console.log(data);
-    } catch (error) {
-      console.log("Error in fetchCustomerOrders: " + error);
+      setCustomerOrders(response.data);
+      //console.log(response.data);
+    } catch (err) {
+      if (!err.response) {
+        setErrMsg("No Server Response");
+        console.log("Error in fetchCustomerOrders: " + err);
+      }
+      // } else if (err.response.status === 403) {
+      setIsAuthenticated(false);
+      //   console.log("Error in fetchCustomerOrders ...(Forbidden): " + err);
+      // }
       setLoading(false);
     }
   };
@@ -91,7 +67,6 @@ function CustomerHistory() {
     let pageIndex = 0;
     let pageSize = 10;
     const url = `http://localhost:8080/customeroldorders/${customer.id}/${pageIndex}/${pageSize}`;
-
     try {
       const response = await axios.get(url, {
         headers: {
@@ -102,23 +77,24 @@ function CustomerHistory() {
       });
       setCustomerOldOrders(response.data);
       setLoading(false);
+      console.log(response.data);
     } catch (error) {
       console.log("Error in fetchCustomerOldOrders: " + error);
       setLoading(false);
     }
   };
   //                                  ------- fetch Ends    -------
+  const logout = () => {
+    localStorage.setItem("token", "");
+    setIsAuthenticated(false);
+  };
   if (loading) {
     return <Loading />;
   }
-  if (userNotFound) {
-    return (
-      <div>
-        <h1>sorry ... No user with this id!</h1>
-        <Link to="/">Go to main page.</Link>
-      </div>
-    );
+  if (!isAuthenticated) {
+    nevigate("/login");
   }
+
   return (
     <div>
       <Header />
@@ -126,6 +102,11 @@ function CustomerHistory() {
       <br></br>
       <div className="header">
         <h1 className="center">مرحبا {customer.name || "زبوننا الكريم"}</h1>
+        <div className="logout">
+          <button type="button" onClick={logout}>
+            تسجيل الخروج
+          </button>
+        </div>
       </div>
 
       <div className="customer-history-component">
@@ -303,7 +284,7 @@ function CustomerHistory() {
         <br></br>
         <br></br>
         <br></br>
-        <p>الطلبية قيد الاحضار</p>
+        {/*     <p>الطلبية قيد الاحضار</p>
         <p> سيتم التسليم خلال:....</p>
         <p>معرف عامل الدييفري</p>
         <p>رقم هاتف الديليفري</p>
@@ -312,7 +293,7 @@ function CustomerHistory() {
           (سيتم عدم تفعيل زر الغاء الطلبية في حال تم تسليمها الى عامل الديليفري)
         </p>
         <p>تقييم الزبون</p>
-        تصفير الكارت
+        تصفير الكارت */}
       </div>
     </div>
   );

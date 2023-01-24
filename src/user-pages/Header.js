@@ -28,7 +28,7 @@ function Header() {
         </Link>
         <a href="#">العروض</a>
         <Link to="#">أسعار التوصيل</Link>
-        <Link to={`/customerhistory/${customer.id}`}> الطلبات السابقة</Link>
+        <Link to={`/customerhistory`}> الطلبات السابقة</Link>
       </div>
 
       <div className="icons">
@@ -39,7 +39,7 @@ function Header() {
           onClick={showSearchBar}
         ></i>
         <Link to="#" className="fas fa-heart"></Link>
-        <Link to="/login" className="fa-solid fa-user"></Link>
+        <Link to="/customerhistory" className="fa-solid fa-user"></Link>
       </div>
     </header>
   );

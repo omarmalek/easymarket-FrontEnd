@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGlobalContext } from "../context";
+import Header from "./Header";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -15,9 +16,33 @@ const Login = () => {
   const [username, setUsername] = useState(customer.phoneNumber);
   const [passsword, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
-    userRef.current.focus();
+    checkAuthentication();
+  }, []);
+  const checkAuthentication = async () => {
+    let url = "http://localhost:8080/checkUserAuthentication";
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        withCredentials: true,
+      });
+    } catch (err) {
+      if (!err.response) {
+        setErrMsg("No Server Response");
+        console.log("Error in fetchCustomerOrders: " + err);
+      } else {
+        setIsAuthenticated(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    //userRef.current.focus();
   }, []);
 
   useEffect(() => {
@@ -87,45 +112,50 @@ const Login = () => {
     }
   };
   return (
-    <div className="Signup-component">
-      <section>
-        <p
-          ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
-          {errMsg}
-        </p>
-        <h1>Login</h1>
+    <div>
+      <Header />
+      <br></br>
+      <br></br>
+      <div className="Signup-component">
+        <section>
+          <p
+            ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p>
+          <h1>Login</h1>
 
-        <form onSubmit={handleLogIn}>
-          <label> رقم الجوال</label>
-          <input
-            type="text"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-            ref={userRef}
-            //required
-          />
+          <form onSubmit={handleLogIn}>
+            <label> رقم الجوال</label>
+            <input
+              type="text"
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              ref={userRef}
+              //required
+            />
 
-          <label> كلمة المرور</label>
-          <input
-            type="password"
-            value={passsword}
-            onChange={(e) => setPassword(e.target.value)}
-            //required
-          />
+            <label> كلمة المرور</label>
+            <input
+              type="password"
+              value={passsword}
+              onChange={(e) => setPassword(e.target.value)}
+              //required
+            />
 
-          <button>Long in</button>
-        </form>
-        <p>
-          ليس لديك حساب؟
-          <br />
-          <span className="line">
-            <Link to="/signup"> انشاء حساب </Link>
-          </span>
-        </p>
-      </section>
+            <button>Long in</button>
+          </form>
+          <p>
+            ليس لديك حساب؟
+            <br />
+            <span className="line">
+              <Link to="/signup"> انشاء حساب </Link>
+            </span>
+          </p>
+        </section>
+      </div>
     </div>
   );
 };

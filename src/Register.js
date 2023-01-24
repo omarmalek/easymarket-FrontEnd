@@ -6,12 +6,13 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 // import axios from "./api/axios";
-import axios from "axios";
+//import axios from "axios";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = "/register";
+//const REGISTER_URL = "/register";
 
 const Register = () => {
   const userRef = useRef();
@@ -94,7 +95,7 @@ const Register = () => {
         <section>
           <h1>Success!</h1>
           <p>
-            <a href="#">Sign In</a>
+            <Link href="/login">Sign In</Link>
           </p>
         </section>
       ) : (
