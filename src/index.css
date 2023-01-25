@@ -1702,6 +1702,9 @@ table th {
   border-radius: 0.5rem;
 }
 
+.Signup-component input[type="text"] {
+  text-transform: none;
+}
 .Signup-component label,
 .Signup-component button {
   margin-top: 1rem;

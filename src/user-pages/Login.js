@@ -31,6 +31,7 @@ const Login = () => {
         },
         withCredentials: true,
       });
+      setIsAuthenticated(true);
     } catch (err) {
       if (!err.response) {
         setErrMsg("No Server Response");
@@ -42,12 +43,19 @@ const Login = () => {
   };
 
   useEffect(() => {
-    //userRef.current.focus();
+    if (!isAuthenticated) {
+      userRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
     setErrMsg("");
   }, [username, passsword]);
+
+  const logout = () => {
+    localStorage.setItem("token", "");
+    setIsAuthenticated(false);
+  };
 
   const handleLogIn = async (e) => {
     e.preventDefault();
@@ -100,17 +108,30 @@ const Login = () => {
       setPassword("");
 
       navigate(`/customerhistory`);
-      //navigate(`/customerhistory/${customer.id}`);
     } catch (err) {
       if (!err.response) {
         setErrMsg("No Server Response");
-      } else if (err.response.status === 409) {
-        setErrMsg("Username Taken");
       } else {
         setErrMsg("هنالك خطأ في اسم المستخدم أو كلمة المرور ");
       }
     }
   };
+  if (isAuthenticated) {
+    return (
+      <div className="container">
+        <Header />
+        <br></br>
+        <br></br>
+        <h1>
+          مرحبا <span> {customer.name}</span>
+        </h1>
+        <button type="button" onClick={logout}>
+          تسجيل الخروج
+        </button>
+        <Link to="/customerhistory">متابعة الطلبات</Link>
+      </div>
+    );
+  }
   return (
     <div>
       <Header />

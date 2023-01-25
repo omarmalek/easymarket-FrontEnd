@@ -13,6 +13,8 @@ import Delivery from "./control-pages/Delivery";
 import SignUp from "./user-pages/SignUp";
 import Login from "./user-pages/Login";
 import Footer from "./Footer";
+import AdminLogin from "./control-pages/AdminLogin";
+import AdminPage from "./control-pages/AdminPage";
 
 function App() {
   return (
@@ -20,8 +22,10 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Customer />} />
         <Route exact path="/customerhistory" element={<CustomerHistory />} />
-        <Route exact path="/admin" element={<OrderControlPage />} />
-        <Route exact path="/admin/control-old" element={<OrderOldPage />} />
+        <Route exact path="/admin" element={<AdminLogin />} />
+        <Route exact path="/admin/orders" element={<OrderControlPage />} />
+        <Route exact path="/admin/main" element={<AdminPage />} />
+        <Route exact path="/admin/ordres-old" element={<OrderOldPage />} />
         <Route exact path="/reg" element={<Register />} />
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/login" element={<Login />} />
