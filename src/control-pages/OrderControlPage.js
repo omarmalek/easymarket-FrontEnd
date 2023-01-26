@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Loading from "../Loading";
 import PaginationControl from "./PaginationControl";
 import HeaderControl from "./Header-Control";
+import axios from "axios";
 
 export default function OrderControlPage() {
   const [loading, setLoading] = useState(true);
@@ -19,12 +20,17 @@ export default function OrderControlPage() {
     let pageSize = 5;
 
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/admin/controlorders/${pageIndex}/${pageSize}`
-      );
-      const data = await response.json();
+      const url = `http://localhost:8080/admin/controlorders/${pageIndex}/${pageSize}`;
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("admintoken"),
+        },
+        withCredentials: true,
+      });
+
       setLoading(false);
-      setControlOrders(data);
+      setControlOrders(response.data);
     } catch (error) {
       console.log(error);
       setLoading(false);

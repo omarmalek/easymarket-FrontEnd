@@ -10,14 +10,14 @@ function SearchResult() {
   );
   const [alert, setAlert] = useState({ show: false, style: "", msg: "" });
   useEffect(() => {
-    searchValue.current.focus();
+    searchRef.current.focus();
   }, []);
   useEffect(() => {
     if (searchText) {
       searchforProduct(searchText);
     }
   }, []);
-  const searchValue = React.useRef("");
+  const searchRef = React.useRef("");
 
   const handlSearch = (e) => {
     let str = e.target.value;
@@ -38,7 +38,13 @@ function SearchResult() {
 
     try {
       fetch(
-        `http://localhost:8080/api/products/byname/${string}/${pageIndex}/${pageSize}`
+        `http://localhost:8080/products/byname/${string}/${pageIndex}/${pageSize}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("admintoken"),
+          },
+        }
       )
         .then((response) => response.json())
         .then((data) => {
@@ -70,7 +76,7 @@ function SearchResult() {
           <input
             type="text"
             className="input-search"
-            ref={searchValue}
+            ref={searchRef}
             onChange={handlSearch}
           />
           <p className="alert">

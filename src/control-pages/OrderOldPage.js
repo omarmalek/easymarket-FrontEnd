@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Loading from "../Loading";
 import ServerError from "../ServerError";
 import HeaderControl from "./Header-Control";
+import axios from "axios";
 
 export default function OrderOld() {
   const [loading, setLoading] = useState(true);
@@ -15,13 +16,17 @@ export default function OrderOld() {
   const fetchSetterOrders = async () => {
     let pageIndex = 0;
     let pageSize = 10;
-    const url = `http://localhost:8080/api/controloldorders/${pageIndex}/${pageSize}`;
-
     try {
-      const response = await fetch(url);
-      const data = await response.json();
+      const url = `http://localhost:8080/admin/controloldorders/${pageIndex}/${pageSize}`;
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("admintoken"),
+        },
+        withCredentials: true,
+      });
       setLoading(false);
-      setOldOrders(data);
+      setOldOrders(response.data);
     } catch (error) {
       console.log(error);
       setLoading(false);

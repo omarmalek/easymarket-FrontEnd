@@ -36,10 +36,19 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm, reSearch }) {
       new Blob([JSON.stringify(product)], { type: "application/json" })
     );
     try {
-      fetch("http://localhost:8080/api/productmedia", {
-        method: "POST",
-        body: formData,
-      })
+      fetch(
+        "http://localhost:8080/productmedia",
+        {
+          method: "POST",
+          body: formData,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: localStorage.getItem("admintoken"),
+          },
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
           console.log("Files successfully uploaded!");
