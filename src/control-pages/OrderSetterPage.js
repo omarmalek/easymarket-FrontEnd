@@ -18,7 +18,7 @@ export default function OrderSetterPage() {
 
   const fetchSetterOrders = async () => {
     let pageIndex = page - 1;
-    let pageSize = 3;
+    let pageSize = 10;
     try {
       const url = `http://localhost:8080/admin/setterorders/${pageIndex}/${pageSize}`;
       const response = await axios.get(url, {

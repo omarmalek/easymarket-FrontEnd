@@ -16,7 +16,7 @@ export default function OrderOld() {
   }, []);
   const fetchSetterOrders = async () => {
     let pageIndex = 0;
-    let pageSize = 5;
+    let pageSize = 10;
     const url = `http://localhost:8080/admin/controloldorders/${pageIndex}/${pageSize}`;
     try {
       const response = await axios.get(url, {

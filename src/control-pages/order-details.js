@@ -4,8 +4,8 @@ import { FaTimes } from "react-icons/fa";
 
 const OrderDetails = ({ currentOrder, role, setShowOrderDetials }) => {
   const { updateOrder } = useGlobalContext();
-  // const updateProductQuantity = () => {};
-
+  console.log("currentOrder: >> ");
+  console.log(currentOrder);
   const {
     id,
     // customerId,
@@ -126,7 +126,8 @@ const OrderDetails = ({ currentOrder, role, setShowOrderDetials }) => {
               </button>
             )}
             {role === "admin" && (
-              <button onClick={() => updateOrder(currentOrder, "cancelled")}>
+              <button onClick={() => updateOrder(currentOrder, "rejected")}>
+                {/**is this right */}
                 رفض العملية
               </button>
             )}
