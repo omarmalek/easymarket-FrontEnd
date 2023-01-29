@@ -5,6 +5,7 @@ import Loading from "../Loading";
 import ServerError from "../ServerError";
 import HeaderControl from "./Header-Control";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function OrderOld() {
   const [loading, setLoading] = useState(true);
@@ -15,9 +16,9 @@ export default function OrderOld() {
   }, []);
   const fetchSetterOrders = async () => {
     let pageIndex = 0;
-    let pageSize = 10;
+    let pageSize = 5;
+    const url = `http://localhost:8080/admin/controloldorders/${pageIndex}/${pageSize}`;
     try {
-      const url = `http://localhost:8080/admin/controloldorders/${pageIndex}/${pageSize}`;
       const response = await axios.get(url, {
         headers: {
           "Content-Type": "application/json",
@@ -28,9 +29,20 @@ export default function OrderOld() {
       setLoading(false);
       setOldOrders(response.data);
     } catch (error) {
-      console.log(error);
+      if (!error.response) {
+        console.log("Connection failed!");
+        setServerStuck(true);
+      } else if (error.response.status === 401) {
+        console.log("unauthorized!");
+        localStorage.removeItem("roleName");
+        useNavigate("/admin");
+      } else if (error.response.status === 403) {
+        console.log("forbidden!");
+        localStorage.removeItem("roleName");
+        useNavigate("/admin");
+      }
+
       setLoading(false);
-      setServerStuck(true);
     }
   };
 

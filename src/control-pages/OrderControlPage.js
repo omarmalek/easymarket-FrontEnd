@@ -5,8 +5,10 @@ import Loading from "../Loading";
 import PaginationControl from "./PaginationControl";
 import HeaderControl from "./Header-Control";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function OrderControlPage() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [controlOrders, setControlOrders] = useState([]);
   const [page, setPage] = useState(1);
@@ -32,7 +34,15 @@ export default function OrderControlPage() {
       setLoading(false);
       setControlOrders(response.data);
     } catch (error) {
-      console.log(error);
+      if (!error.response) {
+        console.log("Connection failed!");
+      } else {
+        if (error.response.status == 401) {
+          console.log("unauthorized!");
+          localStorage.removeItem("roleName");
+          navigate("/admin");
+        }
+      }
       setLoading(false);
     }
   };

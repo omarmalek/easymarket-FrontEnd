@@ -8,7 +8,7 @@ import Header from "./Header";
 const Login = () => {
   let navigate = useNavigate();
   const { customer, setCustomer } = useGlobalContext();
-  const PHONE_REGEX = /[0-9]{7,}$/;
+  //const PHONE_REGEX = /[0-9]{7,}$/;
 
   const userRef = useRef();
   const errRef = useRef();
@@ -16,64 +16,32 @@ const Login = () => {
   const [username, setUsername] = useState(customer.phoneNumber);
   const [passsword, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
-    checkAuthentication();
-  }, []);
-  const checkAuthentication = async () => {
-    let url = "http://localhost:8080/checkUserAuthentication";
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
-        },
-        withCredentials: true,
-      });
-      setIsAuthenticated(true);
-    } catch (err) {
-      if (!err.response) {
-        setErrMsg("No Server Response");
-        console.log("Error in fetchCustomerOrders: " + err);
-      } else {
-        setIsAuthenticated(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      userRef.current.focus();
-    }
+    userRef.current.focus();
   }, []);
 
   useEffect(() => {
     setErrMsg("");
   }, [username, passsword]);
 
-  const logout = () => {
-    localStorage.setItem("token", "");
-    setIsAuthenticated(false);
-  };
-
   const handleLogIn = async (e) => {
     e.preventDefault();
-
     if (!username || !passsword) {
       setErrMsg("أدخل اسم المستخدم وكلمةالمرور!");
       return;
     }
     try {
+      const url = "http://localhost:8080/authenticate";
       const response = await axios.post(
-        "http://localhost:8080/authenticate",
+        url,
         JSON.stringify({
           userName: username,
           userPassword: passsword,
         }),
         {
           headers: { "Content-Type": "application/json" },
-          //withCredentials: true,
+          withCredentials: true,
         }
       );
       const token = response.data.jwtToken;
@@ -91,22 +59,6 @@ const Login = () => {
         address: address,
         isAuthenticated: true,
       });
-      console.log("token is:>>");
-      console.log(token);
-      console.log("customer-id is:>>");
-      //console.log(customerId);
-
-      //should erease the Local Storage temp customer here...
-      //console.log("data is:>>");
-      //console.log(response.data);
-
-      //console.log(JSON.stringify(response));
-      //setSuccess(true);
-      //clear state and controlled inputs
-      //need value attrib on inputs for this
-      setUsername("");
-      setPassword("");
-
       navigate(`/customerhistory`);
     } catch (err) {
       if (!err.response) {
@@ -116,22 +68,7 @@ const Login = () => {
       }
     }
   };
-  if (isAuthenticated) {
-    return (
-      <div className="container">
-        <Header />
-        <br></br>
-        <br></br>
-        <h1>
-          مرحبا <span> {customer.name}</span>
-        </h1>
-        <button type="button" onClick={logout}>
-          تسجيل الخروج
-        </button>
-        <Link to="/customerhistory">متابعة الطلبات</Link>
-      </div>
-    );
-  }
+
   return (
     <div>
       <Header />
@@ -155,7 +92,6 @@ const Login = () => {
               onChange={(e) => setUsername(e.target.value)}
               value={username}
               ref={userRef}
-              //required
             />
 
             <label> كلمة المرور</label>
@@ -163,7 +99,6 @@ const Login = () => {
               type="password"
               value={passsword}
               onChange={(e) => setPassword(e.target.value)}
-              //required
             />
 
             <button>Long in</button>

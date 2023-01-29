@@ -8,7 +8,7 @@ function Header() {
     showSearchBar,
     toggleNavbar,
     showNvbar,
-    customer,
+    //customer,
   } = useGlobalContext();
 
   const navbarRef = useRef(null);

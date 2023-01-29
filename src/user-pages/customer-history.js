@@ -6,12 +6,11 @@ import axios from "axios";
 import { useGlobalContext } from "../context";
 
 function CustomerHistory() {
-  let nevigate = useNavigate();
+  let navigate = useNavigate();
 
   const { customer } = useGlobalContext();
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const [customerOrders, setCustomerOrders] = useState([]);
   const [customerOldOrders, setCustomerOldOrders] = useState([]);
@@ -23,13 +22,14 @@ function CustomerHistory() {
       fetchCustomerOrders();
       fetchCustomerOldOrders();
     } else {
-      nevigate("/login");
+      navigate("/login");
     }
   }, []);
 
   useEffect(() => {
-    if (customerOrders.length > 0)
+    if (customerOrders.length > 0) {
       setLastOrder(customerOrders[customerOrders.length - 1]);
+    }
   }, [customerOrders]);
 
   //  ============================================   fetch    ========================================
@@ -56,16 +56,12 @@ function CustomerHistory() {
         setErrMsg("No Server Response");
         console.log("Error in fetchCustomerOrders: " + err);
       }
-      // } else if (err.response.status === 403) {
-      setIsAuthenticated(false);
-      //   console.log("Error in fetchCustomerOrders ...(Forbidden): " + err);
-      // }
       setLoading(false);
     }
   };
   const fetchCustomerOldOrders = async () => {
     let pageIndex = 0;
-    let pageSize = 10;
+    let pageSize = 1;
     const url = `http://localhost:8080/customeroldorders/${customer.id}/${pageIndex}/${pageSize}`;
     try {
       const response = await axios.get(url, {
@@ -79,20 +75,28 @@ function CustomerHistory() {
       setLoading(false);
       console.log(response.data);
     } catch (error) {
-      console.log("Error in fetchCustomerOldOrders: " + error);
+      if (!error.response) {
+        console.log("Connection failed!");
+      } else if (error.response.status === 401) {
+        console.log("unauthorized!");
+        localStorage.removeItem("roleName");
+        navigate("/login");
+      } else if (error.response.status === 403) {
+        console.log("forbidden!");
+        localStorage.removeItem("roleName");
+        navigate("/login");
+      }
+
       setLoading(false);
     }
   };
   //                                  ------- fetch Ends    -------
   const logout = () => {
     localStorage.setItem("token", "");
-    setIsAuthenticated(false);
+    navigate("/login");
   };
   if (loading) {
     return <Loading />;
-  }
-  if (!isAuthenticated) {
-    nevigate("/login");
   }
 
   return (

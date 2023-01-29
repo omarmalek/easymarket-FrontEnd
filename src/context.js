@@ -96,6 +96,7 @@ const AppProvider = ({ children }) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: localStorage.getItem("admintoken"),
       },
       body: JSON.stringify(newUpdatedOrder),
     });

@@ -10,7 +10,8 @@ const AdminPage = () => {
   }, []);
 
   const checkAccess = async () => {
-    const url = "/checkAdminAuthentication";
+    const url = "http://localhost:8080/checkAdminAuthentication";
+
     try {
       const response = await axios.get(url, {
         headers: {
@@ -19,14 +20,22 @@ const AdminPage = () => {
         },
         withCredentials: true,
       });
-    } catch (e) {
-      if (!e.response) {
+      console.log(response.data);
+    } catch (error) {
+      if (!error.response) {
         console.log("Connection Failed");
       } else {
-        localStorage.removeItem("roleName");
-        navigate("/admin");
+        if (error.response.status == 401) {
+          console.log("unauthorized!");
+          localStorage.removeItem("roleName");
+          navigate("/admin");
+        }
       }
     }
+  };
+  const logout = () => {
+    localStorage.setItem("admintoken", "");
+    navigate("/admin");
   };
   return (
     <div>
@@ -35,6 +44,11 @@ const AdminPage = () => {
         <br></br>
         <br></br>
         <h1>AdminPage</h1>
+        <div className="logout">
+          <button type="button" onClick={logout}>
+            تسجيل الخروج
+          </button>
+        </div>
         <Link to="/admin/orders">Orders</Link>
         <br></br>
         <Link to="/admin/ordres-old">OldOrders</Link>
