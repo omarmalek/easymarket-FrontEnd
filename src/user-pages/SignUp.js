@@ -13,7 +13,7 @@ import { useGlobalContext } from "../context";
 
 const USER_REGEX = /[A-z0-9-_\u0621-\u064A ]{2,}$/;
 const PWD_REGEX = /[a-zA-Z\u0621-\u064A0-9!@#$%*]{4,}$/;
-const PHONE_REGEX = /[0-9]{7,}$/;
+//const PHONE_REGEX = /[0-9]{7,}$/;
 // const REGISTER_URL = "/localhost:8080/registerNewUser";
 
 const SignUp = () => {
@@ -27,7 +27,7 @@ const SignUp = () => {
   const [userFocus, setUserFocus] = useState(false);
 
   const [validPhoneNumber, setValidPhoneNumber] = useState(false);
-  const [phoneFocus, setPhoneFocus] = useState(false);
+  //const [phoneFocus, setPhoneFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);

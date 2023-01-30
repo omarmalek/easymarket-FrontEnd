@@ -8,7 +8,7 @@ function SearchResult() {
   const [searchText, setSearchText] = useState(
     localStorage.getItem("searchText")
   );
-  const [alert, setAlert] = useState({ show: false, style: "", msg: "" });
+  const [alert, setAlert] = useState({ show: true, style: "", msg: "" });
   useEffect(() => {
     searchRef.current.focus();
   }, []);
@@ -54,9 +54,19 @@ function SearchResult() {
             setResultOfSearch(data);
           } else {
             setResultOfSearch([]);
+            showAlert("", "النتيجة غير متوفرة");
           }
         });
     } catch (error) {
+      if (!error.response) {
+        showAlert("", "الخادم لا يستجيب");
+      } else if (error.response.status === 401) {
+        showAlert("", "unauthorized!");
+        console.log("unauthorized!");
+      } else if (error.response.status === 403) {
+        showAlert("", "forbidden!");
+        console.log("forbidden!");
+      }
       console.log(error);
       showAlert("", "حدث خطأ ما ...");
       // setLoading(false);
@@ -80,9 +90,9 @@ function SearchResult() {
             ref={searchRef}
             onChange={handlSearch}
           />
-          <p className="alert">
+          <div className="alert">
             {alert.show && <Alert {...alert} removeAlert={removeAlert} />}
-          </p>
+          </div>
         </div>
         {resultOfSearch.length > 0 ? (
           <ExhibitionUpdateDelete

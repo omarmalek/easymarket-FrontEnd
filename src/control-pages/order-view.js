@@ -117,9 +117,6 @@ const OrderView = ({ orders, role }) => {
                         </td>
                         <td>{delivaryServiceType}</td>
                       </tr>
-                      {/* {currentOrder.id === id && (
-                        // <OrderDetails currentOrder={currentOrder} role={role} />
-                      )} */}
                     </>
                   );
                 })

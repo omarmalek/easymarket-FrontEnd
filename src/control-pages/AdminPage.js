@@ -25,7 +25,7 @@ const AdminPage = () => {
       if (!error.response) {
         console.log("Connection Failed");
       } else {
-        if (error.response.status == 401) {
+        if (error.response.status === 401) {
           console.log("unauthorized!");
           localStorage.removeItem("roleName");
           navigate("/admin");

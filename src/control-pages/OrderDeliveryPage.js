@@ -20,7 +20,7 @@ export default function OrderDeliveryPage() {
     let pageIndex = page - 1;
     let pageSize = 10;
     try {
-      const url = `http://localhost:8080/admin/setterorders/${pageIndex}/${pageSize}`;
+      const url = `http://localhost:8080/admin/deliveryorders/${pageIndex}/${pageSize}`;
       const response = await axios.get(url, {
         headers: {
           "Content-Type": "application/json",

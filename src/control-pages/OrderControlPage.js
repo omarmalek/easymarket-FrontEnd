@@ -37,7 +37,7 @@ export default function OrderControlPage() {
       if (!error.response) {
         console.log("Connection failed!");
       } else {
-        if (error.response.status == 401) {
+        if (error.response.status === 401) {
           console.log("unauthorized!");
           localStorage.removeItem("roleName");
           navigate("/admin");

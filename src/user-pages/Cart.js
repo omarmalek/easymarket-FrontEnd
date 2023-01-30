@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useGlobalContext } from "../context";
 import { FaTimes } from "react-icons/fa";
 import CustomerInfo from "./CustomerInfo";
-import PhoneBox from "./phone-box";
 
 const Cart = () => {
   const {
@@ -17,12 +16,11 @@ const Cart = () => {
     decreasProductAmount,
     // updateProductQuantity,
     // showCustomerInfo,
-    isCustomerInfoShown,
   } = useGlobalContext();
-  const [isPhoneBoxShown, setIsPhoneBoxShown] = useState(true);
-  const showPhoneBox = () => {
-    setIsPhoneBoxShown(true);
-  };
+  //const [isPhoneBoxShown, setIsPhoneBoxShown] = useState(true);
+  // const showPhoneBox = () => {
+  //   setIsPhoneBoxShown(true);
+  // };
 
   return (
     <div className="cart-scroll">

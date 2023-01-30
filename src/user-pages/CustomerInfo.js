@@ -1,6 +1,6 @@
 import React from "react";
 import { useGlobalContext } from "../context";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function CustomerInfo() {
   // let navigate = useNavigate();

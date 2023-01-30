@@ -26,7 +26,7 @@ function Header() {
         <Link to="/" className="active">
           الصفحة الرئيسية
         </Link>
-        <a href="#">العروض</a>
+        <Link href="#">العروض</Link>
         <Link to="#">أسعار التوصيل</Link>
         <Link to={`/customerhistory`}> الطلبات السابقة</Link>
       </div>

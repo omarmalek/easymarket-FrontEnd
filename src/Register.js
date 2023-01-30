@@ -32,6 +32,7 @@ const Register = () => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  setSuccess(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -230,7 +231,7 @@ const Register = () => {
             <br />
             <span className="line">
               {/*put router link here*/}
-              <a href="#">Sign In</a>
+              <Link href="#">Sign In</Link>
             </span>
           </p>
         </section>

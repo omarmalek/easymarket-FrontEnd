@@ -10,7 +10,7 @@ function CustomerHistory() {
 
   const { customer } = useGlobalContext();
   const [loading, setLoading] = useState(true);
-  const [errMsg, setErrMsg] = useState(false);
+  //const [errMsg, setErrMsg] = useState(false);
 
   const [customerOrders, setCustomerOrders] = useState([]);
   const [customerOldOrders, setCustomerOldOrders] = useState([]);
@@ -53,7 +53,7 @@ function CustomerHistory() {
       //console.log(response.data);
     } catch (err) {
       if (!err.response) {
-        setErrMsg("No Server Response");
+        //setErrMsg("No Server Response");
         console.log("Error in fetchCustomerOrders: " + err);
       }
       setLoading(false);
