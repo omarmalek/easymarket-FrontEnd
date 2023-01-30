@@ -103,23 +103,29 @@ const OrderDetails = ({ currentOrder, role, setShowOrderDetials }) => {
             </div>
           </div>
           <div className="control-control-btns ">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-            >
-              طباعة <i className="fa fa-print"></i>
-            </button>
-            <button
-              onClick={() => {
-                updateOrder(currentOrder, "packed");
-              }}
-            >
-              تم التحضير <i className="fa-solid fa-person-carry-box"></i>
-            </button>
-            <button onClick={() => updateOrder(currentOrder, "sentDelivery")}>
-              تم التسليم الى الديليفري
-            </button>
+            {(role === "admin" || role === "setter") && (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                طباعة <i className="fa fa-print"></i>
+              </button>
+            )}
+            {(role === "admin" || role === "setter") && (
+              <button
+                onClick={() => {
+                  updateOrder(currentOrder, "packed");
+                }}
+              >
+                تم التحضير <i className="fa-solid fa-person-carry-box"></i>
+              </button>
+            )}
+            {(role === "admin" || role === "setter") && (
+              <button onClick={() => updateOrder(currentOrder, "sentDelivery")}>
+                تم التسليم الى الديليفري
+              </button>
+            )}
             {(role === "admin" || role === "delivery") && (
               <button onClick={() => updateOrder(currentOrder, "delivered")}>
                 تم التوصيل الى الزبون

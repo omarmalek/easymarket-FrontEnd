@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import HeaderControl from "./Header-Control";
 import OrderDetails from "./order-details";
 
 const OrderView = ({ orders, role }) => {

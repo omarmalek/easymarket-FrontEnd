@@ -28,7 +28,8 @@ function SearchResult() {
     }
   };
   const reSearch = () => {
-    searchforProduct(searchText);
+    //searchforProduct(searchText);
+    window.location.reload();
   };
 
   const searchforProduct = (string) => {

@@ -6,10 +6,10 @@ import PaginationControl from "./PaginationControl";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function OrderSetterPage() {
+export default function OrderDeliveryPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [setterOrders, setSetterOrders] = useState([]);
+  const [deliveryOrders, setDeliveryOrders] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function OrderSetterPage() {
         withCredentials: true,
       });
       setLoading(false);
-      setSetterOrders(response.data);
+      setDeliveryOrders(response.data);
     } catch (error) {
       if (!error.response) {
         console.log("Connection failed!");
@@ -60,16 +60,16 @@ export default function OrderSetterPage() {
       </div>
     );
   }
-  const role = "setter";
+  const role = "delivery";
   return (
     <div>
-      <h1 className="page-title">موظف التجهيز</h1>
+      <h1 className="page-title">موظف الديليفري</h1>
       <div className="logout">
         <button type="button" onClick={logout}>
           تسجيل الخروج
         </button>
       </div>
-      <OrderView orders={setterOrders} role={role} />
+      <OrderView orders={deliveryOrders} role={role} />
       <PaginationControl page={page} selectPage={selectPage} />
     </div>
   );

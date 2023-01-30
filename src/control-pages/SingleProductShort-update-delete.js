@@ -51,9 +51,11 @@ const SingleProductShortUpdateDelete = ({ product, reSearch }) => {
     var result = window.confirm("Want to delete?");
     if (result) {
       try {
-        fetch(`http://localhost:8080/api/product/${id}`, {
+        fetch(`http://localhost:8080/product/${id}`, {
           method: "DELETE",
-          //body: formData,
+          headers: {
+            Authorization: localStorage.getItem("admintoken"),
+          },
         })
           .then((response) => response.json())
           .then((data) => {

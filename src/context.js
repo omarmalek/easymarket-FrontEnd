@@ -264,14 +264,15 @@ const AppProvider = ({ children }) => {
     setCart(newCart);
   };
   const decreasProductAmount = (product) => {
-    let newCart = cart
-      .map((item) => {
-        if (item.id === product.id) {
+    let newCart = cart.map((item) => {
+      if (item.id === product.id) {
+        if (item.amount > 1) {
           item.amount = item.amount - 1;
         }
-        return item;
-      })
-      .filter((item) => item.amount !== 0);
+      }
+      return item;
+    });
+    // .filter((item) => item.amount !== 0);
     setCart(newCart);
   };
   // const updateProductQuantity = () => {};

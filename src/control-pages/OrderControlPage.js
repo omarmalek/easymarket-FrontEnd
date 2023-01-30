@@ -19,7 +19,7 @@ export default function OrderControlPage() {
 
   const fetchControlOrders = async () => {
     let pageIndex = page - 1;
-    let pageSize = 5;
+    let pageSize = 10;
 
     try {
       const url = `http://localhost:8080/admin/controlorders/${pageIndex}/${pageSize}`;

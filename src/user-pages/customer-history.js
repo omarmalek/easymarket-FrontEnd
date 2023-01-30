@@ -61,7 +61,7 @@ function CustomerHistory() {
   };
   const fetchCustomerOldOrders = async () => {
     let pageIndex = 0;
-    let pageSize = 1;
+    let pageSize = 10; // customer see the last 10 orders
     const url = `http://localhost:8080/customeroldorders/${customer.id}/${pageIndex}/${pageSize}`;
     try {
       const response = await axios.get(url, {

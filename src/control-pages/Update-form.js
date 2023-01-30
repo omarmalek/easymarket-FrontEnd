@@ -2,6 +2,7 @@ import { useState } from "react";
 import React from "react";
 import { useGlobalContext } from "../context";
 import { FaTimes } from "react-icons/fa";
+import axios from "axios";
 
 function UpdateForm({ prodctToUpdate, setShowUpdateForm, reSearch }) {
   const { catgories } = useGlobalContext();
@@ -35,33 +36,25 @@ function UpdateForm({ prodctToUpdate, setShowUpdateForm, reSearch }) {
       "product",
       new Blob([JSON.stringify(product)], { type: "application/json" })
     );
+    if (product.name !== "") {
+    }
     try {
-      fetch(
-        "http://localhost:8080/productmedia",
-        {
-          method: "POST",
-          body: formData,
+      const url = "http://localhost:8080/productmedia";
+      const response = axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: localStorage.getItem("admintoken"),
         },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("admintoken"),
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Files successfully uploaded!");
-          console.log("data is: ");
-          console.log(data);
-          reSearch();
-        });
+      });
+      console.log("Files successfully updateded!");
+      console.log("data is: ");
+      console.log(response.data);
+      reSearch();
+      setShowUpdateForm(false);
     } catch (error) {
-      console.log("catch...................................");
       console.log(error);
     }
 
-    setShowUpdateForm(false);
     //window.location.reload();
   };
   return (

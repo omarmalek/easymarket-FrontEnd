@@ -60,7 +60,7 @@ function CustomerInfo() {
             لرؤية تقدم الطلبية ولمشاهدة الطلبات السابقة وحماية بياناتك يمكنك
             تسجيل الدخول الى المنصة
             <span>
-              <Link to="/login"> من هنا</Link>
+              <Link to="/customerhistory"> من هنا</Link>
             </span>
           </p>
           <p>

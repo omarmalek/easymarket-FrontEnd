@@ -9,7 +9,7 @@ import OrderControlPage from "./control-pages/OrderControlPage";
 import OrderOldPage from "./control-pages/OrderOldPage";
 import ErrorPage from "./ErrorPage";
 import Register from "./Register";
-import Delivery from "./control-pages/Delivery";
+import OrderDeliveryPage from "./control-pages/OrderDeliveryPage";
 import SignUp from "./user-pages/SignUp";
 import Login from "./user-pages/Login";
 import Footer from "./Footer";
@@ -32,7 +32,7 @@ function App() {
         <Route exact path="/admin/addproduct" element={<AddProduct />} />;
         <Route exact path="/admin/searchresult" element={<SearchResult />} />
         <Route exact path="/set" element={<OrderSetterPage />} />
-        <Route exact path="/dv" element={<Delivery />} />
+        <Route exact path="/dv" element={<OrderDeliveryPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
