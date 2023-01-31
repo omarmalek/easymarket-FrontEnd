@@ -83,7 +83,11 @@ const AppProvider = ({ children }) => {
       );
       const data = await response.json();
       setLoading(false);
-      setProductsOfCurrentCatgory(data);
+      console.log("data.length");
+      console.log(data.length);
+      if (data.length > 0) {
+        setProductsOfCurrentCatgory(data);
+      }
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -192,7 +196,8 @@ const AppProvider = ({ children }) => {
     if (
       customer.name !== "" &&
       customer.phoneNumber !== "" &&
-      customer.address !== ""
+      customer.address !== "" &&
+      cart.length > 0
     ) {
       try {
         fetch("http://localhost:8080/userorder", {
@@ -204,7 +209,7 @@ const AppProvider = ({ children }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            window.location.assign(`/`);
+            //window.location.assign(`/`);
             // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
             //window.location.assign(`/customerhistory/${customer.id}`);
             // navigate(`/`);
@@ -213,6 +218,8 @@ const AppProvider = ({ children }) => {
         console.log(error);
       }
     }
+
+    window.location.assign(`/`);
   };
 
   // const updateAnyOrder = (orderTarget, orderId, property, value) => {}; // to be done

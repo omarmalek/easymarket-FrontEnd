@@ -6,12 +6,22 @@ function Pagination() {
   const { page, selectPage } = useGlobalContext();
   const [pageListIcons, setPageListIcon] = useState([]);
   useEffect(() => {
+    if (page === "...") return;
     if (page <= 3) {
       setPageListIcon([1, 2, 3, 4, 5]);
     }
-    if (page > 3) {
+    if (page > 4) {
       const center = page;
-      setPageListIcon([center - 2, center - 1, center, center + 1, center + 2]);
+      setPageListIcon([
+        1,
+        2,
+        "...",
+        center - 2,
+        center - 1,
+        center,
+        center + 1,
+        center + 2,
+      ]);
     }
   }, [page]);
   const getNextPage = () => {

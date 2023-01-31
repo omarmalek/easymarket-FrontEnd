@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 function PaginationControl({ page, selectPage }) {
   const [pageListIcons, setPageListIcon] = useState([]);
   useEffect(() => {
+    if (page === "...") return;
     if (page <= 3) {
       setPageListIcon([1, 2, 3, 4, 5]);
     }
-    if (page > 3) {
+    if (page > 5) {
       const center = page;
-      setPageListIcon([center - 2, center - 1, center, center + 1, center + 2]);
+      setPageListIcon([1, 2, "...", center, center + 1, center + 2]);
     }
   }, [page]);
   const getNextPage = () => {

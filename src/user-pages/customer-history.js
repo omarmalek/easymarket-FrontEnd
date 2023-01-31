@@ -28,7 +28,7 @@ function CustomerHistory() {
 
   useEffect(() => {
     if (customerOrders.length > 0) {
-      setLastOrder(customerOrders[customerOrders.length - 1]);
+      setLastOrder(customerOrders[0]);
     }
   }, [customerOrders]);
 
