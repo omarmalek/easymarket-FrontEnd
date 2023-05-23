@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-// import { useNavigate } from "react-router-dom";
 import { temp_catgories } from "./data";
 import { temp_full_catgories } from "./data";
-
 const AppContext = React.createContext();
 
 const getCustomerLocalInfo = () => {
@@ -18,16 +16,13 @@ const getCustomerLocalInfo = () => {
     };
   }
 };
-
 const AppProvider = ({ children }) => {
-  // let navigate = useNavigate();
   // ----------------------------   states     -------------------------------------
   const [loading, setLoading] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [catgories, setCatgories] = useState(temp_catgories);
   const [isSearchBarshown, setIsSearchBarshown] = useState(false);
   const [isCustomerInfoShown, setIsCustomerInfoShown] = useState(false);
-  // const [isNextBtnInCartShown, setIsNextBtnInCartShown] = useState(false);
 
   const [productsOfCurrentCatgory, setProductsOfCurrentCatgory] = useState([]);
   const [showNvbar, setshowNvbar] = useState(false);
@@ -50,9 +45,9 @@ const AppProvider = ({ children }) => {
   }, [cart]);
 
   useEffect(() => {
-    // setProductsAternativly(1);
     fetchProductsOfCurrentCatgory(currentCatId, page);
   }, [page]);
+
   useEffect(() => {
     localStorage.setItem("customerInfo", JSON.stringify(customer));
   }, [customer]);
@@ -71,12 +66,8 @@ const AppProvider = ({ children }) => {
     }
   };
   const fetchProductsOfCurrentCatgory = async (catid) => {
-    // setLoading(true);
-
     let pageIndex = page - 1;
-
     let pageSize = 9;
-
     try {
       const response = await fetch(
         `http://localhost:8080/products/bycatgory/${catid}/${pageIndex}/${pageSize}`
@@ -120,7 +111,6 @@ const AppProvider = ({ children }) => {
           });
       } catch (error) {
         console.log(error);
-        // setLoading(false);
       }
     }
   };
@@ -135,6 +125,7 @@ const AppProvider = ({ children }) => {
 
     console.log("updating customer info: ");
     console.log(customer);
+    localStorage.removeItem("token"); //to prevent login to previous account
   };
 
   const choosCatgory = (catgoryId) => {
@@ -146,7 +137,6 @@ const AppProvider = ({ children }) => {
   };
   const selectPage = (pageLabel) => {
     setPage(pageLabel);
-    // fetchProductsOfCurrentCatgory(currentCatId, pageLabel);
   };
   const openCart = () => {
     setIsCartOpen(true);
@@ -171,11 +161,9 @@ const AppProvider = ({ children }) => {
     const targetCatgory = temp_full_catgories.map((cat) => cat.id === id);
     setProductsOfCurrentCatgory(targetCatgory.contents);
   };
-
   const showCustomerInfo = () => {
     setIsCustomerInfoShown(true);
   };
-  const showNextBtnInCart = () => {};
 
   const sendOrder = (e) => {
     e.preventDefault();
@@ -210,9 +198,6 @@ const AppProvider = ({ children }) => {
           .then((response) => response.json())
           .then((data) => {
             //window.location.assign(`/`);
-            // setCustomer({ ...customer, id: data.customerId }); //data is orderDTO
-            //window.location.assign(`/customerhistory/${customer.id}`);
-            // navigate(`/`);
           });
       } catch (error) {
         console.log(error);
@@ -228,20 +213,7 @@ const AppProvider = ({ children }) => {
     let newUpdatedOrder = { ...order, [property]: true };
     updateOrderFinal(newUpdatedOrder);
   };
-  // const checkIfUserExist = (e) => {
-  //   //e.preventDefault();
-  //   try {
-  //     fetch(`http://localhost:8080/customerbyphone/${customer.phoneNumber}`)
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setCustomer({ ...data, exist: true }); //include id and phone in case of new customer
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //     setCustomer({ ...customer, exist: false });
-  //   }
-  //   setIsCustomerInfoShown(true);
-  // };
+
   const handleSearch = (e) => {
     let str = e.target.value;
     fetchSearchResult(str);
@@ -282,7 +254,7 @@ const AppProvider = ({ children }) => {
     // .filter((item) => item.amount !== 0);
     setCart(newCart);
   };
-  // const updateProductQuantity = () => {};
+
   const buyProduct = (product) => {
     if (inCart(product)) {
       console.log("product already in cart...!");
@@ -320,11 +292,6 @@ const AppProvider = ({ children }) => {
       0
     );
     setCartTotal(total);
-    // let total = 0;
-    // cart.map((product) => {
-    //   total += product.unitPrice * product.amount;
-    //   total = parseFloat(total.toFixed(2));
-    // });
   };
   const computeCartCount = () => {
     let count = 0;
@@ -350,7 +317,6 @@ const AppProvider = ({ children }) => {
         closeSerchBar,
         showNvbar,
         toggleNavbar,
-        // updateProductQuantity,
         cart,
         buyProduct,
         incProductQuantityInCart,
@@ -362,16 +328,13 @@ const AppProvider = ({ children }) => {
         cartCount,
         showCustomerInfo,
         isCustomerInfoShown,
-        showNextBtnInCart,
         productsOfCurrentCatgory,
         customer,
         setCustomer,
         clearCustomerInfo,
         sendOrder,
         updateCusomerInfo,
-
         updateOrder,
-        // checkIfUserExist,
         handleSearch,
         selectPage,
         page,
